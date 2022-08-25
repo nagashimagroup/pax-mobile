@@ -27,17 +27,18 @@ function Item({ project }: { project: Project }) {
         <ListItemText
           primary={project.name}
           secondary={
-            <>
+            <div className="w-full overflow-hidden truncate">
               <Typography
-                sx={{ display: "inline" }}
+                sx={{
+                  display: "inline",
+                }}
                 component="span"
                 variant="body2"
                 color="text.secondary"
               >
                 {project.accountName}
               </Typography>
-              {project.alert}
-            </>
+            </div>
           }
         />
       </ListItemButton>
