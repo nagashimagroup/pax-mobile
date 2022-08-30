@@ -1,4 +1,3 @@
-import type { Project } from "API";
 import { useProject } from "contexts/project";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
