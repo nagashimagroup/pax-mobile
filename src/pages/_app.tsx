@@ -1,6 +1,5 @@
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
-import Layout from "layouts";
 import Login from "layouts/Login";
 import { AuthProvider, useAuth } from "contexts/auth";
 import Amplify from "aws-amplify";
@@ -16,11 +15,7 @@ function PaxAppContent({ Component, pageProps }: AppProps) {
 
   if (user === undefined && !loadingUser) return <Login />;
 
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  );
+  return <Component {...pageProps} />;
 }
 
 function PaxApp(appProps: AppProps) {

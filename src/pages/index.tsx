@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { HomeLayout } from "layouts";
 import Head from "next/head";
 import { ProjectsProvider } from "contexts/projects";
 import ProjectList from "components/ProjectList";
@@ -13,9 +14,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <ProjectsProvider>
-          <ProjectList />
-        </ProjectsProvider>
+        <HomeLayout>
+          <ProjectsProvider>
+            <ProjectList />
+          </ProjectsProvider>
+        </HomeLayout>
       </main>
     </div>
   );

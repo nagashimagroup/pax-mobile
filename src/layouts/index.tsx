@@ -13,7 +13,7 @@ interface LayoutProps {
 
 const mdTheme = createTheme();
 
-export default function Layout({ children }: LayoutProps) {
+export function HomeLayout({ children }: LayoutProps) {
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
