@@ -63,7 +63,15 @@ function TabsComponent({ tabs }: TabsProps) {
   };
 
   return (
-    <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
+    <Box
+      sx={{
+        bgcolor: "background.paper",
+        width: "100%",
+        display: "flex",
+        flexFlow: "column",
+        height: "100%",
+      }}
+    >
       <AppBar position="static" sx={{ bgcolor: "white" }}>
         <Tabs
           value={value}
@@ -82,6 +90,7 @@ function TabsComponent({ tabs }: TabsProps) {
         </Tabs>
       </AppBar>
       <SwipeableViews
+        style={{ height: "100%" }}
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
