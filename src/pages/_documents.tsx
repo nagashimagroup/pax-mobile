@@ -4,7 +4,29 @@ const MyDocument = () => {
   return (
     <Html lang="ja-JP">
       <Head>
-        <meta name="application-name" content="PAX MOBILE" />
+        <meta name="application-name" content="Pax Mobile" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="梱包業務改善システム" />
+        <link rel="canonical" href="https://m.pax-cloud.com" />
+        <meta property="og:url" content="https://m.pax-cloud.com" />
+        <meta property="og:title" content="Pax" />
+        <meta property="og:type" content="" />
+        <meta property="og:description" content="梱包業務改善システム" />
+        <meta property="og:image" content="vercel.svg" />
+        <meta property="og:site_name" content="Pax Mobile" />
+        <meta property="og:local" content="ja_JP" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon-16.gif" sizes="16x16" type="image/gif" />
+        <link rel="icon" href="/icon-32.gif" sizes="32x32" type="image/gif" />
+        <link rel="icon" href="/icon-48.gif" sizes="48x48" type="image/gif" />
+        <link rel="icon" href="/icon-96.gif" sizes="96x96" type="image/gif" />
+        <link
+          rel="icon"
+          href="/icon-192.gif"
+          sizes="192x192"
+          type="image/gif"
+        />
+        <link rel="manifest" href="/manifest.webmanifest.json" />
       </Head>
       <body>
         <Main />

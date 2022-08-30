@@ -10,7 +10,6 @@ const Home: NextPage = () => {
       <Head>
         <title>PAX</title>
         <meta name="description" content="Pax mobile" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>

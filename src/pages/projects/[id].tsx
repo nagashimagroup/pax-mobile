@@ -13,8 +13,6 @@ const ProjectPage: NextPage = () => {
     <div>
       <Head>
         <title>PAX | Project</title>
-        <meta name="description" content="Pax project" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
