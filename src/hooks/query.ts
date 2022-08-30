@@ -62,7 +62,7 @@ const reducer: Reducer<QueryState, QueryAction> = (
         ...state,
         loading: false,
         error: false,
-        data: action.payload.items,
+        data: action.payload.data,
         nextToken: action.payload.nextToken,
       };
     case "LOAD_DATA_ERROR":
@@ -97,7 +97,12 @@ export default function useQuery({ query, variables }: QueryProps) {
 
       const { items, nextToken } = res.data[query];
 
-      dispatch({ type: "DATA_LOADED", payload: { items, nextToken } });
+      // returns items if it's a list, else returns object
+      if (items) {
+        dispatch({ type: "DATA_LOADED", payload: { data: items, nextToken } });
+      } else {
+        dispatch({ type: "DATA_LOADED", payload: { data: res.data[query] } });
+      }
     } catch (err) {
       if (typeof err === "string") {
         return dispatch({ type: "LOAD_DATA_ERROR", payload: err });
