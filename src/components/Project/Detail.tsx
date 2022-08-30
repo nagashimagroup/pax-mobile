@@ -56,18 +56,20 @@ export default function ProjectDetail() {
       <Item label="お得意様" data={project?.accountName} />
       <Item label="お得意様担当者" data={project?.contactName} />
       <Item label="フェーズ" data={getStatusText(project?.status)} />
-      <Item
-        label="スケジュール"
-        data={
-          <Accordion
-            items={project?.keyDates?.map((keyDate, idx: number) => ({
-              key: `${keyDate?.name}_${idx}`,
-              title: `${keyDate?.name}`,
-              content: <Schedule data={keyDate} />,
-            }))}
-          />
-        }
-      />
+      {project?.keyDates && project.keyDates.length > 0 && (
+        <Item
+          label="スケジュール"
+          data={
+            <Accordion
+              items={project?.keyDates?.map((keyDate, idx: number) => ({
+                key: `${keyDate?.name}_${idx}`,
+                title: `${keyDate?.name}`,
+                content: <Schedule data={keyDate} />,
+              }))}
+            />
+          }
+        />
+      )}
     </div>
   );
 }
