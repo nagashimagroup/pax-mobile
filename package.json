@@ -16,17 +16,20 @@
     "@mui/material": "^5.10.2",
     "aws-amplify": "^4.3.33",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "next": "12.2.5",
     "qr-scanner": "^1.4.1",
     "react": "18.2.0",
     "react-device-detector": "^1.7.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-swipeable-views": "^0.14.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.184",
     "@types/node": "18.7.13",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "@types/react-swipeable-views": "^0.13.1",
     "autoprefixer": "^10.4.8",
     "eslint": "8.22.0",
     "eslint-config-next": "12.2.5",
