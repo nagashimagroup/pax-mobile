@@ -1,4 +1,4 @@
-import AppBar from "./AppBar";
+import AppBar, { ProjectAppBar } from "./AppBar";
 import Navigation from "./Navigation";
 
 import { ReactNode, useState } from "react";
@@ -25,6 +25,32 @@ export function HomeLayout({ children }: LayoutProps) {
         <CssBaseline />
         <AppBar open={open} toggleDrawer={toggleDrawer} />
         <Navigation open={open} toggleDrawer={toggleDrawer} />
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Toolbar />
+          {children}
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}
+
+export function ProjectLayout({ children }: LayoutProps) {
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <ProjectAppBar />
         <Box
           component="main"
           sx={{
