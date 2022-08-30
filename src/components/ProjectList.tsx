@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Project } from "API";
 import { useProjects } from "contexts/projects";
 import { getStatusInitial, getStatusColor } from "utils/status";
@@ -11,7 +12,7 @@ import Typography from "@mui/material/Typography";
 function StatusCircle({ status }: { status: Project["status"] }) {
   return (
     <div
-      className="w-14 h-14 mr-2 flex justify-center items-center rounded-full text-white"
+      className="w-full h-full flex justify-center items-center rounded-full text-white"
       style={{ backgroundColor: getStatusColor(status) }}
     >
       {getStatusInitial(status)}
@@ -23,22 +24,23 @@ function Item({ project }: { project: Project }) {
   return (
     <>
       <ListItemButton>
-        <StatusCircle status={project.status} />
+        <div className="mr-2 w-14 aspect-square">
+          <StatusCircle status={project.status} />
+        </div>
         <ListItemText
+          className="w-full overflow-hidden truncate"
           primary={project.name}
           secondary={
-            <div className="w-full overflow-hidden truncate">
-              <Typography
-                sx={{
-                  display: "inline",
-                }}
-                component="span"
-                variant="body2"
-                color="text.secondary"
-              >
-                {project.accountName}
-              </Typography>
-            </div>
+            <Typography
+              sx={{
+                display: "inline",
+              }}
+              component="span"
+              variant="body2"
+              color="text.secondary"
+            >
+              {project.accountName}
+            </Typography>
           }
         />
       </ListItemButton>
@@ -57,7 +59,11 @@ function ProjectList() {
   return (
     <List>
       {projects.map((project) => (
-        <Item key={project.id} project={project} />
+        <Link key={project.id} href={`projects/${project.id}`} passHref>
+          <a>
+            <Item project={project} />
+          </a>
+        </Link>
       ))}
     </List>
   );
