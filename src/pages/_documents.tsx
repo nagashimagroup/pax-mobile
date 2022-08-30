@@ -26,7 +26,21 @@ const MyDocument = () => {
           sizes="192x192"
           type="image/gif"
         />
-        <link rel="manifest" href="/manifest.webmanifest.json" />
+        <link
+          rel="icon"
+          href="/icon-144.png"
+          sizes="144x144"
+          type="image/png"
+        />
+        <link
+          rel="icon"
+          href="/icon-512.png"
+          sizes="512x512"
+          type="image/png"
+        />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#E53012" />
       </Head>
       <body>
         <Main />

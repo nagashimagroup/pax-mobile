@@ -10,6 +10,7 @@ const Home: NextPage = () => {
       <Head>
         <title>PAX</title>
         <meta name="description" content="Pax mobile" />
+        <link rel="manifest" href="/manifest.json" />
       </Head>
 
       <main>
