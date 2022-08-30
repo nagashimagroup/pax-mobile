@@ -24,10 +24,11 @@ function Item({ label, data }: ItemProps) {
 }
 
 interface ScheduleProps {
-  data: KeyDate;
+  data: KeyDate | null;
 }
 
 function Schedule({ data }: ScheduleProps) {
+  if (!data) return null;
   const getSimpleDate = (d: any) => (d ? moment(d).format("MM/DD") : "-");
   return (
     <div>

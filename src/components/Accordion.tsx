@@ -6,7 +6,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ReactNode } from "react";
 
 interface AccordionProps {
-  items: Data[];
+  items: Data[] | null | undefined;
 }
 
 interface Data {
@@ -16,6 +16,7 @@ interface Data {
 }
 
 export default function AccordionComponent({ items }: AccordionProps) {
+  if (!items) return null;
   return (
     <>
       {items.map((item) => (
