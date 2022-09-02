@@ -17,6 +17,8 @@ export function getStatusColor(status: Status) {
     case "ORDER":
       return "#3e6eb3";
     case "PACK":
+      return "#3e6eb3";
+    case "SHIP":
       return "#d18643";
     case "INVOICE":
       return "#bd3993";
@@ -32,8 +34,10 @@ export function getStatusInitial(status: Status) {
     case "STOCK":
       return "入";
     case "ORDER":
-      return "梱";
+      return "受";
     case "PACK":
+      return "梱";
+    case "SHIP":
       return "出";
     case "INVOICE":
       return "請";
@@ -51,6 +55,8 @@ export function getStatusText(status: Status) {
     case "ORDER":
       return "梱包";
     case "PACK":
+      return "梱包";
+    case "SHIP":
       return "出荷";
     case "INVOICE":
       return "請求";

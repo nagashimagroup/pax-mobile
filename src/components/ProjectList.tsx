@@ -8,6 +8,7 @@ import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
+import Tabs from "components/Tabs";
 
 function StatusCircle({ status }: { status: Project["status"] }) {
   return (
@@ -49,13 +50,7 @@ function Item({ project }: { project: Project }) {
   );
 }
 
-function ProjectList() {
-  const { loading, projects } = useProjects();
-
-  if (loading) return <LinearProgress color="secondary" />;
-
-  if (!projects) return <div />;
-
+function FilterList({ projects }: { projects: Project[] }) {
   return (
     <List>
       {projects.map((project) => (
@@ -66,6 +61,46 @@ function ProjectList() {
         </Link>
       ))}
     </List>
+  );
+}
+
+function ProjectList() {
+  const { loading, projects } = useProjects();
+
+  if (loading) return <LinearProgress color="secondary" />;
+
+  if (!projects) return <div />;
+
+  return (
+    <Tabs
+      tabs={[
+        { title: "全案件", content: <FilterList projects={projects} /> },
+        {
+          title: "入荷",
+          content: (
+            <FilterList
+              projects={projects.filter((p) => p.status === "STOCK")}
+            />
+          ),
+        },
+        {
+          title: "梱包",
+          content: (
+            <FilterList
+              projects={projects.filter((p) => p.status === "PACK")}
+            />
+          ),
+        },
+        {
+          title: "出荷",
+          content: (
+            <FilterList
+              projects={projects.filter((p) => p.status === "SHIP")}
+            />
+          ),
+        },
+      ]}
+    />
   );
 }
 
