@@ -12,6 +12,8 @@ interface ItemProps {
 }
 
 function Item({ label, data }: ItemProps) {
+  if (!data) return null;
+
   return (
     <>
       <div className="my-4">
@@ -54,7 +56,7 @@ export default function ProjectDetail() {
     <div className="">
       <Item label="案件名" data={project?.name} />
       <Item label="お得意様" data={project?.accountName} />
-      <Item label="お得意様担当者" data={project?.contactName} />
+      <Item label="注意事項" data={project?.alert} />
       <Item label="フェーズ" data={getStatusText(project?.status)} />
       {project?.keyDates && project.keyDates.length > 0 && (
         <Item
