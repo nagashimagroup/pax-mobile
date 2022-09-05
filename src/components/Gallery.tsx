@@ -9,6 +9,7 @@ import Preview from "./ImagePreview";
 
 interface S3Image {
   key: string;
+  lastModified: Date;
 }
 
 interface GalleryProps {

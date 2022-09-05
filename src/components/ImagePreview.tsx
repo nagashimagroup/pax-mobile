@@ -31,7 +31,7 @@ interface PreviewProps {
   fileList: S3Image[] | [];
   setFileList: (images: S3Image[]) => void;
   fileIdx: number;
-  label: string;
+  label: string | undefined;
 }
 
 export default function Preview({
