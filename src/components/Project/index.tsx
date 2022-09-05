@@ -1,6 +1,7 @@
 import { useProject } from "contexts/project";
 import Tabs from "components/Tabs";
 import ProjectDetail from "./Detail";
+import StockPage from "./Stock";
 import LinearProgress from "@mui/material/LinearProgress";
 
 function Project() {
@@ -14,7 +15,7 @@ function Project() {
     <Tabs
       tabs={[
         { title: "詳細", content: <ProjectDetail /> },
-        { title: "入荷", content: "入荷" },
+        { title: "入荷", content: <StockPage /> },
         { title: "梱包", content: "梱包" },
         { title: "出荷", content: "出荷" },
       ]}

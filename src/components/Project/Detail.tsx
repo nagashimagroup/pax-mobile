@@ -53,7 +53,7 @@ export default function ProjectDetail() {
   const { project } = useProject();
 
   return (
-    <div className="">
+    <div className="p-4">
       <Item label="案件名" data={project?.name} />
       <Item label="お得意様" data={project?.accountName} />
       <Item label="注意事項" data={project?.alert} />

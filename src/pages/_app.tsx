@@ -1,4 +1,5 @@
 import "tailwindcss/tailwind.css";
+import "global.css";
 import type { AppProps } from "next/app";
 import Login from "layouts/Login";
 import { AuthProvider, useAuth } from "contexts/auth";
