@@ -43,6 +43,12 @@ interface ImageFile {
   file: File;
 }
 
+const videoConstraints = {
+  facingMode: "environment",
+  width: 720,
+  height: 720,
+};
+
 export default function Camera({
   label,
   open,
@@ -135,6 +141,7 @@ export default function Camera({
           className="w-full max-w-lg aspect-square"
           ref={webcamRef}
           screenshotFormat="image/jpeg"
+          videoConstraints={videoConstraints}
           forceScreenshotSourceSize
           {...webCamProps}
         />
@@ -159,7 +166,7 @@ export default function Camera({
                 </div>
               ))}
           </div>
-          <div className="w-full grid grid-cols-3 items-center">
+          <div className="w-full grid grid-cols-3 items-center my-4">
             <IconButton
               onClick={handleClose}
               className="flex flex-col justify-center items-center"
