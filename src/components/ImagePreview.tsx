@@ -1,4 +1,6 @@
-import { forwardRef, ReactElement, Ref } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { forwardRef, ReactElement, Ref, useEffect } from "react";
+import { useRouter } from "next/router";
 import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
 import { Storage } from "aws-amplify";
 import Dialog from "@mui/material/Dialog";
@@ -42,9 +44,19 @@ export default function Preview({
   fileIdx,
   label,
 }: PreviewProps) {
+  const router = useRouter();
+
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    setOpen(false);
+    window.onpopstate = () => {
+      history.go(1);
+    };
+    return () => router.beforePopState(() => true);
+  }, [router]);
 
   const downloadFile = async () => {
     const file = (await Storage.get(fileList[fileIdx].key, {
