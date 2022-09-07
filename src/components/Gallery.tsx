@@ -52,7 +52,6 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    console.log({ path });
     loadFiles();
   }, []);
 
@@ -131,6 +130,7 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
           ))}
           <input
             type="file"
+            capture="environment"
             multiple
             accept={fileType}
             ref={inputRef}
