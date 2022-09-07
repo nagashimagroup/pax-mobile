@@ -8,6 +8,7 @@ import {
   useEffect,
   Ref,
 } from "react";
+import { useRouter } from "next/router";
 import short from "short-uuid";
 import Webcam from "react-webcam";
 import Dialog from "@mui/material/Dialog";
@@ -49,6 +50,7 @@ export default function Camera({
   onUpload,
   ...webCamProps
 }: CameraProps) {
+  const router = useRouter();
   const [enableCamera, setEnableCamera] = useState<boolean>(open);
   const webcamRef = useRef<Webcam>(null);
   const [imageFiles, setImageFiles] = useState<ImageFile[] | []>([]);
@@ -56,6 +58,14 @@ export default function Camera({
   useEffect(() => {
     return () => setEnableCamera(false);
   }, []);
+
+  useEffect(() => {
+    setOpen(false);
+    window.onpopstate = () => {
+      history.go(1);
+    };
+    return () => router.beforePopState(() => true);
+  }, [router]);
 
   useEffect(() => {
     setEnableCamera(open);
@@ -122,7 +132,7 @@ export default function Camera({
       <div className="fixed inset-0 bg-black flex flex-col justify-center items-center text-white">
         <Webcam
           audio={false}
-          className="w-full max-w-md aspect-square"
+          className="w-full max-w-lg aspect-square"
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           forceScreenshotSourceSize
@@ -154,18 +164,18 @@ export default function Camera({
               onClick={handleClose}
               className="flex flex-col justify-center items-center"
             >
-              <ArrowBackIcon className="text-white text-4xl" />
-              <span className="text-white text-[0.7rem]">キャンセル</span>
+              <ArrowBackIcon className="text-white text-[28pt]" />
+              <span className="text-white text-[8pt]">キャンセル</span>
             </IconButton>
             <IconButton onClick={capture}>
-              <CaptureIcon className="text-white text-7xl" />
+              <CaptureIcon className="text-white text-[48pt]" />
             </IconButton>
             <IconButton
               onClick={uploadImages}
               className="flex flex-col justify-center items-center"
             >
-              <UploadIcon className="text-white text-4xl" />
-              <span className="text-white text-[0.7rem]">アップロード</span>
+              <UploadIcon className="text-white text-[28pt]" />
+              <span className="text-white text-[8pt]">アップロード</span>
             </IconButton>
           </div>
         </div>
