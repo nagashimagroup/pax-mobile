@@ -18,6 +18,12 @@ function Project() {
     setTabIndex(getTabIndex(status as any));
   }, [status]);
 
+  useEffect(() => {
+    window.onpopstate = () => {
+      router.push("/");
+    };
+  }, [router]);
+
   if (loading) return <LinearProgress color="secondary" />;
 
   if (!project) return <div />;
