@@ -4,7 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { ReactNode, SyntheticEvent, useState } from "react";
+import { ReactNode, SyntheticEvent, useEffect, useState } from "react";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -37,7 +37,9 @@ function a11yProps(index: number) {
 }
 
 interface TabsProps {
+  index: number;
   tabs: Tab[];
+  onTabClick?: (index: number) => void;
 }
 
 interface Tab {
@@ -45,15 +47,25 @@ interface Tab {
   content: ReactNode | ReactNode[] | string;
 }
 
-function TabsComponent({ tabs }: TabsProps) {
-  const [value, setValue] = useState(0);
+function TabsComponent({ tabs, index, onTabClick }: TabsProps) {
+  const [value, setValue] = useState(index);
   const theme = useTheme();
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  useEffect(() => {
+    setValue(index);
+  }, [index]);
+
+  const handleChange = (newValue: number) => {
+    if (onTabClick) {
+      return onTabClick(newValue);
+    }
     setValue(newValue);
   };
 
   const handleChangeIndex = (index: number) => {
+    if (onTabClick) {
+      return onTabClick(index);
+    }
     setValue(index);
   };
 
@@ -70,7 +82,7 @@ function TabsComponent({ tabs }: TabsProps) {
       <AppBar position="static" sx={{ bgcolor: "white" }}>
         <Tabs
           value={value}
-          onChange={handleChange}
+          onChange={(_, idx) => handleChange(idx)}
           indicatorColor="secondary"
           textColor="secondary"
           variant="fullWidth"

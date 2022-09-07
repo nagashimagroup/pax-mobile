@@ -64,3 +64,35 @@ export function getStatusText(status: Status) {
       return "?";
   }
 }
+
+export function getStatusFromTabIndex(index: number) {
+  switch (index) {
+    case 1:
+      return "STOCK";
+    case 2:
+      return "PACK";
+    case 3:
+      return "SHIP";
+    default:
+      return "DETAIL";
+  }
+}
+
+export function getTabIndex(status: Status) {
+  switch (status) {
+    case "QUOTE":
+      return 0;
+    case "STOCK":
+      return 1;
+    case "ORDER":
+      return 0;
+    case "PACK":
+      return 2;
+    case "SHIP":
+      return 3;
+    case "INVOICE":
+      return 0;
+    default:
+      return 0;
+  }
+}
