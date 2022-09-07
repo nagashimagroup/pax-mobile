@@ -5,7 +5,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Storage } from "aws-amplify";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import AddPhotoIcon from "@mui/icons-material/AddPhotoAlternate";
+import CameraIcon from "@mui/icons-material/CameraAlt";
 import Preview from "./ImagePreview";
+import Camera from "./Camera";
 
 interface S3Image {
   key: string;
@@ -49,6 +51,7 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
   const [uploading, setUploading] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [openCamera, setOpenCamera] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -64,7 +67,7 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
 
   const saveFiles = async ({
     target: { files },
-  }: ChangeEvent<HTMLInputElement>) => {
+  }: ChangeEvent<HTMLInputElement> | { target: { files: File[] } }) => {
     if (!files) return;
     setUploading(true);
     const promises = Object.values(files).map((file) =>
@@ -90,9 +93,24 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
         open={showPreview}
         setOpen={setShowPreview}
       />
+      <Camera open={openCamera} setOpen={setOpenCamera} onUpload={saveFiles} />
       {label && (
         <div className="p-4 w-full sticky top-0 flex items-center gap-4 text-sm">
           <div className="text-slate-700">{label}</div>
+          <button
+            type="button"
+            onClick={() => setOpenCamera(true)}
+            className="px-4 py-1 flex items-center gap-1 bg-slate-800 text-white rounded-lg"
+          >
+            {uploading ? (
+              <CircularProgress size={20} sx={{ color: "white" }} />
+            ) : (
+              <>
+                <CameraIcon sx={{ fontSize: "1.2rem" }} />
+                撮影
+              </>
+            )}
+          </button>
           <button
             type="button"
             onClick={() => inputRef.current && inputRef.current.click()}
@@ -130,7 +148,6 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
           ))}
           <input
             type="file"
-            capture="environment"
             multiple
             accept={fileType}
             ref={inputRef}
@@ -138,15 +155,15 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
             className="hidden"
           />
           <div
-            onClick={() => inputRef.current && inputRef.current.click()}
+            onClick={() => setOpenCamera(true)}
             className="w-full aspect-square text-white text-[0.8rem] p-2 bg-slate-800 flex flex-col justify-center items-center text-center"
           >
             {uploading ? (
               <CircularProgress />
             ) : (
               <>
-                <AddPhotoIcon />
-                {label ? `${label}を追加` : "追加"}
+                <CameraIcon />
+                {label ? `${label}を撮影` : "撮影"}
               </>
             )}
           </div>
