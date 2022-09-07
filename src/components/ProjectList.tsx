@@ -73,6 +73,7 @@ function ProjectList() {
 
   return (
     <Tabs
+      index={0}
       tabs={[
         { title: "全案件", content: <FilterList projects={projects} /> },
         {
