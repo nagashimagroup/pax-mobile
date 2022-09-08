@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import QrScanner from "qr-scanner";
+import { useRouter } from "next/router";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -26,6 +27,7 @@ interface QrReaderProps {
 
 export default function QrReader({ open, setOpen }: QrReaderProps) {
   const [scanner, setScanner] = useState<any>(null);
+  const router = useRouter();
 
   const handleClose = () => {
     setOpen(false);
@@ -38,8 +40,25 @@ export default function QrReader({ open, setOpen }: QrReaderProps) {
     const qrScanner = new QrScanner(
       videoRef,
       (result: any) => {
-        qrScanner.stop();
-        setOpen(false);
+        try {
+          console.log({ result });
+          const data = JSON.parse(result.data);
+          console.log({ data });
+          if (!data.project) {
+            alert("無効なQRコードです");
+          } else {
+            router.push(
+              `/projects/${data.project}?status=SHIP${
+                data.product && `&product=${data.product}`
+              }${data.case && `&case=${data.case}`}`
+            );
+            qrScanner.stop();
+            setOpen(false);
+          }
+        } catch (e) {
+          alert("無効なQRコードです");
+          console.error(e);
+        }
       },
       { highlightScanRegion: true, highlightCodeOutline: true }
     );
