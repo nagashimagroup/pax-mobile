@@ -1,4 +1,4 @@
-export default function ErrorFallback({ error, resetErrorBoundary }) {
+export default function ErrorFallback({ error, resetErrorBoundary }: any) {
   console.log({ error });
 
   return (
