@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
 import "global.css";
-import "core-js";
+import "polyfills.ts";
 import type { AppProps } from "next/app";
 import Login from "layouts/Login";
 import { AuthProvider, useAuth } from "contexts/auth";
@@ -8,6 +8,9 @@ import Amplify from "aws-amplify";
 import awsconfig from "aws-exports";
 import { LinearProgress } from "@mui/material";
 import { useEffect } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "components/ErrorFallback";
+import { startServiceWorker } from "utils/sw";
 
 Amplify.configure(awsconfig);
 
@@ -15,21 +18,7 @@ function PaxAppContent({ Component, pageProps }: AppProps) {
   const { user, loadingUser } = useAuth();
 
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("/sw.js").then(
-          function (registration) {
-            console.log(
-              "Service Worker registration successful with scope: ",
-              registration.scope
-            );
-          },
-          function (err) {
-            console.log("Service Worker registration failed: ", err);
-          }
-        );
-      });
-    }
+    startServiceWorker();
   }, []);
 
   if (loadingUser) return <LinearProgress color="primary" />;
@@ -41,9 +30,11 @@ function PaxAppContent({ Component, pageProps }: AppProps) {
 
 function PaxApp(appProps: AppProps) {
   return (
-    <AuthProvider>
-      <PaxAppContent {...appProps} />
-    </AuthProvider>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <AuthProvider>
+        <PaxAppContent {...appProps} />
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

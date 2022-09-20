@@ -95,12 +95,12 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
       />
       <Camera open={openCamera} setOpen={setOpenCamera} onUpload={saveFiles} />
       {label && (
-        <div className="p-4 w-full sticky top-0 flex items-center gap-4 text-sm">
-          <div className="text-slate-700">{label}</div>
+        <div className="p-4 w-full sticky top-0 flex items-center text-sm">
+          <div className="text-slate-700 mr-4">{label}</div>
           <button
             type="button"
             onClick={() => setOpenCamera(true)}
-            className="px-4 py-1 flex items-center gap-1 bg-slate-800 text-white rounded-lg"
+            className="px-4 py-1 flex items-center mr-4 bg-slate-800 text-white rounded-lg"
           >
             {uploading ? (
               <CircularProgress size={20} sx={{ color: "white" }} />
@@ -114,7 +114,7 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
           <button
             type="button"
             onClick={() => inputRef.current && inputRef.current.click()}
-            className="px-4 py-1 flex items-center gap-1 bg-slate-800 text-white rounded-lg"
+            className="px-4 py-1 flex items-center bg-slate-800 text-white rounded-lg"
           >
             {uploading ? (
               <CircularProgress size={20} sx={{ color: "white" }} />
