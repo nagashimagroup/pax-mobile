@@ -12,7 +12,8 @@ interface AccordionProps {
 interface Data {
   key: number | string;
   title: string | null | undefined;
-  content: ReactNode | ReactNode[] | string;
+  subtitle?: string | null | undefined;
+  content: ReactNode | ReactNode[] | string | undefined;
 }
 
 export default function AccordionComponent({ items }: AccordionProps) {
@@ -25,7 +26,14 @@ export default function AccordionComponent({ items }: AccordionProps) {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
           >
-            <Typography>{item.title}</Typography>
+            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              {item.title}
+            </Typography>
+            {item.subtitle && (
+              <Typography sx={{ color: "text.secondary" }}>
+                {item.subtitle}
+              </Typography>
+            )}
           </AccordionSummary>
           <AccordionDetails>{item.content}</AccordionDetails>
         </Accordion>
