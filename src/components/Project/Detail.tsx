@@ -1,5 +1,5 @@
 import { useProject } from "contexts/project";
-import type { KeyDate } from "API";
+import type { Schedule } from "API";
 import { getStatusText } from "utils/status";
 import Accordion from "components/Accordion";
 import Divider from "@mui/material/Divider";
@@ -26,7 +26,7 @@ function Item({ label, data }: ItemProps) {
 }
 
 interface ScheduleProps {
-  data: KeyDate | null;
+  data: Schedule | null;
 }
 
 function Schedule({ data }: ScheduleProps) {

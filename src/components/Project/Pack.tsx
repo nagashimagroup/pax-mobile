@@ -30,30 +30,34 @@ function ProductList() {
 
   if (!products) return <div />;
 
-  return getPackDates(products).map((packStart) => (
-    <List
-      key={packStart}
-      subheader={
-        <ListSubheader component="div">
-          {moment(packStart).format("製函指定期日 MM/DD")}
-        </ListSubheader>
-      }
-    >
-      <Accordion
-        items={products
-          ?.filter((p) => p.packagingStart === packStart)
-          .sort(sortByPackEnd)
-          .map((product, idx: number) => ({
-            key: `${product?.name}_${idx}`,
-            title: product?.name,
-            subtitle: `${product?.packageTypeName}・${moment(
-              product.packagingEnd
-            ).format("MM/DD迄")}`,
-            content: <CaseList product={product} />,
-          }))}
-      />
-    </List>
-  ));
+  return (
+    <>
+      {getPackDates(products).map((packStart) => (
+        <List
+          key={packStart}
+          subheader={
+            <ListSubheader component="div">
+              {moment(packStart).format("製函指定期日 MM/DD")}
+            </ListSubheader>
+          }
+        >
+          <Accordion
+            items={products
+              ?.filter((p) => p.packagingStart === packStart)
+              .sort(sortByPackEnd)
+              .map((product, idx: number) => ({
+                key: `${product?.name}_${idx}`,
+                title: product?.name,
+                subtitle: `${product?.packageTypeName}・${moment(
+                  product.packagingEnd
+                ).format("MM/DD迄")}`,
+                content: <CaseList product={product} />,
+              }))}
+          />
+        </List>
+      ))}
+    </>
+  );
 }
 
 export default function ProjectDetail() {
