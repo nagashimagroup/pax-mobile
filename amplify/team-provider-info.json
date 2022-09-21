@@ -1,0 +1,54 @@
+{
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-paxweb-test-04425-authRole",
+      "UnauthRoleArn": "arn:aws:iam::861717512462:role/amplify-paxweb-test-04425-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::861717512462:role/amplify-paxweb-test-04425-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-paxweb-test-04425-deployment",
+      "UnauthRoleName": "amplify-paxweb-test-04425-unauthRole",
+      "StackName": "amplify-paxweb-test-04425",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:861717512462:stack/amplify-paxweb-test-04425/446edd50-03ab-11ec-9320-069142138e3f",
+      "AmplifyAppId": "d2af5c0160youl"
+    },
+    "categories": {
+      "auth": {
+        "paxauth": {}
+      },
+      "function": {
+        "adminfunc": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/adminfunc-34586749396b33437452-build.zip"
+        },
+        "cascadeDeleteTenant": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/cascadeDeleteTenant-6c627734743132584d6f-build.zip"
+        },
+        "paxwebGraphQL": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/paxwebGraphQL-LambdaLayerVersiond4237a6b-build.zip"
+        },
+        "salesforce": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/salesforce-5949416c626769615133-build.zip"
+        },
+        "syncAll": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/syncAll-52502f48314a46334848-build.zip"
+        },
+        "syncOne": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/syncOne-6571355473346a37762f-build.zip"
+        },
+        "cascadeDeleteUser": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/cascadeDeleteUser-39757068454d56304976-build.zip"
+        },
+        "cascadeDeleteGroup": {
+          "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
+          "s3Key": "amplify-builds/cascadeDeleteGroup-685a6a67713068685551-build.zip"
+        }
+      }
+    }
+  }
+}

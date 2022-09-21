@@ -5320,6 +5320,202 @@ export const baseDecorationComponentsByPackageTypeId = /* GraphQL */ `
     }
   }
 `;
+export const getSchedule = /* GraphQL */ `
+  query GetSchedule($id: ID!) {
+    getSchedule(id: $id) {
+      id
+      projectId
+      name
+      m3
+      case
+      shipType
+      stockingDate
+      packagingDate
+      shippingDate
+      cutDate
+      createdAt
+      updatedAt
+      products {
+        items {
+          id
+          projectId
+          packageTypeId
+          scheduleId
+          userId
+          pricingId
+          packageTypeName
+          quoteLineId
+          name
+          order
+          productNumber
+          quantity
+          material
+          tareWeight
+          stamp
+          destination
+          packagingStart
+          packagingEnd
+          packageMethod
+          description
+          cases {
+            order
+            name
+            netWeight
+            grossWeight
+            outerLength
+            outerWidth
+            outerHeight
+          }
+          elements {
+            type
+            name
+            slug
+            value
+            expr
+            description
+            overwriteValue
+            cutting
+          }
+          createdAt
+          updatedAt
+          schedule {
+            id
+            projectId
+            name
+            m3
+            case
+            shipType
+            stockingDate
+            packagingDate
+            shippingDate
+            cutDate
+            createdAt
+            updatedAt
+          }
+          areas {
+            nextToken
+          }
+          decorations {
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listSchedules = /* GraphQL */ `
+  query ListSchedules(
+    $filter: ModelScheduleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSchedules(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        projectId
+        name
+        m3
+        case
+        shipType
+        stockingDate
+        packagingDate
+        shippingDate
+        cutDate
+        createdAt
+        updatedAt
+        products {
+          items {
+            id
+            projectId
+            packageTypeId
+            scheduleId
+            userId
+            pricingId
+            packageTypeName
+            quoteLineId
+            name
+            order
+            productNumber
+            quantity
+            material
+            tareWeight
+            stamp
+            destination
+            packagingStart
+            packagingEnd
+            packageMethod
+            description
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const schedulesByProject = /* GraphQL */ `
+  query SchedulesByProject(
+    $projectId: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelScheduleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    schedulesByProject(
+      projectId: $projectId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        projectId
+        name
+        m3
+        case
+        shipType
+        stockingDate
+        packagingDate
+        shippingDate
+        cutDate
+        createdAt
+        updatedAt
+        products {
+          items {
+            id
+            projectId
+            packageTypeId
+            scheduleId
+            userId
+            pricingId
+            packageTypeName
+            quoteLineId
+            name
+            order
+            productNumber
+            quantity
+            material
+            tareWeight
+            stamp
+            destination
+            packagingStart
+            packagingEnd
+            packageMethod
+            description
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getProject = /* GraphQL */ `
   query GetProject($id: ID!) {
     getProject(id: $id) {
@@ -5331,16 +5527,6 @@ export const getProject = /* GraphQL */ `
       accountName
       contactId
       contactName
-      keyDates {
-        name
-        m3
-        case
-        shipType
-        stockingDate
-        packagingDate
-        shippingDate
-        cutDate
-      }
       name
       status
       inquiryDate
@@ -5630,6 +5816,26 @@ export const getProject = /* GraphQL */ `
           nextToken
         }
       }
+      schedules {
+        items {
+          id
+          projectId
+          name
+          m3
+          case
+          shipType
+          stockingDate
+          packagingDate
+          shippingDate
+          cutDate
+          createdAt
+          updatedAt
+          products {
+            nextToken
+          }
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -5649,16 +5855,6 @@ export const listProjects = /* GraphQL */ `
         accountName
         contactId
         contactName
-        keyDates {
-          name
-          m3
-          case
-          shipType
-          stockingDate
-          packagingDate
-          shippingDate
-          cutDate
-        }
         name
         status
         inquiryDate
@@ -5845,6 +6041,23 @@ export const listProjects = /* GraphQL */ `
           users {
             nextToken
           }
+        }
+        schedules {
+          items {
+            id
+            projectId
+            name
+            m3
+            case
+            shipType
+            stockingDate
+            packagingDate
+            shippingDate
+            cutDate
+            createdAt
+            updatedAt
+          }
+          nextToken
         }
       }
       nextToken
@@ -5875,16 +6088,6 @@ export const projectsByUserId = /* GraphQL */ `
         accountName
         contactId
         contactName
-        keyDates {
-          name
-          m3
-          case
-          shipType
-          stockingDate
-          packagingDate
-          shippingDate
-          cutDate
-        }
         name
         status
         inquiryDate
@@ -6071,6 +6274,23 @@ export const projectsByUserId = /* GraphQL */ `
           users {
             nextToken
           }
+        }
+        schedules {
+          items {
+            id
+            projectId
+            name
+            m3
+            case
+            shipType
+            stockingDate
+            packagingDate
+            shippingDate
+            cutDate
+            createdAt
+            updatedAt
+          }
+          nextToken
         }
       }
       nextToken
@@ -6101,16 +6321,6 @@ export const projectsByAccountId = /* GraphQL */ `
         accountName
         contactId
         contactName
-        keyDates {
-          name
-          m3
-          case
-          shipType
-          stockingDate
-          packagingDate
-          shippingDate
-          cutDate
-        }
         name
         status
         inquiryDate
@@ -6297,6 +6507,23 @@ export const projectsByAccountId = /* GraphQL */ `
           users {
             nextToken
           }
+        }
+        schedules {
+          items {
+            id
+            projectId
+            name
+            m3
+            case
+            shipType
+            stockingDate
+            packagingDate
+            shippingDate
+            cutDate
+            createdAt
+            updatedAt
+          }
+          nextToken
         }
       }
       nextToken
@@ -6327,16 +6554,6 @@ export const projectsByContactId = /* GraphQL */ `
         accountName
         contactId
         contactName
-        keyDates {
-          name
-          m3
-          case
-          shipType
-          stockingDate
-          packagingDate
-          shippingDate
-          cutDate
-        }
         name
         status
         inquiryDate
@@ -6523,6 +6740,23 @@ export const projectsByContactId = /* GraphQL */ `
           users {
             nextToken
           }
+        }
+        schedules {
+          items {
+            id
+            projectId
+            name
+            m3
+            case
+            shipType
+            stockingDate
+            packagingDate
+            shippingDate
+            cutDate
+            createdAt
+            updatedAt
+          }
+          nextToken
         }
       }
       nextToken
@@ -6553,16 +6787,6 @@ export const projectsByGroupId = /* GraphQL */ `
         accountName
         contactId
         contactName
-        keyDates {
-          name
-          m3
-          case
-          shipType
-          stockingDate
-          packagingDate
-          shippingDate
-          cutDate
-        }
         name
         status
         inquiryDate
@@ -6749,6 +6973,23 @@ export const projectsByGroupId = /* GraphQL */ `
           users {
             nextToken
           }
+        }
+        schedules {
+          items {
+            id
+            projectId
+            name
+            m3
+            case
+            shipType
+            stockingDate
+            packagingDate
+            shippingDate
+            cutDate
+            createdAt
+            updatedAt
+          }
+          nextToken
         }
       }
       nextToken
@@ -7186,6 +7427,8 @@ export const getProduct = /* GraphQL */ `
       id
       projectId
       packageTypeId
+      scheduleId
+      userId
       pricingId
       packageTypeName
       quoteLineId
@@ -7222,6 +7465,47 @@ export const getProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      schedule {
+        id
+        projectId
+        name
+        m3
+        case
+        shipType
+        stockingDate
+        packagingDate
+        shippingDate
+        cutDate
+        createdAt
+        updatedAt
+        products {
+          items {
+            id
+            projectId
+            packageTypeId
+            scheduleId
+            userId
+            pricingId
+            packageTypeName
+            quoteLineId
+            name
+            order
+            productNumber
+            quantity
+            material
+            tareWeight
+            stamp
+            destination
+            packagingStart
+            packagingEnd
+            packageMethod
+            description
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
       areas {
         items {
           id
@@ -7276,6 +7560,8 @@ export const listProducts = /* GraphQL */ `
         id
         projectId
         packageTypeId
+        scheduleId
+        userId
         pricingId
         packageTypeName
         quoteLineId
@@ -7312,6 +7598,129 @@ export const listProducts = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        schedule {
+          id
+          projectId
+          name
+          m3
+          case
+          shipType
+          stockingDate
+          packagingDate
+          shippingDate
+          cutDate
+          createdAt
+          updatedAt
+          products {
+            nextToken
+          }
+        }
+        areas {
+          items {
+            id
+            productId
+            name
+            areaType
+            order
+            description
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        decorations {
+          items {
+            id
+            productId
+            type
+            name
+            slug
+            order
+            unit
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const productsbyScheduleId = /* GraphQL */ `
+  query ProductsbyScheduleId(
+    $scheduleId: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    productsbyScheduleId(
+      scheduleId: $scheduleId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        projectId
+        packageTypeId
+        scheduleId
+        userId
+        pricingId
+        packageTypeName
+        quoteLineId
+        name
+        order
+        productNumber
+        quantity
+        material
+        tareWeight
+        stamp
+        destination
+        packagingStart
+        packagingEnd
+        packageMethod
+        description
+        cases {
+          order
+          name
+          netWeight
+          grossWeight
+          outerLength
+          outerWidth
+          outerHeight
+        }
+        elements {
+          type
+          name
+          slug
+          value
+          expr
+          description
+          overwriteValue
+          cutting
+        }
+        createdAt
+        updatedAt
+        schedule {
+          id
+          projectId
+          name
+          m3
+          case
+          shipType
+          stockingDate
+          packagingDate
+          shippingDate
+          cutDate
+          createdAt
+          updatedAt
+          products {
+            nextToken
+          }
+        }
         areas {
           items {
             id
@@ -7363,6 +7772,8 @@ export const productsByPackageTypeId = /* GraphQL */ `
         id
         projectId
         packageTypeId
+        scheduleId
+        userId
         pricingId
         packageTypeName
         quoteLineId
@@ -7399,6 +7810,23 @@ export const productsByPackageTypeId = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        schedule {
+          id
+          projectId
+          name
+          m3
+          case
+          shipType
+          stockingDate
+          packagingDate
+          shippingDate
+          cutDate
+          createdAt
+          updatedAt
+          products {
+            nextToken
+          }
+        }
         areas {
           items {
             id
@@ -7450,6 +7878,8 @@ export const productsByProjectId = /* GraphQL */ `
         id
         projectId
         packageTypeId
+        scheduleId
+        userId
         pricingId
         packageTypeName
         quoteLineId
@@ -7486,6 +7916,23 @@ export const productsByProjectId = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        schedule {
+          id
+          projectId
+          name
+          m3
+          case
+          shipType
+          stockingDate
+          packagingDate
+          shippingDate
+          cutDate
+          createdAt
+          updatedAt
+          products {
+            nextToken
+          }
+        }
         areas {
           items {
             id
