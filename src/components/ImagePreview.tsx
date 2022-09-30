@@ -36,6 +36,19 @@ interface PreviewProps {
   label: string | undefined;
 }
 
+const getLgImageKey = (key: string) => {
+  let newKey = key
+    .replace("/xs_", "/lg_")
+    .replace("/sm_", "/lg_")
+    .replace("/md_", "/lg_");
+  if (!newKey.includes("/lg_")) {
+    const imgName = newKey.split("/").at(-1);
+    if (!imgName) return newKey;
+    newKey = newKey.replace(imgName, `lg_${imgName}`);
+  }
+  return newKey;
+};
+
 export default function Preview({
   open,
   setOpen,
@@ -71,11 +84,20 @@ export default function Preview({
   };
 
   const deleteFile = async () => {
-    setFileList(
-      fileList.filter((f: { key: string }) => f.key !== fileList[fileIdx].key)
-    );
+    const fileKey = fileList[fileIdx].key;
+    setFileList(fileList.filter((f: { key: string }) => f.key !== fileKey));
     handleClose();
-    await Storage.remove(fileList[fileIdx].key);
+
+    const lgFileKey = getLgImageKey(fileKey);
+
+    const delProm = [
+      Storage.remove(lgFileKey),
+      Storage.remove(lgFileKey.replace("/lg_", "/xs_")),
+      Storage.remove(lgFileKey.replace("/lg_", "/sm_")),
+      Storage.remove(lgFileKey.replace("/lg_", "/md_")),
+    ];
+
+    await Promise.all(delProm);
   };
 
   if (!fileList[fileIdx]) return null;
@@ -113,8 +135,8 @@ export default function Preview({
       </div>
       <div className="fixed inset-0 bg-black flex flex-col justify-center items-start text-white">
         <AmplifyS3Image
-          imgKey={fileList[fileIdx].key}
-          alt={fileList[fileIdx].key.split("/").at(-1)}
+          imgKey={getLgImageKey(fileList[fileIdx].key)}
+          alt={getLgImageKey(fileList[fileIdx].key).split("/").at(-1)}
         />
         <h2 className="m-2 font-bold">
           {moment(fileList[fileIdx].lastModified).format(

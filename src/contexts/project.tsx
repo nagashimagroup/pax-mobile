@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, createContext, useContext, useEffect } from "react";
 import type { Project } from "API";
-import useQuery from "hooks/query";
+import useData from "hooks/data";
 
 interface ProjectContextValue {
   loading: boolean;
@@ -19,11 +19,9 @@ const ProjectContext = createContext<ProjectContextValue>({
 });
 
 export const ProjectProvider = ({ id, children }: ProjectContextProps) => {
-  const { data, loading, refetch } = useQuery({
-    query: "getProject",
-    variables: {
-      id,
-    },
+  const { data, loading, refetch } = useData({
+    object: "project",
+    variables: { id },
   });
 
   useEffect(() => {

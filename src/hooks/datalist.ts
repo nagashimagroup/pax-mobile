@@ -3,6 +3,7 @@ import { useReducer, Reducer, useEffect } from "react";
 import _ from "lodash";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "graphql/queries";
+//import * as mutations from "graphql/mutations";
 
 interface GraphQLVariables {
   [key: string]: any;
@@ -65,19 +66,48 @@ const reducer: Reducer<QueryState, QueryAction> = (
         data: action.payload.data,
         nextToken: action.payload.nextToken,
       };
-    case "LOAD_DATA_ERROR":
+    case "SET_ERROR":
       return {
         ...state,
         loading: false,
         error: action.payload.error,
+      };
+    case "CREATE_DATA":
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case "DATA_CREATED":
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        data: [...state.data, action.payload.data],
+      };
+    case "DELETE_DATA":
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case "DATA_DELETED":
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        data: state.data.filter((d: any) => d.id !== action.payload.data.id),
       };
     default:
       return initialState;
   }
 };
 
-//TODO: Learn proper way to use useReducer
-export default function useQuery({ query, variables }: QueryProps) {
+function cap(str: string) {
+  return `${str[0].toUpperCase()}${str.substring(1).toLowerCase()}`;
+}
+
+export default function useDatalist({ query, variables }: QueryProps) {
   const [result, dispatch] = useReducer(reducer, initialState);
 
   // triggers data fetch when initialized
@@ -93,21 +123,16 @@ export default function useQuery({ query, variables }: QueryProps) {
       )) as GraphQLResult;
 
       if (res.errors)
-        return dispatch({ type: "LOAD_DATA_ERROR", payload: res.errors });
+        return dispatch({ type: "SET_ERROR", payload: res.errors });
 
       const { items, nextToken } = res.data[query];
 
-      // returns items if it's a list, else returns object
-      if (items) {
-        dispatch({ type: "DATA_LOADED", payload: { data: items, nextToken } });
-      } else {
-        dispatch({ type: "DATA_LOADED", payload: { data: res.data[query] } });
-      }
+      dispatch({ type: "DATA_LOADED", payload: { data: items, nextToken } });
     } catch (err) {
       if (typeof err === "string") {
-        return dispatch({ type: "LOAD_DATA_ERROR", payload: err });
+        return dispatch({ type: "SET_ERROR", payload: err });
       } else if (err instanceof Error) {
-        return dispatch({ type: "LOAD_DATA_ERROR", payload: err.message });
+        return dispatch({ type: "SET_ERROR", payload: err.message });
       }
     }
   };
@@ -122,16 +147,16 @@ export default function useQuery({ query, variables }: QueryProps) {
       )) as GraphQLResult;
 
       if (res.errors)
-        return dispatch({ type: "LOAD_DATA_ERROR", payload: res.errors });
+        return dispatch({ type: "SET_ERROR", payload: res.errors });
 
       const { items, nextToken } = res.data[query];
 
       dispatch({ type: "DATA_LOADED", payload: { items, nextToken } });
     } catch (err) {
       if (typeof err === "string") {
-        return dispatch({ type: "LOAD_DATA_ERROR", payload: err });
+        return dispatch({ type: "SET_ERROR", payload: err });
       } else if (err instanceof Error) {
-        return dispatch({ type: "LOAD_DATA_ERROR", payload: err.message });
+        return dispatch({ type: "SET_ERROR", payload: err.message });
       }
     }
   };

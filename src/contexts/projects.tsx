@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, createContext, useContext, useEffect } from "react";
 import type { Project } from "API";
-import useQuery from "hooks/query";
+import useDatalist from "hooks/datalist";
 import { useAuth } from "contexts/auth";
 
 interface ProjectsContextValue {
@@ -21,7 +21,7 @@ const ProjectsContext = createContext<ProjectsContextValue>({
 });
 export const ProjectsProvider = ({ children }: ProjectsContextProps) => {
   const { currentGroup } = useAuth();
-  const { data, loading, loadNext, refetch } = useQuery({
+  const { data, loading, loadNext, refetch } = useDatalist({
     query: "projectsByGroupId",
     variables: {
       groupId: currentGroup?.id,

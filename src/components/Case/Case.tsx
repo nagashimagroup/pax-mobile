@@ -2,33 +2,13 @@ import { useProduct } from "contexts/product";
 import { useRouter } from "next/router";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useEffect, useState } from "react";
-import { Case } from "API";
 import Stepper from "components/Stepper";
-
-const getPhaseIdFromStepIndex = (c: Case, index: number) => {
-  if (!c || !c.packPhases) return null;
-
-  if (index === c.packPhases.length) return "final";
-  if (index > c.packPhases.length) return "complete";
-
-  const p = c.packPhases[index];
-  if (!p) return null;
-
-  return p.id;
-};
-
-const getStepIndex = (c: Case | undefined, phaseId: string) => {
-  if (!c || !c.packPhases) return 0;
-  if (phaseId === "final") return c.packPhases.length;
-  if (phaseId === "complete") return c.packPhases.length + 1;
-  const p = c.packPhases.findIndex((p) => p?.id === phaseId);
-  if (p < 0) return 0;
-  return p;
-};
+import Gallery from "components/Gallery";
+import { getPhaseIdFromStepIndex, getStepIndex } from "utils/packPhase";
 
 function Case() {
   const [stepIndex, setStepIndex] = useState(0);
-  const { loading, product, currentCase } = useProduct();
+  const { loading, product, currentCase, updateCase } = useProduct();
   const router = useRouter();
 
   const { phase } = router.query;
@@ -57,6 +37,10 @@ function Case() {
       undefined,
       { shallow: true }
     );
+    updateCase({
+      order: currentCase.order as number,
+      phaseId: getPhaseIdFromStepIndex(currentCase, index),
+    });
   };
 
   const handleNext = () => {
@@ -82,7 +66,17 @@ function Case() {
         steps={[
           ...currentCase.packPhases.map((phase) => ({
             title: phase?.name || "?",
-            content: <div className="h-screen bg-black" />,
+            requiresPhoto: phase?.requiresPhoto,
+            content: (
+              <Gallery
+                label={phase?.name || "?"}
+                path={`${product.projectId}/${product.id}/${currentCase.order}/${phase?.id}`}
+                fileType="image/*"
+                showTitle={false}
+                showHeaderButtons={false}
+                size="sm"
+              />
+            ),
           })),
           {
             title: "梱包完了",

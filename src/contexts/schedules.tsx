@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, createContext, useContext, useEffect } from "react";
 import type { Schedule } from "API";
-import useQuery from "hooks/query";
+import useDatalist from "hooks/datalist";
 import moment from "moment";
 
 interface SchedulesContextValue {
@@ -27,7 +27,7 @@ export const SchedulesProvider = ({
   projectId,
   children,
 }: SchedulesContextProps) => {
-  const { data, loading, refetch } = useQuery({
+  const { data, loading, refetch } = useDatalist({
     query: "schedulesByProject",
     variables: {
       projectId,

@@ -14,10 +14,15 @@ interface S3Image {
   lastModified: Date;
 }
 
+type ImageSize = "xs" | "sm" | "md" | "lg" | null;
+
 interface GalleryProps {
   label?: string;
   path: string;
   fileType: string;
+  showTitle?: boolean;
+  showHeaderButtons?: boolean;
+  size?: ImageSize;
 }
 
 const isImage = (file: S3Image) => {
@@ -45,7 +50,14 @@ const isImage = (file: S3Image) => {
   return false;
 };
 
-export default function Gallery({ label, path, fileType }: GalleryProps) {
+export default function Gallery({
+  label,
+  path,
+  fileType,
+  showTitle,
+  showHeaderButtons,
+  size,
+}: GalleryProps) {
   const [fileList, setFileList] = useState<S3Image[] | []>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
@@ -61,7 +73,10 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
   const loadFiles = async () => {
     setLoading(true);
     const res = await Storage.list(path);
-    setFileList(res as S3Image[]);
+    const targetImages = res.filter((r) =>
+      r.key?.includes(`/${size || "xs"}_`)
+    );
+    setFileList(targetImages as S3Image[]);
     setLoading(false);
   };
 
@@ -73,7 +88,7 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
     const promises = Object.values(files).map((file) =>
       Storage.put(`${path}/${file.name}`, file)
     );
-    const newFiles = (await Promise.all(promises)) as S3Image[];
+    let newFiles = (await Promise.all(promises)) as S3Image[];
     setFileList([...fileList, ...newFiles]);
     setUploading(false);
   };
@@ -96,35 +111,39 @@ export default function Gallery({ label, path, fileType }: GalleryProps) {
       <Camera open={openCamera} setOpen={setOpenCamera} onUpload={saveFiles} />
       {label && (
         <div className="p-4 w-full sticky top-0 flex items-center text-sm">
-          <div className="text-slate-700 mr-4">{label}</div>
-          <button
-            type="button"
-            onClick={() => setOpenCamera(true)}
-            className="px-4 py-1 flex items-center mr-4 bg-slate-800 text-white rounded-lg"
-          >
-            {uploading ? (
-              <CircularProgress size={20} sx={{ color: "white" }} />
-            ) : (
-              <>
-                <CameraIcon sx={{ fontSize: "1.2rem" }} />
-                撮影
-              </>
-            )}
-          </button>
-          <button
-            type="button"
-            onClick={() => inputRef.current && inputRef.current.click()}
-            className="px-4 py-1 flex items-center bg-slate-800 text-white rounded-lg"
-          >
-            {uploading ? (
-              <CircularProgress size={20} sx={{ color: "white" }} />
-            ) : (
-              <>
-                <AddPhotoIcon sx={{ fontSize: "1.2rem" }} />
-                追加
-              </>
-            )}
-          </button>
+          {showTitle && <div className="text-slate-700 mr-4">{label}</div>}
+          {showHeaderButtons && (
+            <button
+              type="button"
+              onClick={() => setOpenCamera(true)}
+              className="px-4 py-1 flex items-center mr-4 bg-slate-800 text-white rounded-lg"
+            >
+              {uploading ? (
+                <CircularProgress size={20} sx={{ color: "white" }} />
+              ) : (
+                <>
+                  <CameraIcon sx={{ fontSize: "1.2rem" }} />
+                  撮影
+                </>
+              )}
+            </button>
+          )}
+          {showHeaderButtons && (
+            <button
+              type="button"
+              onClick={() => inputRef.current && inputRef.current.click()}
+              className="px-4 py-1 flex items-center bg-slate-800 text-white rounded-lg"
+            >
+              {uploading ? (
+                <CircularProgress size={20} sx={{ color: "white" }} />
+              ) : (
+                <>
+                  <AddPhotoIcon sx={{ fontSize: "1.2rem" }} />
+                  追加
+                </>
+              )}
+            </button>
+          )}
         </div>
       )}
       {loading ? (

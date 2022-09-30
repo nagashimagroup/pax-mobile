@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext } from "react";
 import type { Account } from "API";
-import useQuery from "hooks/query";
+import useDatalist from "hooks/datalist";
 import { useAuth } from "contexts/auth";
 
 interface AccountsContextValue {
@@ -16,7 +16,7 @@ const AccountsContext = createContext<AccountsContextValue>({
 });
 export const AccountsProvider = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
-  const { data, loading, loadNext } = useQuery({
+  const { data, loading, loadNext } = useDatalist({
     query: "accountsByTenantId",
     variables: {
       tenantId: user?.tenantId,

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, createContext, useContext, useEffect } from "react";
 import type { Product } from "API";
-import useQuery from "hooks/query";
+import useDatalist from "hooks/datalist";
 
 interface ProductsContextValue {
   loading: boolean;
@@ -22,7 +22,7 @@ export const ProductsProvider = ({
   projectId,
   children,
 }: ProductsContextProps) => {
-  const { data, loading, refetch } = useQuery({
+  const { data, loading, refetch } = useDatalist({
     query: "productsByProjectId",
     variables: {
       projectId,
