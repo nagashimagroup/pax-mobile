@@ -2,48 +2,41 @@ import { useProducts, ProductsProvider } from "contexts/products";
 import { useProject } from "contexts/project";
 import Accordion from "components/Accordion";
 import LinearProgress from "@mui/material/LinearProgress";
-import CaseList from "components/Project/CaseList";
+import CaseList from "components/Case/CaseList";
 import moment from "moment";
 import { Product } from "API";
 import { List, ListSubheader } from "@mui/material";
+import { SchedulesProvider, useSchedules } from "contexts/schedules";
 
 function sortByPackEnd(a: Product, b: Product) {
   return moment(a.packagingEnd).isBefore(b.packagingEnd) ? -1 : 1;
 }
 
-function sortByDate(a: string, b: string) {
-  return moment(a).isBefore(b) ? -1 : 1;
-}
-
-function getPackDates(products: Product[]): string[] {
-  const uniqueDates = new Set(
-    products.map((p) => p.packagingStart) as string[]
-  );
-  console.log(uniqueDates);
-  return Array.from(uniqueDates).sort(sortByDate);
-}
-
 function ProductList() {
+  const { loading: schLoading, schedules } = useSchedules();
   const { loading, products } = useProducts();
 
-  if (loading) return <LinearProgress color="secondary" />;
+  if (loading || schLoading) return <LinearProgress color="secondary" />;
+
+  if (!schedules) return <div>No Schedules</div>;
 
   if (!products) return <div />;
 
   return (
     <>
-      {getPackDates(products).map((packStart) => (
+      {schedules.map((schedule) => (
         <List
-          key={packStart}
+          key={`schedule_${schedule.id}`}
           subheader={
             <ListSubheader component="div">
-              {moment(packStart).format("製函指定期日 MM/DD")}
+              {moment(schedule.packagingDate).format("MM/DD")}
+              {moment(schedule.shippingDate).format(" - MM/DD")}
             </ListSubheader>
           }
         >
           <Accordion
             items={products
-              ?.filter((p) => p.packagingStart === packStart)
+              ?.filter((p) => p.scheduleId === schedule.id)
               .sort(sortByPackEnd)
               .map((product, idx: number) => ({
                 key: `${product?.name}_${idx}`,
@@ -66,8 +59,10 @@ export default function ProjectDetail() {
   if (!project) return <div />;
 
   return (
-    <ProductsProvider projectId={project.id}>
-      <ProductList />
-    </ProductsProvider>
+    <SchedulesProvider projectId={project.id}>
+      <ProductsProvider projectId={project.id}>
+        <ProductList />
+      </ProductsProvider>
+    </SchedulesProvider>
   );
 }

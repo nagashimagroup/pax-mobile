@@ -232,6 +232,12 @@ export const onCreateTenant = /* GraphQL */ `
             accountNumber
             swiftCode
           }
+          packPhases {
+            id
+            name
+            requiresPhoto
+            showInKanBan
+          }
           taxRate
           maxInventoryM3
           heatTreatmentRequestCode
@@ -462,6 +468,12 @@ export const onUpdateTenant = /* GraphQL */ `
             accountNumber
             swiftCode
           }
+          packPhases {
+            id
+            name
+            requiresPhoto
+            showInKanBan
+          }
           taxRate
           maxInventoryM3
           heatTreatmentRequestCode
@@ -691,6 +703,12 @@ export const onDeleteTenant = /* GraphQL */ `
             type
             accountNumber
             swiftCode
+          }
+          packPhases {
+            id
+            name
+            requiresPhoto
+            showInKanBan
           }
           taxRate
           maxInventoryM3
@@ -2738,6 +2756,12 @@ export const onCreateGroup = /* GraphQL */ `
         accountNumber
         swiftCode
       }
+      packPhases {
+        id
+        name
+        requiresPhoto
+        showInKanBan
+      }
       taxRate
       maxInventoryM3
       heatTreatmentRequestCode
@@ -2955,6 +2979,12 @@ export const onUpdateGroup = /* GraphQL */ `
         accountNumber
         swiftCode
       }
+      packPhases {
+        id
+        name
+        requiresPhoto
+        showInKanBan
+      }
       taxRate
       maxInventoryM3
       heatTreatmentRequestCode
@@ -3171,6 +3201,12 @@ export const onDeleteGroup = /* GraphQL */ `
         type
         accountNumber
         swiftCode
+      }
+      packPhases {
+        id
+        name
+        requiresPhoto
+        showInKanBan
       }
       taxRate
       maxInventoryM3
@@ -3486,6 +3522,12 @@ export const onCreateUsersGroups = /* GraphQL */ `
           accountNumber
           swiftCode
         }
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
+        }
         taxRate
         maxInventoryM3
         heatTreatmentRequestCode
@@ -3675,6 +3717,12 @@ export const onUpdateUsersGroups = /* GraphQL */ `
           accountNumber
           swiftCode
         }
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
+        }
         taxRate
         maxInventoryM3
         heatTreatmentRequestCode
@@ -3863,6 +3911,12 @@ export const onDeleteUsersGroups = /* GraphQL */ `
           type
           accountNumber
           swiftCode
+        }
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
         }
         taxRate
         maxInventoryM3
@@ -6876,9 +6930,17 @@ export const onCreateSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          packPhases {
+            id
+            name
+            requiresPhoto
+            showInKanBan
+          }
           cases {
             order
             name
+            phaseId
+            isPacked
             netWeight
             grossWeight
             outerLength
@@ -6960,9 +7022,17 @@ export const onUpdateSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          packPhases {
+            id
+            name
+            requiresPhoto
+            showInKanBan
+          }
           cases {
             order
             name
+            phaseId
+            isPacked
             netWeight
             grossWeight
             outerLength
@@ -7044,9 +7114,17 @@ export const onDeleteSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          packPhases {
+            id
+            name
+            requiresPhoto
+            showInKanBan
+          }
           cases {
             order
             name
+            phaseId
+            isPacked
             netWeight
             grossWeight
             outerLength
@@ -7334,6 +7412,12 @@ export const onCreateProject = /* GraphQL */ `
           type
           accountNumber
           swiftCode
+        }
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
         }
         taxRate
         maxInventoryM3
@@ -7658,6 +7742,12 @@ export const onUpdateProject = /* GraphQL */ `
           accountNumber
           swiftCode
         }
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
+        }
         taxRate
         maxInventoryM3
         heatTreatmentRequestCode
@@ -7980,6 +8070,12 @@ export const onDeleteProject = /* GraphQL */ `
           type
           accountNumber
           swiftCode
+        }
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
         }
         taxRate
         maxInventoryM3
@@ -8464,9 +8560,23 @@ export const onCreateProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      packPhases {
+        id
+        name
+        requiresPhoto
+        showInKanBan
+      }
       cases {
         order
         name
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
+        }
+        phaseId
+        isPacked
         netWeight
         grossWeight
         outerLength
@@ -8592,9 +8702,23 @@ export const onUpdateProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      packPhases {
+        id
+        name
+        requiresPhoto
+        showInKanBan
+      }
       cases {
         order
         name
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
+        }
+        phaseId
+        isPacked
         netWeight
         grossWeight
         outerLength
@@ -8720,9 +8844,23 @@ export const onDeleteProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      packPhases {
+        id
+        name
+        requiresPhoto
+        showInKanBan
+      }
       cases {
         order
         name
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
+        }
+        phaseId
+        isPacked
         netWeight
         grossWeight
         outerLength

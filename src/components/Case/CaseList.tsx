@@ -44,7 +44,11 @@ export default function CaseList({ product }: CasesProps) {
   return (
     <List dense>
       {product.cases.map((cs: Case | null) => (
-        <CaseItem key={product.id} product={product} cs={cs} />
+        <CaseItem
+          key={`${product.id}_case_${cs?.order}`}
+          product={product}
+          cs={cs}
+        />
       ))}
     </List>
   );
