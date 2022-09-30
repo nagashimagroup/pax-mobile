@@ -32,6 +32,7 @@ export const MainListItems = ({ toggleDrawer }: MenuListProps) => {
     </>
   );
 };
+
 export const SecondaryListItems = ({ toggleDrawer }: MenuListProps) => {
   const { user, currentGroup, setCurrentGroup } = useAuth();
 

@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import Link from "next/link";
 
 interface CaseItemProps {
   product: Product;
@@ -15,20 +16,26 @@ function CaseItem({ product, cs }: CaseItemProps) {
   if (!cs) return <div />;
   return (
     <>
-      <ListItemButton>
-        <ListItemIcon>
-          <InventoryIcon />
-        </ListItemIcon>
-        <ListItemText
-          className="w-full overflow-hidden truncate"
-          primary={
-            cs.name || `${product.productNumber || product.name}-${cs.order}`
-          }
-          secondary={`GW: ${cs.grossWeight || "-"}  /  NW: ${
-            cs.netWeight || "-"
-          }`}
-        />
-      </ListItemButton>
+      <Link
+        href={`/products/${product.id}?cs=${cs.order}${
+          cs.phaseId ? `&phase=${cs.phaseId}` : ""
+        }`}
+      >
+        <ListItemButton>
+          <ListItemIcon>
+            <InventoryIcon />
+          </ListItemIcon>
+          <ListItemText
+            className="w-full overflow-hidden truncate"
+            primary={
+              cs.name || `${product.productNumber || product.name}-${cs.order}`
+            }
+            secondary={`GW: ${cs.grossWeight || "-"}  /  NW: ${
+              cs.netWeight || "-"
+            }`}
+          />
+        </ListItemButton>
+      </Link>
       <Divider component="li" />
     </>
   );

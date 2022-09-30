@@ -11,10 +11,7 @@ interface NavigationProps {
   toggleDrawer: () => void;
 }
 
-export default function PersistentDrawerLeft({
-  open,
-  toggleDrawer,
-}: NavigationProps) {
+export function HomeNavs({ open, toggleDrawer }: NavigationProps) {
   return (
     <Drawer variant="temporary" open={open}>
       <Toolbar

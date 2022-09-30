@@ -1,5 +1,5 @@
-import AppBar, { ProjectAppBar } from "./AppBar";
-import Navigation from "./Navigation";
+import { HomeAppBar, ProjectAppBar, ProductAppBar } from "./AppBar";
+import { HomeNavs, ProductNavs } from "layouts/Navigation";
 
 import { ReactNode, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -12,6 +12,15 @@ interface LayoutProps {
 }
 
 const mdTheme = createTheme();
+const boxStyle = {
+  backgroundColor: (theme: any) =>
+    theme.palette.mode === "light"
+      ? theme.palette.grey[100]
+      : theme.palette.grey[900],
+  flexGrow: 1,
+  height: "100vh",
+  overflow: "auto",
+};
 
 export function HomeLayout({ children }: LayoutProps) {
   const [open, setOpen] = useState(false);
@@ -23,20 +32,9 @@ export function HomeLayout({ children }: LayoutProps) {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar open={open} toggleDrawer={toggleDrawer} />
-        <Navigation open={open} toggleDrawer={toggleDrawer} />
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-          }}
-        >
+        <HomeAppBar open={open} toggleDrawer={toggleDrawer} />
+        <HomeNavs open={open} toggleDrawer={toggleDrawer} />
+        <Box component="main" sx={boxStyle}>
           <Toolbar />
           {children}
         </Box>
@@ -51,18 +49,28 @@ export function ProjectLayout({ children }: LayoutProps) {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <ProjectAppBar />
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-          }}
-        >
+        <Box component="main" sx={boxStyle}>
+          <Toolbar />
+          {children}
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}
+
+export function ProductLayout({ children }: LayoutProps) {
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <ProductAppBar open={open} toggleDrawer={toggleDrawer} />
+        <ProductNavs open={open} toggleDrawer={toggleDrawer} />
+        <Box component="main" sx={boxStyle}>
           <Toolbar />
           {children}
         </Box>
