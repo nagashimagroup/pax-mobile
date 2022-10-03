@@ -10,6 +10,7 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import QrScanner from "qr-scanner";
 import { useRouter } from "next/router";
+import { useAlerts } from "contexts/alerts";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -27,6 +28,8 @@ interface QrReaderProps {
 
 export default function QrReader({ open, setOpen }: QrReaderProps) {
   const [scanner, setScanner] = useState<any>(null);
+  const { addAlert } = useAlerts();
+
   const router = useRouter();
 
   const handleClose = () => {
@@ -44,17 +47,19 @@ export default function QrReader({ open, setOpen }: QrReaderProps) {
           console.log({ result });
           const data = JSON.parse(result.data);
           console.log({ data });
-          if (!data.project) {
-            alert("無効なQRコードです");
-          } else {
-            router.push(
-              `/projects/${data.project}?status=SHIP${
-                data.product && `&product=${data.product}`
-              }${data.case && `&case=${data.case}`}`
+          if (data.case && data.product) {
+            return router.push(
+              `/product=${data.product}?cs=${data.case}&camera=true`
             );
-            qrScanner.stop();
-            setOpen(false);
+          } else if (data.project && data.product) {
+            router.push(`/projects/${data.project}?product=${data.product}`);
+          } else if (data.project) {
+            router.push(`/projects/${data.project}`);
+          } else {
+            addAlert({ message: "無効なQRコードです", severity: "warning" });
           }
+          qrScanner.stop();
+          setOpen(false);
         } catch (e) {
           alert("無効なQRコードです");
           console.error(e);
