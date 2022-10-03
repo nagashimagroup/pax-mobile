@@ -159,7 +159,7 @@ export default function useData({ object, variables }: QueryProps) {
       )) as GraphQLResult;
 
       if (res.errors) {
-        console.log(err);
+        console.log(res.errors);
         addAlert({ message: res.errors[0].message, severity: "error" });
         return dispatch({ type: "SET_ERROR", payload: res.errors });
       }
