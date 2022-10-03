@@ -44,9 +44,7 @@ export default function QrReader({ open, setOpen }: QrReaderProps) {
       videoRef,
       (result: any) => {
         try {
-          console.log({ result });
           const data = JSON.parse(result.data);
-          console.log({ data });
           if (data.case && data.product) {
             return router.push(
               `/product=${data.product}?cs=${data.case}&camera=true`
@@ -61,7 +59,7 @@ export default function QrReader({ open, setOpen }: QrReaderProps) {
           qrScanner.stop();
           setOpen(false);
         } catch (e) {
-          alert("無効なQRコードです");
+          addAlert({ message: "無効なQRコードです", severity: "warning" });
           console.error(e);
         }
       },
