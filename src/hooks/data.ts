@@ -4,6 +4,7 @@ import _ from "lodash";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "graphql/queries";
 import * as mutations from "graphql/mutations";
+import { useAlerts } from "contexts/alerts";
 
 interface GraphQLVariables {
   [key: string]: any;
@@ -115,6 +116,7 @@ function cap(str: string) {
 //TODO: Learn proper way to use useReducer
 export default function useData({ object, variables }: QueryProps) {
   const [result, dispatch] = useReducer(reducer, initialState);
+  const { addAlert } = useAlerts();
 
   // triggers data fetch when initialized
   useEffect(() => {
@@ -129,14 +131,18 @@ export default function useData({ object, variables }: QueryProps) {
         graphqlOperation(_.get(queries, query), gqlVariables)
       )) as GraphQLResult;
 
-      if (res.errors)
+      if (res.errors) {
+        addAlert({ message: res.errors[0].message, severity: "error" });
         return dispatch({ type: "SET_ERROR", payload: res.errors });
+      }
 
       dispatch({ type: "DATA_LOADED", payload: { data: res.data[query] } });
     } catch (err) {
       if (typeof err === "string") {
+        addAlert({ message: err, severity: "error" });
         return dispatch({ type: "SET_ERROR", payload: err });
       } else if (err instanceof Error) {
+        addAlert({ message: err.message, severity: "error" });
         return dispatch({ type: "SET_ERROR", payload: err.message });
       }
     }
@@ -152,14 +158,20 @@ export default function useData({ object, variables }: QueryProps) {
         })
       )) as GraphQLResult;
 
-      if (res.errors)
+      if (res.errors) {
+        console.log(err);
+        addAlert({ message: res.errors[0].message, severity: "error" });
         return dispatch({ type: "SET_ERROR", payload: res.errors });
+      }
 
       dispatch({ type: "DATA_UPDATED", payload: { data: res.data[mutation] } });
     } catch (err) {
+      console.log(err);
       if (typeof err === "string") {
+        addAlert({ message: err, severity: "error" });
         return dispatch({ type: "SET_ERROR", payload: err });
       } else if (err instanceof Error) {
+        addAlert({ message: err.message, severity: "error" });
         return dispatch({ type: "SET_ERROR", payload: err.message });
       }
     }

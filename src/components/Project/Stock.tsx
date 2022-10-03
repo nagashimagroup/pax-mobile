@@ -12,11 +12,18 @@ export default function Stock() {
         label="入荷写真"
         path={`${project?.id}/stocking`}
         fileType="image/*"
+        size="sm"
+        showTitle
+        showHeaderButton
+        showFileUploadButton
       />
       <Gallery
         label="ケースマーク"
         path={`${project?.id}/casemarks`}
         fileType="*"
+        showTitle
+        showHeaderButton
+        showFileUploadButton
       />
     </div>
   );

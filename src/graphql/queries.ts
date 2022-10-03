@@ -122,6 +122,7 @@ export const groupsByUserId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -251,6 +252,7 @@ export const usersByGroupId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -723,6 +725,7 @@ export const getTenant = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -2451,6 +2454,7 @@ export const getGroup = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       taxRate
       maxInventoryM3
@@ -2679,6 +2683,7 @@ export const listGroups = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -2791,6 +2796,7 @@ export const groupsByTenantId = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -5398,6 +5404,7 @@ export const getSchedule = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           cases {
             order
@@ -5809,6 +5816,7 @@ export const getProject = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -6072,6 +6080,7 @@ export const listProjects = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -6311,6 +6320,7 @@ export const projectsByUserId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -6550,6 +6560,7 @@ export const projectsByAccountId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -6789,6 +6800,7 @@ export const projectsByContactId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -7028,6 +7040,7 @@ export const projectsByGroupId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -7529,6 +7542,7 @@ export const getProduct = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       cases {
         order
@@ -7538,6 +7552,7 @@ export const getProduct = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         phaseId
         isPacked
@@ -7676,6 +7691,7 @@ export const listProducts = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         cases {
           order
@@ -7685,6 +7701,7 @@ export const listProducts = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           phaseId
           isPacked
@@ -7796,6 +7813,7 @@ export const productsbyScheduleId = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         cases {
           order
@@ -7805,6 +7823,7 @@ export const productsbyScheduleId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           phaseId
           isPacked
@@ -7916,6 +7935,7 @@ export const productsByPackageTypeId = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         cases {
           order
@@ -7925,6 +7945,7 @@ export const productsByPackageTypeId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           phaseId
           isPacked
@@ -8036,6 +8057,7 @@ export const productsByProjectId = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         cases {
           order
@@ -8045,6 +8067,7 @@ export const productsByProjectId = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           phaseId
           isPacked

@@ -8,6 +8,7 @@ import AddPhotoIcon from "@mui/icons-material/AddPhotoAlternate";
 import CameraIcon from "@mui/icons-material/CameraAlt";
 import Preview from "./ImagePreview";
 import Camera from "./Camera";
+import { start } from "repl";
 
 interface S3Image {
   key: string;
@@ -21,8 +22,11 @@ interface GalleryProps {
   path: string;
   fileType: string;
   showTitle?: boolean;
-  showHeaderButtons?: boolean;
+  showHeaderButton?: boolean;
+  showFileUploadButton?: boolean;
   size?: ImageSize;
+  updateCallback?: (fileList: S3Image[]) => void;
+  startCamera?: boolean;
 }
 
 const isImage = (file: S3Image) => {
@@ -55,27 +59,37 @@ export default function Gallery({
   path,
   fileType,
   showTitle,
-  showHeaderButtons,
+  showHeaderButton,
+  showFileUploadButton,
   size,
+  updateCallback,
+  startCamera,
 }: GalleryProps) {
   const [fileList, setFileList] = useState<S3Image[] | []>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [currentIdx, setCurrentIdx] = useState<number>(0);
-  const [openCamera, setOpenCamera] = useState<boolean>(false);
+  const [openCamera, setOpenCamera] = useState<boolean>(startCamera || false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     loadFiles();
   }, []);
 
+  useEffect(() => {
+    if (!startCamera) return;
+    setOpenCamera(startCamera);
+  }, [startCamera]);
+
   const loadFiles = async () => {
     setLoading(true);
     const res = await Storage.list(path);
-    const targetImages = res.filter((r) =>
-      r.key?.includes(`/${size || "xs"}_`)
-    );
+
+    let targetImages = res;
+    if (!!size) {
+      targetImages = res.filter((r) => r.key?.includes(`/${size || ""}`));
+    }
     setFileList(targetImages as S3Image[]);
     setLoading(false);
   };
@@ -91,6 +105,7 @@ export default function Gallery({
     let newFiles = (await Promise.all(promises)) as S3Image[];
     setFileList([...fileList, ...newFiles]);
     setUploading(false);
+    if (updateCallback) updateCallback([...fileList, ...newFiles]);
   };
 
   const showImage = (idx: number) => {
@@ -107,12 +122,18 @@ export default function Gallery({
         fileIdx={currentIdx}
         open={showPreview}
         setOpen={setShowPreview}
+        updateCallback={updateCallback}
       />
-      <Camera open={openCamera} setOpen={setOpenCamera} onUpload={saveFiles} />
+      <Camera
+        label={label}
+        open={openCamera}
+        setOpen={setOpenCamera}
+        onUpload={saveFiles}
+      />
       {label && (
         <div className="p-4 w-full sticky top-0 flex items-center text-sm">
           {showTitle && <div className="text-slate-700 mr-4">{label}</div>}
-          {showHeaderButtons && (
+          {showHeaderButton && (
             <button
               type="button"
               onClick={() => setOpenCamera(true)}
@@ -128,7 +149,7 @@ export default function Gallery({
               )}
             </button>
           )}
-          {showHeaderButtons && (
+          {showFileUploadButton && (
             <button
               type="button"
               onClick={() => inputRef.current && inputRef.current.click()}

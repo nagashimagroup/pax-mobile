@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
 import { startServiceWorker } from "utils/sw";
+import { AlertsProvider } from "contexts/alerts";
 
 Amplify.configure(awsconfig);
 
@@ -31,9 +32,11 @@ function PaxAppContent({ Component, pageProps }: AppProps) {
 function PaxApp(appProps: AppProps) {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <AuthProvider>
-        <PaxAppContent {...appProps} />
-      </AuthProvider>
+      <AlertsProvider>
+        <AuthProvider>
+          <PaxAppContent {...appProps} />
+        </AuthProvider>
+      </AlertsProvider>
     </ErrorBoundary>
   );
 }

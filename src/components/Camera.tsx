@@ -101,13 +101,9 @@ export default function Camera({
     if (image) {
       const buffer = decodeBase64(image);
 
-      const imgFile = new File(
-        [buffer.buffer],
-        `${label}_${short.generate()}.jpeg`,
-        {
-          type: "image/jpeg",
-        }
-      );
+      const imgFile = new File([buffer.buffer], `${short().new()}.jpeg`, {
+        type: "image/jpeg",
+      });
 
       const newFiles = [...imageFiles, { src: image, file: imgFile }];
 

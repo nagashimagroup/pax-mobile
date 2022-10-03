@@ -14,6 +14,7 @@ interface Data {
   title: string | null | undefined;
   subtitle?: string | null | undefined;
   content: ReactNode | ReactNode[] | string | undefined;
+  open?: boolean;
 }
 
 export default function AccordionComponent({ items }: AccordionProps) {
@@ -21,7 +22,7 @@ export default function AccordionComponent({ items }: AccordionProps) {
   return (
     <>
       {items.map((item) => (
-        <Accordion key={item.key}>
+        <Accordion key={item.key} defaultExpanded={item.open}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"

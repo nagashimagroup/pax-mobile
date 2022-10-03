@@ -26,7 +26,7 @@
         },
         "paxwebGraphQL": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/paxwebGraphQL-LambdaLayerVersion5236e0b7-build.zip"
+          "s3Key": "amplify-builds/paxwebGraphQL-LambdaLayerVersion1864553c-build.zip"
         },
         "salesforce": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
@@ -50,7 +50,7 @@
         },
         "resizeImage": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/resizeImage-6a667135434f53443345-build.zip"
+          "s3Key": "amplify-builds/resizeImage-784650306b495271554c-build.zip"
         }
       }
     }

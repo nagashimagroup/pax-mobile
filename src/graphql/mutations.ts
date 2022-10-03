@@ -984,6 +984,7 @@ export const createTenant = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -1223,6 +1224,7 @@ export const updateTenant = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -1462,6 +1464,7 @@ export const deleteTenant = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -3571,6 +3574,7 @@ export const createGroup = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       taxRate
       maxInventoryM3
@@ -3797,6 +3801,7 @@ export const updateGroup = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       taxRate
       maxInventoryM3
@@ -4023,6 +4028,7 @@ export const deleteGroup = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       taxRate
       maxInventoryM3
@@ -4346,6 +4352,7 @@ export const createUsersGroups = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -4544,6 +4551,7 @@ export const updateUsersGroups = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -4742,6 +4750,7 @@ export const deleteUsersGroups = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -7871,6 +7880,7 @@ export const createSchedule = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           cases {
             order
@@ -7966,6 +7976,7 @@ export const updateSchedule = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           cases {
             order
@@ -8061,6 +8072,7 @@ export const deleteSchedule = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           cases {
             order
@@ -8363,6 +8375,7 @@ export const createProject = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -8695,6 +8708,7 @@ export const updateProject = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -9027,6 +9041,7 @@ export const deleteProject = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -9537,6 +9552,7 @@ export const createProduct = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       cases {
         order
@@ -9546,6 +9562,7 @@ export const createProduct = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         phaseId
         isPacked
@@ -9682,6 +9699,7 @@ export const updateProduct = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       cases {
         order
@@ -9691,6 +9709,7 @@ export const updateProduct = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         phaseId
         isPacked
@@ -9827,6 +9846,7 @@ export const deleteProduct = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       cases {
         order
@@ -9836,6 +9856,7 @@ export const deleteProduct = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         phaseId
         isPacked

@@ -29,7 +29,7 @@ const awsmobile = {
     "aws_appsync_region": "ap-northeast-1",
     "aws_appsync_authenticationType": "API_KEY",
     "aws_appsync_apiKey": "da2-svdzocyydvexpjg2j73uiynhhy",
-    "aws_user_files_s3_bucket": "paxstoragebucket04425-test",
+    "aws_user_files_s3_bucket": "paxstorage04425-test",
     "aws_user_files_s3_bucket_region": "ap-northeast-1"
 };
 

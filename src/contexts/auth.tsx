@@ -69,7 +69,6 @@ const getUserData = async (
 
   if (res.data.getUser) {
     const userData = res.data.getUser;
-    console.log({ res });
     const userGroups = userData.tenant.groups.items;
 
     let groups = userGroups;

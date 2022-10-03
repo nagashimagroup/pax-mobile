@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useProduct } from "contexts/product";
 import { useRouter } from "next/router";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -8,20 +9,28 @@ import { getPhaseIdFromStepIndex, getStepIndex } from "utils/packPhase";
 
 function Case() {
   const [stepIndex, setStepIndex] = useState(0);
-  const { loading, product, currentCase, updateCase } = useProduct();
+  const { loading, product, currentCase, updateCase, updatePhase } =
+    useProduct();
   const router = useRouter();
 
-  const { phase } = router.query;
+  const { phase: phaseId, camera } = router.query;
 
   useEffect(() => {
-    setStepIndex(getStepIndex(currentCase, phase as string));
-  }, [phase, currentCase]);
-
-  useEffect(() => {
-    window.onpopstate = () => {
-      router.push("/");
-    };
+    router.beforePopState(({ as }) => {
+      console.log({ as }, router.asPath);
+      if (as !== router.asPath) {
+        router.push(
+          `/projects/${product?.projectId}?status=PACK&&product=${product?.id}`
+        );
+      }
+      return true;
+    });
+    return () => router.beforePopState(() => true);
   }, [router]);
+
+  useEffect(() => {
+    setStepIndex(getStepIndex(currentCase, phaseId as string));
+  }, [phaseId, currentCase]);
 
   if (loading) return <LinearProgress color="secondary" />;
 
@@ -35,11 +44,13 @@ function Case() {
         phaseId ? `&phase=${phaseId}` : ""
       }`,
       undefined,
-      { shallow: true }
+      {
+        shallow: true,
+      }
     );
     updateCase({
       order: currentCase.order as number,
-      phaseId: getPhaseIdFromStepIndex(currentCase, index),
+      phaseId: getPhaseIdFromStepIndex(currentCase, index) as string,
     });
   };
 
@@ -56,7 +67,7 @@ function Case() {
   };
 
   return (
-    <div className="p-3">
+    <div className="w-full p-3">
       <Stepper
         index={stepIndex}
         onNext={handleNext}
@@ -65,16 +76,29 @@ function Case() {
         completedText="梱包作業が完了しました"
         steps={[
           ...currentCase.packPhases.map((phase) => ({
-            title: phase?.name || "?",
-            requiresPhoto: phase?.requiresPhoto,
+            title: `${phase?.name || "?"} ${
+              !phase?.requiresPhoto ? "(任意)" : ""
+            }`,
+            disabled: phase?.requiresPhoto && !phase?.numImgs,
             content: (
               <Gallery
                 label={phase?.name || "?"}
                 path={`${product.projectId}/${product.id}/${currentCase.order}/${phase?.id}`}
                 fileType="image/*"
                 showTitle={false}
-                showHeaderButtons={false}
+                showHeaderButton={true}
+                showFileUploadButton={true}
                 size="sm"
+                startCamera={phase?.id === phaseId && !!camera}
+                updateCallback={(fileList) => {
+                  updatePhase(
+                    currentCase.order as number,
+                    phase?.id as string,
+                    {
+                      numImgs: fileList.length,
+                    }
+                  );
+                }}
               />
             ),
           })),

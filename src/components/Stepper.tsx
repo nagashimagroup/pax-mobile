@@ -20,6 +20,7 @@ interface StepsProps {
 interface Step {
   title: string;
   content: ReactNode | ReactNode[] | string;
+  disabled?: boolean;
 }
 
 export default function VerticalLinearStepper({
@@ -31,7 +32,7 @@ export default function VerticalLinearStepper({
   onFinish,
 }: StepsProps) {
   return (
-    <Box sx={{ maxWidth: 400 }}>
+    <Box>
       <Stepper activeStep={index} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.title}>
@@ -50,6 +51,7 @@ export default function VerticalLinearStepper({
                 <div>
                   <Button
                     variant="outlined"
+                    disabled={step.disabled}
                     onClick={() =>
                       index === steps.length - 1 ? onFinish() : onNext()
                     }

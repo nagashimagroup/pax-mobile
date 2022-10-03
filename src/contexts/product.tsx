@@ -7,11 +7,16 @@ import {
   useState,
 } from "react";
 import { useRouter } from "next/router";
-import type { Case, Product } from "API";
+import type { Case, PackPhase, Product } from "API";
 import useData, { GraphQLInput } from "hooks/data";
 
 interface CaseInput {
   order: number;
+  phaseId: string;
+  [key: string]: any;
+}
+
+interface PhaseInput {
   [key: string]: any;
 }
 
@@ -22,6 +27,7 @@ interface ProductContextValue {
   setCurrentCase: (cs: Case | undefined) => void;
   update: (input: GraphQLInput) => void;
   updateCase: (input: CaseInput) => void;
+  updatePhase: (caseOrder: number, phaseId: string, input: PhaseInput) => void;
 }
 
 interface ProductContextProps {
@@ -37,6 +43,7 @@ const ProductContext = createContext<ProductContextValue>({
   setCurrentCase: () => null,
   update: () => null,
   updateCase: () => null,
+  updatePhase: () => null,
 });
 
 export const ProductProvider = ({
@@ -83,7 +90,22 @@ export const ProductProvider = ({
       ...newCs[idx],
       ...input,
     };
-    console.log({ newCs });
+    update({
+      id: data.id,
+      cases: newCs,
+    });
+  };
+
+  const updatePhase = async (
+    caseOrder: number,
+    phaseId: string,
+    input: PhaseInput
+  ) => {
+    let newCs = data.cases;
+    const idx = newCs.findIndex((c: Case) => c.order === caseOrder);
+    let newPhases = data.cases[idx].packPhases;
+    const pidx = newPhases.findIndex((p: PackPhase) => p.id === phaseId);
+    newCs[idx].packPhases[pidx] = { ...newPhases[pidx], ...input };
     update({
       id: data.id,
       cases: newCs,
@@ -96,6 +118,7 @@ export const ProductProvider = ({
         product: data,
         update,
         updateCase,
+        updatePhase,
         loading,
         currentCase,
         setCurrentCase,

@@ -34,6 +34,7 @@ interface PreviewProps {
   setFileList: (images: S3Image[]) => void;
   fileIdx: number;
   label: string | undefined;
+  updateCallback?: (fileList: S3Image[]) => void;
 }
 
 const getLgImageKey = (key: string) => {
@@ -56,6 +57,7 @@ export default function Preview({
   setFileList,
   fileIdx,
   label,
+  updateCallback,
 }: PreviewProps) {
   const router = useRouter();
 
@@ -85,7 +87,10 @@ export default function Preview({
 
   const deleteFile = async () => {
     const fileKey = fileList[fileIdx].key;
-    setFileList(fileList.filter((f: { key: string }) => f.key !== fileKey));
+    const newFileList = fileList.filter(
+      (f: { key: string }) => f.key !== fileKey
+    );
+    setFileList(newFileList);
     handleClose();
 
     const lgFileKey = getLgImageKey(fileKey);
@@ -98,6 +103,7 @@ export default function Preview({
     ];
 
     await Promise.all(delProm);
+    if (updateCallback) updateCallback(newFileList);
   };
 
   if (!fileList[fileIdx]) return null;

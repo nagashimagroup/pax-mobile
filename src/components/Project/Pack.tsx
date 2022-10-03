@@ -7,14 +7,24 @@ import moment from "moment";
 import { Product } from "API";
 import { List, ListSubheader } from "@mui/material";
 import { SchedulesProvider, useSchedules } from "contexts/schedules";
+import { useRouter } from "next/router";
 
 function sortByPackEnd(a: Product, b: Product) {
   return moment(a.packagingEnd).isBefore(b.packagingEnd) ? -1 : 1;
 }
 
+function packed(p: Product) {
+  if (!p.cases) return false;
+  return (
+    p.cases.filter((c) => c?.phaseId === "complete").length === p.cases.length
+  );
+}
+
 function ProductList() {
   const { loading: schLoading, schedules } = useSchedules();
   const { loading, products } = useProducts();
+  const router = useRouter();
+  const { product: pId } = router.query;
 
   if (loading || schLoading) return <LinearProgress color="secondary" />;
 
@@ -36,7 +46,7 @@ function ProductList() {
         >
           <Accordion
             items={products
-              ?.filter((p) => p.scheduleId === schedule.id)
+              ?.filter((p) => p.scheduleId === schedule.id && !packed(p))
               .sort(sortByPackEnd)
               .map((product, idx: number) => ({
                 key: `${product?.name}_${idx}`,
@@ -45,6 +55,7 @@ function ProductList() {
                   product.packagingEnd
                 ).format("MM/DD迄")}`,
                 content: <CaseList product={product} />,
+                open: pId ? product?.id === pId : false,
               }))}
           />
         </List>

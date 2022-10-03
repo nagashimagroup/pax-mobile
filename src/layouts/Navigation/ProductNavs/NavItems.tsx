@@ -9,6 +9,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CheckIcon from "@mui/icons-material/Check";
 import { useProduct } from "contexts/product";
 import Link from "next/link";
+import { ProgressIcon } from "utils/case";
 
 interface MenuListProps {
   toggleDrawer: () => void;
@@ -30,7 +31,9 @@ export const MainListItems = ({ toggleDrawer }: MenuListProps) => {
       <ListSubheader component="div" inset>
         {product.name}
       </ListSubheader>
-      <Link href={`/projects/${product.projectId}?status=PACK`}>
+      <Link
+        href={`/projects/${product.projectId}?status=PACK&product=${product.id}`}
+      >
         <ListItemButton>
           <ListItemIcon>
             <BallotIcon />
@@ -76,6 +79,9 @@ export const SecondaryListItems = ({ toggleDrawer }: MenuListProps) => {
               }`}
             >
               <ListItemButton onClick={toggleDrawer}>
+                <ListItemIcon>
+                  <ProgressIcon cs={cs} />
+                </ListItemIcon>
                 <ListItemText
                   primary={cs.name || `${product.name}-${cs.order}`}
                 />

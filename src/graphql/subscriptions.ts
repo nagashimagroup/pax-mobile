@@ -237,6 +237,7 @@ export const onCreateTenant = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -473,6 +474,7 @@ export const onUpdateTenant = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -709,6 +711,7 @@ export const onDeleteTenant = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           taxRate
           maxInventoryM3
@@ -2761,6 +2764,7 @@ export const onCreateGroup = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       taxRate
       maxInventoryM3
@@ -2984,6 +2988,7 @@ export const onUpdateGroup = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       taxRate
       maxInventoryM3
@@ -3207,6 +3212,7 @@ export const onDeleteGroup = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       taxRate
       maxInventoryM3
@@ -3527,6 +3533,7 @@ export const onCreateUsersGroups = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -3722,6 +3729,7 @@ export const onUpdateUsersGroups = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -3917,6 +3925,7 @@ export const onDeleteUsersGroups = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -6935,6 +6944,7 @@ export const onCreateSchedule = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           cases {
             order
@@ -7027,6 +7037,7 @@ export const onUpdateSchedule = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           cases {
             order
@@ -7119,6 +7130,7 @@ export const onDeleteSchedule = /* GraphQL */ `
             name
             requiresPhoto
             showInKanBan
+            numImgs
           }
           cases {
             order
@@ -7418,6 +7430,7 @@ export const onCreateProject = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -7747,6 +7760,7 @@ export const onUpdateProject = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -8076,6 +8090,7 @@ export const onDeleteProject = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         taxRate
         maxInventoryM3
@@ -8565,6 +8580,7 @@ export const onCreateProduct = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       cases {
         order
@@ -8574,6 +8590,7 @@ export const onCreateProduct = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         phaseId
         isPacked
@@ -8707,6 +8724,7 @@ export const onUpdateProduct = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       cases {
         order
@@ -8716,6 +8734,7 @@ export const onUpdateProduct = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         phaseId
         isPacked
@@ -8849,6 +8868,7 @@ export const onDeleteProduct = /* GraphQL */ `
         name
         requiresPhoto
         showInKanBan
+        numImgs
       }
       cases {
         order
@@ -8858,6 +8878,7 @@ export const onDeleteProduct = /* GraphQL */ `
           name
           requiresPhoto
           showInKanBan
+          numImgs
         }
         phaseId
         isPacked
