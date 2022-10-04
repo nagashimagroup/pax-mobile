@@ -61,8 +61,8 @@ function TabsComponent({ tabs, index, onTabClick }: TabsProps) {
       sx={{
         bgcolor: "background.paper",
         width: "100%",
-        height: "100%",
       }}
+      className="h-full"
     >
       <AppBar position="static" sx={{ bgcolor: "white" }}>
         <Tabs
@@ -77,23 +77,16 @@ function TabsComponent({ tabs, index, onTabClick }: TabsProps) {
           ))}
         </Tabs>
       </AppBar>
-      <SwipeableViews
-        style={{ height: "100%", position: "relative" }}
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        {tabs.map((tab, idx: number) => (
-          <TabPanel
-            key={`tabs__content__${tab.title}__${idx}`}
-            value={value}
-            index={idx}
-            dir={theme.direction}
-          >
-            {tab.content}
-          </TabPanel>
-        ))}
-      </SwipeableViews>
+      {tabs.map((tab, idx: number) => (
+        <TabPanel
+          key={`tabs__content__${tab.title}__${idx}`}
+          value={value}
+          index={idx}
+          dir={theme.direction}
+        >
+          {tab.content}
+        </TabPanel>
+      ))}
     </Box>
   );
 }

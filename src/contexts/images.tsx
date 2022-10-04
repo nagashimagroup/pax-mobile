@@ -7,7 +7,12 @@ import {
   useEffect,
 } from "react";
 import { useLongPress } from "use-long-press";
-import { S3Image, deleteImages, getLgImageKey } from "utils/image";
+import {
+  S3Image,
+  deleteImages,
+  getImageKeyBySize,
+  ImageSize,
+} from "utils/image";
 import { Storage } from "aws-amplify";
 import Preview from "components/Gallery/ImagePreview";
 import Camera from "components/Gallery/Camera";
@@ -24,6 +29,7 @@ interface ImagesContextValue {
   showImage: (idx: number) => void;
   bind: any;
   mode: Mode;
+  previewSize?: ImageSize;
   setMode: (mode: Mode) => void;
   label: string | null | undefined;
   setOpenCamera: (open: boolean) => void;
@@ -50,6 +56,7 @@ const ImagesContext = createContext<ImagesContextValue>({
   mode: "gallery",
   setMode: () => null,
   label: "",
+  previewSize: undefined,
   setOpenCamera: () => null,
   selectedImages: [],
   setSelectedImages: () => null,
@@ -66,7 +73,8 @@ interface ImagesProviderProps {
   children: ReactNode;
   path: string;
   fileType: string;
-  size: string;
+  size?: ImageSize;
+  previewSize?: ImageSize;
   label?: string;
   updateCallback?: (images: S3Image[]) => void;
   startCamera?: boolean;
@@ -102,6 +110,7 @@ export const ImagesProvider = ({
   path,
   fileType,
   size,
+  previewSize,
   label,
   updateCallback,
   startCamera,
@@ -132,7 +141,7 @@ export const ImagesProvider = ({
       setMode("select");
     },
     {
-      threshold: 100,
+      threshold: 400,
     }
   );
 
@@ -141,7 +150,7 @@ export const ImagesProvider = ({
       const res = await Storage.list(path);
       let targetImages = res;
       if (!!size) {
-        targetImages = res.filter((r) => r.key?.includes(`/${size || ""}`));
+        targetImages = res.filter((r) => r.key?.includes(`/${size}_`));
       }
       return targetImages;
     };
@@ -194,9 +203,12 @@ export const ImagesProvider = ({
 
   const downloadImages = async (imgKeys: string[]) => {
     if (imgKeys.length === 1) {
-      const file = (await Storage.get(getLgImageKey(imgKeys[0]), {
-        download: true,
-      })) as any;
+      const file = (await Storage.get(
+        getImageKeyBySize(imgKeys[0], previewSize),
+        {
+          download: true,
+        }
+      )) as any;
       await downloadFile(getImageNameFromKey(imgKeys[0]) as string, file.Body);
     }
   };
@@ -242,6 +254,7 @@ export const ImagesProvider = ({
         deleteImages: handleDeleteImages,
         downloadImages,
         downloadSelectedImages,
+        previewSize,
       }}
     >
       <Preview

@@ -17,10 +17,7 @@ const boxStyle = {
     theme.palette.mode === "light"
       ? theme.palette.grey[100]
       : theme.palette.grey[900],
-  flexGrow: 1,
   height: "100%",
-  overflow: "auto",
-  position: "relative",
 };
 
 export function HomeLayout({ children }: LayoutProps) {

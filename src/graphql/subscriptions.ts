@@ -27,6 +27,8 @@ export const onUpdateProjectById = /* GraphQL */ `
       alert
       cancelled
       cancelReason
+      caseMarkNumImgs
+      stockNumImgs
       createdAt
       updatedAt
       account {
@@ -321,6 +323,7 @@ export const onUpdateProjectById = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -7245,6 +7248,7 @@ export const onCreateSchedule = /* GraphQL */ `
       packagingDate
       shippingDate
       cutDate
+      numImgs
       createdAt
       updatedAt
       products {
@@ -7310,6 +7314,7 @@ export const onCreateSchedule = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -7338,6 +7343,7 @@ export const onUpdateSchedule = /* GraphQL */ `
       packagingDate
       shippingDate
       cutDate
+      numImgs
       createdAt
       updatedAt
       products {
@@ -7403,6 +7409,7 @@ export const onUpdateSchedule = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -7431,6 +7438,7 @@ export const onDeleteSchedule = /* GraphQL */ `
       packagingDate
       shippingDate
       cutDate
+      numImgs
       createdAt
       updatedAt
       products {
@@ -7496,6 +7504,7 @@ export const onDeleteSchedule = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -7536,6 +7545,8 @@ export const onCreateProject = /* GraphQL */ `
       alert
       cancelled
       cancelReason
+      caseMarkNumImgs
+      stockNumImgs
       createdAt
       updatedAt
       account {
@@ -7830,6 +7841,7 @@ export const onCreateProject = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -7866,6 +7878,8 @@ export const onUpdateProject = /* GraphQL */ `
       alert
       cancelled
       cancelReason
+      caseMarkNumImgs
+      stockNumImgs
       createdAt
       updatedAt
       account {
@@ -8160,6 +8174,7 @@ export const onUpdateProject = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -8196,6 +8211,8 @@ export const onDeleteProject = /* GraphQL */ `
       alert
       cancelled
       cancelReason
+      caseMarkNumImgs
+      stockNumImgs
       createdAt
       updatedAt
       account {
@@ -8490,6 +8507,7 @@ export const onDeleteProject = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -8953,6 +8971,7 @@ export const onCreateProduct = /* GraphQL */ `
         packagingDate
         shippingDate
         cutDate
+        numImgs
         createdAt
         updatedAt
         products {
@@ -9097,6 +9116,7 @@ export const onUpdateProduct = /* GraphQL */ `
         packagingDate
         shippingDate
         cutDate
+        numImgs
         createdAt
         updatedAt
         products {
@@ -9241,6 +9261,7 @@ export const onDeleteProduct = /* GraphQL */ `
         packagingDate
         shippingDate
         cutDate
+        numImgs
         createdAt
         updatedAt
         products {

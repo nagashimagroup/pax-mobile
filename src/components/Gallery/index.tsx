@@ -11,6 +11,7 @@ interface GalleryProps {
   showHeaderButton?: boolean;
   showFileUploadButton?: boolean;
   size?: ImageSize;
+  previewSize?: ImageSize;
   updateCallback?: (fileList: S3Image[]) => void;
   startCamera?: boolean;
   expectedNumImgs?: number;
@@ -24,16 +25,18 @@ export default function Gallery({
   showHeaderButton,
   showFileUploadButton,
   size,
+  previewSize,
   updateCallback,
   startCamera,
   expectedNumImgs,
 }: GalleryProps) {
   return (
-    <div className="w-full overflow-y-scroll">
+    <div className="w-full">
       <ImagesProvider
         path={path}
         fileType={fileType}
-        size={size || "sm"}
+        size={size}
+        previewSize={previewSize}
         label={label}
         startCamera={startCamera}
         updateCallback={updateCallback}

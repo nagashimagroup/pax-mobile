@@ -15,13 +15,11 @@ const ProjectPage: NextPage = () => {
         <title>PAX | Project</title>
       </Head>
 
-      <main>
-        <ProjectProvider id={id}>
-          <ProjectLayout>
-            <Project />
-          </ProjectLayout>
-        </ProjectProvider>
-      </main>
+      <ProjectProvider id={id}>
+        <ProjectLayout>
+          <Project />
+        </ProjectLayout>
+      </ProjectProvider>
     </div>
   );
 };

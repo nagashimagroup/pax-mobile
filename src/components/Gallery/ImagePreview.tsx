@@ -11,7 +11,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import moment from "moment";
-import { getLgImageKey, deleteImages, S3Image } from "utils/image";
+import { getImageKeyBySize, deleteImages, S3Image } from "utils/image";
 import { useImages } from "contexts/images";
 
 const Transition = forwardRef(function Transition(
@@ -35,8 +35,14 @@ export default function Preview({
   currentImage,
 }: PreviewProps) {
   const router = useRouter();
-  const { images, currentIndex, label, getImageName, downloadImages } =
-    useImages();
+  const {
+    images,
+    currentIndex,
+    label,
+    getImageName,
+    downloadImages,
+    previewSize,
+  } = useImages();
 
   useEffect(() => {
     hideImage();
@@ -87,7 +93,7 @@ export default function Preview({
       </div>
       <div className="fixed inset-0 bg-black flex flex-col justify-center items-start text-white">
         <AmplifyS3Image
-          imgKey={getLgImageKey(currentImage.key)}
+          imgKey={getImageKeyBySize(currentImage.key, previewSize)}
           alt={getImageName(currentImage) || ""}
         />
         <h2 className="m-2 font-bold">

@@ -32,15 +32,16 @@ export const isImage = (file: S3Image) => {
   return false;
 };
 
-export const getLgImageKey = (key: string) => {
+export const getImageKeyBySize = (key: string, size?: ImageSize) => {
+  if (!size) return key;
   let newKey = key
-    .replace("/xs_", "/lg_")
-    .replace("/sm_", "/lg_")
-    .replace("/md_", "/lg_");
-  if (!newKey.includes("/lg_")) {
+    .replace("/xs_", `/${size}_`)
+    .replace("/sm_", `/${size}_`)
+    .replace("/md_", `/${size}_`);
+  if (!newKey.includes(`/${size}_`)) {
     const imgName = newKey.split("/").at(-1);
     if (!imgName) return newKey;
-    newKey = newKey.replace(imgName, `lg_${imgName}`);
+    newKey = newKey.replace(imgName, `${size}_${imgName}`);
   }
   return newKey;
 };
@@ -48,8 +49,9 @@ export const getLgImageKey = (key: string) => {
 export const deleteImages = async (imageKeys: string[]) => {
   let delProm: Promise<any>[] = [];
   imageKeys.forEach((k: string) => {
-    const lgFileKey = getLgImageKey(k);
+    const lgFileKey = getImageKeyBySize(k, "lg");
     delProm = delProm.concat([
+      Storage.remove(k),
       Storage.remove(lgFileKey),
       Storage.remove(lgFileKey.replace("/lg_", "/xs_")),
       Storage.remove(lgFileKey.replace("/lg_", "/sm_")),

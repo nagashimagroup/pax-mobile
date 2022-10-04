@@ -5375,6 +5375,7 @@ export const getSchedule = /* GraphQL */ `
       packagingDate
       shippingDate
       cutDate
+      numImgs
       createdAt
       updatedAt
       products {
@@ -5440,6 +5441,7 @@ export const getSchedule = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -5473,6 +5475,7 @@ export const listSchedules = /* GraphQL */ `
         packagingDate
         shippingDate
         cutDate
+        numImgs
         createdAt
         updatedAt
         products {
@@ -5533,6 +5536,7 @@ export const schedulesByProject = /* GraphQL */ `
         packagingDate
         shippingDate
         cutDate
+        numImgs
         createdAt
         updatedAt
         products {
@@ -5592,6 +5596,8 @@ export const getProject = /* GraphQL */ `
       alert
       cancelled
       cancelReason
+      caseMarkNumImgs
+      stockNumImgs
       createdAt
       updatedAt
       account {
@@ -5886,6 +5892,7 @@ export const getProject = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -5927,6 +5934,8 @@ export const listProjects = /* GraphQL */ `
         alert
         cancelled
         cancelReason
+        caseMarkNumImgs
+        stockNumImgs
         createdAt
         updatedAt
         account {
@@ -6119,6 +6128,7 @@ export const listProjects = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -6167,6 +6177,8 @@ export const projectsByUserId = /* GraphQL */ `
         alert
         cancelled
         cancelReason
+        caseMarkNumImgs
+        stockNumImgs
         createdAt
         updatedAt
         account {
@@ -6359,6 +6371,7 @@ export const projectsByUserId = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -6407,6 +6420,8 @@ export const projectsByAccountId = /* GraphQL */ `
         alert
         cancelled
         cancelReason
+        caseMarkNumImgs
+        stockNumImgs
         createdAt
         updatedAt
         account {
@@ -6599,6 +6614,7 @@ export const projectsByAccountId = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -6647,6 +6663,8 @@ export const projectsByContactId = /* GraphQL */ `
         alert
         cancelled
         cancelReason
+        caseMarkNumImgs
+        stockNumImgs
         createdAt
         updatedAt
         account {
@@ -6839,6 +6857,7 @@ export const projectsByContactId = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -6887,6 +6906,8 @@ export const projectsByGroupId = /* GraphQL */ `
         alert
         cancelled
         cancelReason
+        caseMarkNumImgs
+        stockNumImgs
         createdAt
         updatedAt
         account {
@@ -7079,6 +7100,7 @@ export const projectsByGroupId = /* GraphQL */ `
             packagingDate
             shippingDate
             cutDate
+            numImgs
             createdAt
             updatedAt
           }
@@ -7585,6 +7607,7 @@ export const getProduct = /* GraphQL */ `
         packagingDate
         shippingDate
         cutDate
+        numImgs
         createdAt
         updatedAt
         products {
@@ -7734,6 +7757,7 @@ export const listProducts = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -7856,6 +7880,7 @@ export const productsbyScheduleId = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -7978,6 +8003,7 @@ export const productsByPackageTypeId = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {
@@ -8100,6 +8126,7 @@ export const productsByProjectId = /* GraphQL */ `
           packagingDate
           shippingDate
           cutDate
+          numImgs
           createdAt
           updatedAt
           products {

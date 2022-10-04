@@ -1809,6 +1809,7 @@ export type CreateScheduleInput = {
   packagingDate?: string | null,
   shippingDate?: string | null,
   cutDate?: string | null,
+  numImgs?: number | null,
 };
 
 export type ModelScheduleConditionInput = {
@@ -1821,6 +1822,7 @@ export type ModelScheduleConditionInput = {
   packagingDate?: ModelStringInput | null,
   shippingDate?: ModelStringInput | null,
   cutDate?: ModelStringInput | null,
+  numImgs?: ModelFloatInput | null,
   and?: Array< ModelScheduleConditionInput | null > | null,
   or?: Array< ModelScheduleConditionInput | null > | null,
   not?: ModelScheduleConditionInput | null,
@@ -1838,6 +1840,7 @@ export type Schedule = {
   packagingDate?: string | null,
   shippingDate?: string | null,
   cutDate?: string | null,
+  numImgs?: number | null,
   createdAt: string,
   updatedAt: string,
   products?: ModelProductConnection | null,
@@ -1963,6 +1966,7 @@ export type UpdateScheduleInput = {
   packagingDate?: string | null,
   shippingDate?: string | null,
   cutDate?: string | null,
+  numImgs?: number | null,
 };
 
 export type DeleteScheduleInput = {
@@ -1989,6 +1993,8 @@ export type CreateProjectInput = {
   alert?: string | null,
   cancelled: boolean,
   cancelReason?: string | null,
+  caseMarkNumImgs?: number | null,
+  stockNumImgs?: number | null,
 };
 
 export type LocationInput = {
@@ -2014,6 +2020,8 @@ export type ModelProjectConditionInput = {
   alert?: ModelStringInput | null,
   cancelled?: ModelBooleanInput | null,
   cancelReason?: ModelStringInput | null,
+  caseMarkNumImgs?: ModelFloatInput | null,
+  stockNumImgs?: ModelFloatInput | null,
   and?: Array< ModelProjectConditionInput | null > | null,
   or?: Array< ModelProjectConditionInput | null > | null,
   not?: ModelProjectConditionInput | null,
@@ -2040,6 +2048,8 @@ export type Project = {
   alert?: string | null,
   cancelled: boolean,
   cancelReason?: string | null,
+  caseMarkNumImgs?: number | null,
+  stockNumImgs?: number | null,
   createdAt: string,
   updatedAt: string,
   account?: Account | null,
@@ -2081,6 +2091,8 @@ export type UpdateProjectInput = {
   alert?: string | null,
   cancelled?: boolean | null,
   cancelReason?: string | null,
+  caseMarkNumImgs?: number | null,
+  stockNumImgs?: number | null,
 };
 
 export type DeleteProjectInput = {
@@ -3447,6 +3459,7 @@ export type ModelScheduleFilterInput = {
   packagingDate?: ModelStringInput | null,
   shippingDate?: ModelStringInput | null,
   cutDate?: ModelStringInput | null,
+  numImgs?: ModelFloatInput | null,
   and?: Array< ModelScheduleFilterInput | null > | null,
   or?: Array< ModelScheduleFilterInput | null > | null,
   not?: ModelScheduleFilterInput | null,
@@ -3471,6 +3484,8 @@ export type ModelProjectFilterInput = {
   alert?: ModelStringInput | null,
   cancelled?: ModelBooleanInput | null,
   cancelReason?: ModelStringInput | null,
+  caseMarkNumImgs?: ModelFloatInput | null,
+  stockNumImgs?: ModelFloatInput | null,
   and?: Array< ModelProjectFilterInput | null > | null,
   or?: Array< ModelProjectFilterInput | null > | null,
   not?: ModelProjectFilterInput | null,
@@ -12416,6 +12431,7 @@ export type CreateScheduleMutation = {
     packagingDate?: string | null,
     shippingDate?: string | null,
     cutDate?: string | null,
+    numImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -12487,6 +12503,7 @@ export type CreateScheduleMutation = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -12522,6 +12539,7 @@ export type UpdateScheduleMutation = {
     packagingDate?: string | null,
     shippingDate?: string | null,
     cutDate?: string | null,
+    numImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -12593,6 +12611,7 @@ export type UpdateScheduleMutation = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -12628,6 +12647,7 @@ export type DeleteScheduleMutation = {
     packagingDate?: string | null,
     shippingDate?: string | null,
     cutDate?: string | null,
+    numImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -12699,6 +12719,7 @@ export type DeleteScheduleMutation = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -12747,6 +12768,8 @@ export type CreateProjectMutation = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -13077,6 +13100,7 @@ export type CreateProjectMutation = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -13120,6 +13144,8 @@ export type UpdateProjectMutation = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -13450,6 +13476,7 @@ export type UpdateProjectMutation = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -13493,6 +13520,8 @@ export type DeleteProjectMutation = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -13823,6 +13852,7 @@ export type DeleteProjectMutation = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -14336,6 +14366,7 @@ export type CreateProductMutation = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -14498,6 +14529,7 @@ export type UpdateProductMutation = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -14660,6 +14692,7 @@ export type DeleteProductMutation = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -21533,6 +21566,7 @@ export type GetScheduleQuery = {
     packagingDate?: string | null,
     shippingDate?: string | null,
     cutDate?: string | null,
+    numImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -21604,6 +21638,7 @@ export type GetScheduleQuery = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -21642,6 +21677,7 @@ export type ListSchedulesQuery = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -21701,6 +21737,7 @@ export type SchedulesByProjectQuery = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -21767,6 +21804,8 @@ export type GetProjectQuery = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -22097,6 +22136,7 @@ export type GetProjectQuery = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -22143,6 +22183,8 @@ export type ListProjectsQuery = {
       alert?: string | null,
       cancelled: boolean,
       cancelReason?: string | null,
+      caseMarkNumImgs?: number | null,
+      stockNumImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       account?:  {
@@ -22352,6 +22394,7 @@ export type ListProjectsQuery = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -22398,6 +22441,8 @@ export type ProjectsByUserIdQuery = {
       alert?: string | null,
       cancelled: boolean,
       cancelReason?: string | null,
+      caseMarkNumImgs?: number | null,
+      stockNumImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       account?:  {
@@ -22607,6 +22652,7 @@ export type ProjectsByUserIdQuery = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -22653,6 +22699,8 @@ export type ProjectsByAccountIdQuery = {
       alert?: string | null,
       cancelled: boolean,
       cancelReason?: string | null,
+      caseMarkNumImgs?: number | null,
+      stockNumImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       account?:  {
@@ -22862,6 +22910,7 @@ export type ProjectsByAccountIdQuery = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -22908,6 +22957,8 @@ export type ProjectsByContactIdQuery = {
       alert?: string | null,
       cancelled: boolean,
       cancelReason?: string | null,
+      caseMarkNumImgs?: number | null,
+      stockNumImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       account?:  {
@@ -23117,6 +23168,7 @@ export type ProjectsByContactIdQuery = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -23163,6 +23215,8 @@ export type ProjectsByGroupIdQuery = {
       alert?: string | null,
       cancelled: boolean,
       cancelReason?: string | null,
+      caseMarkNumImgs?: number | null,
+      stockNumImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       account?:  {
@@ -23372,6 +23426,7 @@ export type ProjectsByGroupIdQuery = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -23904,6 +23959,7 @@ export type GetProductQuery = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -24069,6 +24125,7 @@ export type ListProductsQuery = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -24198,6 +24255,7 @@ export type ProductsbyScheduleIdQuery = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -24327,6 +24385,7 @@ export type ProductsByPackageTypeIdQuery = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -24456,6 +24515,7 @@ export type ProductsByProjectIdQuery = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -25538,6 +25598,8 @@ export type OnUpdateProjectByIdSubscription = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -25868,6 +25930,7 @@ export type OnUpdateProjectByIdSubscription = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -33402,6 +33465,7 @@ export type OnCreateScheduleSubscription = {
     packagingDate?: string | null,
     shippingDate?: string | null,
     cutDate?: string | null,
+    numImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -33473,6 +33537,7 @@ export type OnCreateScheduleSubscription = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -33503,6 +33568,7 @@ export type OnUpdateScheduleSubscription = {
     packagingDate?: string | null,
     shippingDate?: string | null,
     cutDate?: string | null,
+    numImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -33574,6 +33640,7 @@ export type OnUpdateScheduleSubscription = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -33604,6 +33671,7 @@ export type OnDeleteScheduleSubscription = {
     packagingDate?: string | null,
     shippingDate?: string | null,
     cutDate?: string | null,
+    numImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -33675,6 +33743,7 @@ export type OnDeleteScheduleSubscription = {
           packagingDate?: string | null,
           shippingDate?: string | null,
           cutDate?: string | null,
+          numImgs?: number | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -33718,6 +33787,8 @@ export type OnCreateProjectSubscription = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -34048,6 +34119,7 @@ export type OnCreateProjectSubscription = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -34086,6 +34158,8 @@ export type OnUpdateProjectSubscription = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -34416,6 +34490,7 @@ export type OnUpdateProjectSubscription = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -34454,6 +34529,8 @@ export type OnDeleteProjectSubscription = {
     alert?: string | null,
     cancelled: boolean,
     cancelReason?: string | null,
+    caseMarkNumImgs?: number | null,
+    stockNumImgs?: number | null,
     createdAt: string,
     updatedAt: string,
     account?:  {
@@ -34784,6 +34861,7 @@ export type OnDeleteProjectSubscription = {
         packagingDate?: string | null,
         shippingDate?: string | null,
         cutDate?: string | null,
+        numImgs?: number | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -35262,6 +35340,7 @@ export type OnCreateProductSubscription = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -35419,6 +35498,7 @@ export type OnUpdateProductSubscription = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -35576,6 +35656,7 @@ export type OnDeleteProductSubscription = {
       packagingDate?: string | null,
       shippingDate?: string | null,
       cutDate?: string | null,
+      numImgs?: number | null,
       createdAt: string,
       updatedAt: string,
       products?:  {

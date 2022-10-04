@@ -16,31 +16,32 @@ export function SelectFooter() {
   } = useImages();
   return (
     <Slide direction="up" appear={false} in={mode === "select"}>
-      <div className="fixed z-[999] bottom-0 inset-x-0">
-        <BottomNavigation showLabels className="w-screen bg-slate-800">
-          <BottomNavigationAction
-            onClick={downloadSelectedImages}
-            label="ダウンロード"
-            icon={<DownloadIcon />}
-            className="text-white"
-          />
-          <BottomNavigationAction
-            onClick={deleteSelectedImages}
-            label="削除"
-            icon={<DeleteIcon />}
-            className="text-white"
-          />
-          <BottomNavigationAction
-            onClick={() => {
-              setMode("gallery");
-              setSelectedImages([]);
-            }}
-            label="キャンセル"
-            icon={<CloseIcon />}
-            className="text-white"
-          />
-        </BottomNavigation>
-      </div>
+      <BottomNavigation
+        showLabels
+        className="fixed z-[999] bottom-0 inset-x-0 w-full bg-slate-800"
+      >
+        <BottomNavigationAction
+          onClick={downloadSelectedImages}
+          label="ダウンロード"
+          icon={<DownloadIcon />}
+          className="text-white"
+        />
+        <BottomNavigationAction
+          onClick={deleteSelectedImages}
+          label="削除"
+          icon={<DeleteIcon />}
+          className="text-white"
+        />
+        <BottomNavigationAction
+          onClick={() => {
+            setMode("gallery");
+            setSelectedImages([]);
+          }}
+          label="キャンセル"
+          icon={<CloseIcon />}
+          className="text-white"
+        />
+      </BottomNavigation>
     </Slide>
   );
 }
