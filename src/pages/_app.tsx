@@ -1,3 +1,4 @@
+import "utils/wdyr";
 import "tailwindcss/tailwind.css";
 import "global.css";
 import "polyfills.ts";

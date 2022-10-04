@@ -8,6 +8,7 @@ import {
   useEffect,
   Ref,
 } from "react";
+import { useImages } from "contexts/images";
 import { useRouter } from "next/router";
 import short from "short-uuid";
 import Webcam from "react-webcam";
@@ -32,10 +33,8 @@ const Transition = forwardRef(function Transition(
 });
 
 interface CameraProps {
-  label?: string;
   open: boolean;
   setOpen: (open: boolean) => void;
-  onUpload: (event: { target: { files: File[] } }) => void;
 }
 
 interface ImageFile {
@@ -49,14 +48,9 @@ const videoConstraints = {
   height: 720,
 };
 
-export default function Camera({
-  label,
-  open,
-  setOpen,
-  onUpload,
-  ...webCamProps
-}: CameraProps) {
+export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
   const router = useRouter();
+  const { label, saveImages } = useImages();
   const [enableCamera, setEnableCamera] = useState<boolean>(open);
   const webcamRef = useRef<Webcam>(null);
   const [imageFiles, setImageFiles] = useState<ImageFile[] | []>([]);
@@ -88,11 +82,7 @@ export default function Camera({
   };
 
   const uploadImages = () => {
-    onUpload({
-      target: {
-        files: imageFiles.map((f) => f.file),
-      },
-    });
+    saveImages(imageFiles.map((f) => f.file));
     handleClose();
   };
 
@@ -162,7 +152,7 @@ export default function Camera({
                 </div>
               ))}
           </div>
-          <div className="w-full grid grid-cols-3 items-center my-4">
+          <div className="w-full h-auto grid grid-cols-3 items-center my-4">
             <IconButton
               onClick={handleClose}
               className="flex flex-col justify-center items-center"

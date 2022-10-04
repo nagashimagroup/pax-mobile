@@ -18,8 +18,9 @@ const boxStyle = {
       ? theme.palette.grey[100]
       : theme.palette.grey[900],
   flexGrow: 1,
-  height: "100vh",
+  height: "100%",
   overflow: "auto",
+  position: "relative",
 };
 
 export function HomeLayout({ children }: LayoutProps) {
@@ -30,7 +31,7 @@ export function HomeLayout({ children }: LayoutProps) {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box>
         <CssBaseline />
         <HomeAppBar open={open} toggleDrawer={toggleDrawer} />
         <HomeNavs open={open} toggleDrawer={toggleDrawer} />
@@ -46,7 +47,7 @@ export function HomeLayout({ children }: LayoutProps) {
 export function ProjectLayout({ children }: LayoutProps) {
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box>
         <CssBaseline />
         <ProjectAppBar />
         <Box component="main" sx={boxStyle}>
@@ -66,7 +67,7 @@ export function ProductLayout({ children }: LayoutProps) {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box>
         <CssBaseline />
         <ProductAppBar open={open} toggleDrawer={toggleDrawer} />
         <ProductNavs open={open} toggleDrawer={toggleDrawer} />

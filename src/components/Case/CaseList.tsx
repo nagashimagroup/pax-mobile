@@ -7,7 +7,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import List from "@mui/material/List";
 import { useAlerts } from "contexts/alerts";
 
-import { ProgressIcon, invalidPhases } from "utils/case";
+import { ProgressIcon, invalidPhases, getPhaseName } from "utils/case";
 
 interface CaseItemProps {
   product: Product;
@@ -47,9 +47,7 @@ function CaseItem({ product, cs }: CaseItemProps) {
           primary={
             cs.name || `${product.productNumber || product.name}-${cs.order}`
           }
-          secondary={`GW: ${cs.grossWeight || "-"}  /  NW: ${
-            cs.netWeight || "-"
-          }`}
+          secondary={getPhaseName(cs)}
         />
       </ListItemButton>
       <Divider component="li" />

@@ -2,13 +2,16 @@
 import { useProduct } from "contexts/product";
 import { useRouter } from "next/router";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Stepper from "components/Stepper";
 import Gallery from "components/Gallery";
 import { getPhaseIdFromStepIndex, getStepIndex } from "utils/packPhase";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 
 function Case() {
   const [stepIndex, setStepIndex] = useState(0);
+  const [gw, setGw] = useState<number | string | null>(null);
   const { loading, product, currentCase, updateCase, updatePhase } =
     useProduct();
   const router = useRouter();
@@ -30,6 +33,7 @@ function Case() {
 
   useEffect(() => {
     setStepIndex(getStepIndex(currentCase, phaseId as string));
+    setGw(Number(currentCase?.grossWeight));
   }, [phaseId, currentCase]);
 
   if (loading) return <LinearProgress color="secondary" />;
@@ -37,7 +41,7 @@ function Case() {
   if (!product) return <div />;
   if (!currentCase || !currentCase.packPhases) return <div />;
 
-  const onStepChange = (index: number) => {
+  const onStepChange = (index: number, input?: any) => {
     const phaseId = getPhaseIdFromStepIndex(currentCase, index);
     router.push(
       `/products/${product.id}?cs=${currentCase?.order}${
@@ -51,6 +55,7 @@ function Case() {
     updateCase({
       order: currentCase.order as number,
       phaseId: getPhaseIdFromStepIndex(currentCase, index) as string,
+      ...input,
     });
   };
 
@@ -59,11 +64,20 @@ function Case() {
   };
 
   const handleFinish = () => {
-    onStepChange(stepIndex + 1);
+    onStepChange(stepIndex + 1, {
+      isPacked: true,
+      grossWeight: gw,
+    });
   };
 
   const handleBack = () => {
-    onStepChange(stepIndex - 1);
+    onStepChange(stepIndex - 1, {
+      isPacked: false,
+    });
+  };
+
+  const handleGwChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setGw(e.target.value);
   };
 
   return (
@@ -78,7 +92,7 @@ function Case() {
           ...currentCase.packPhases.map((phase) => ({
             title: `${phase?.name || "?"} ${
               !phase?.requiresPhoto ? "(任意)" : ""
-            }`,
+            }${phase?.numImgs ? ` x${phase.numImgs}` : ""}`,
             disabled: phase?.requiresPhoto && !phase?.numImgs,
             content: (
               <Gallery
@@ -90,6 +104,7 @@ function Case() {
                 showFileUploadButton={true}
                 size="sm"
                 startCamera={phase?.id === phaseId && !!camera}
+                expectedNumImgs={phase?.numImgs || undefined}
                 updateCallback={(fileList) => {
                   updatePhase(
                     currentCase.order as number,
@@ -103,8 +118,31 @@ function Case() {
             ),
           })),
           {
-            title: "梱包完了",
-            content: "GW",
+            title: `重量入力${gw ? ` (${gw}kg)` : ""}`,
+            disabled: !gw || gw <= 0,
+            content: (
+              <div>
+                <TextField
+                  value={gw}
+                  onChange={handleGwChange}
+                  type="number"
+                  label="Gross Weight"
+                  variant="outlined"
+                  size="small"
+                  onFocus={(event) => {
+                    event.target.select();
+                  }}
+                  onBlur={(e) => {
+                    setGw(Number(e.target.value));
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">kg</InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+            ),
           },
         ]}
       />

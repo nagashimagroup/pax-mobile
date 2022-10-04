@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useReducer, Reducer, useEffect } from "react";
+import { useReducer, Reducer, useEffect, useMemo } from "react";
 import _ from "lodash";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "graphql/queries";
@@ -185,5 +185,11 @@ export default function useData({ object, variables }: QueryProps) {
     await getData(customVariables || variables);
   };
 
-  return { ...result, refetch, update };
+  // useMemo to prevent force re-render components that are reading these values
+  const values = useMemo(
+    () => ({ ...result, refetch, update }),
+    [result, refetch, update]
+  );
+
+  return values;
 }

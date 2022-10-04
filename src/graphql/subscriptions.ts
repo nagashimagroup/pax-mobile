@@ -2,6 +2,336 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onUpdateProjectById = /* GraphQL */ `
+  subscription OnUpdateProjectById($id: ID!) {
+    onUpdateProjectById(id: $id) {
+      id
+      groupId
+      quoteId
+      userId
+      accountId
+      accountName
+      contactId
+      contactName
+      name
+      status
+      inquiryDate
+      quotationDate
+      destinationName
+      destination {
+        lat
+        lng
+      }
+      confidence
+      description
+      alert
+      cancelled
+      cancelReason
+      createdAt
+      updatedAt
+      account {
+        id
+        tenantId
+        name
+        abbreviation
+        site
+        billingAddress
+        billingStreet
+        billingCity
+        billingState
+        billingPostalCode
+        billingCountry
+        billingType
+        fax
+        phone
+        customeCode
+        cutoffDateText
+        cutoffDateNumber
+        paymentMonthText
+        paymentMonthNumber
+        paymentDateText
+        paymentDateNumber
+        invoiceUnit
+        invoiceMethod
+        createdAt
+        updatedAt
+        contacts {
+          items {
+            id
+            accountId
+            tenantId
+            name
+            firstName
+            lastName
+            suffix
+            email
+            phone
+            mobilePhone
+            title
+            retired
+            customeCode
+            description
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      contact {
+        id
+        accountId
+        tenantId
+        name
+        firstName
+        lastName
+        suffix
+        email
+        phone
+        mobilePhone
+        title
+        retired
+        customeCode
+        description
+        createdAt
+        updatedAt
+        account {
+          id
+          tenantId
+          name
+          abbreviation
+          site
+          billingAddress
+          billingStreet
+          billingCity
+          billingState
+          billingPostalCode
+          billingCountry
+          billingType
+          fax
+          phone
+          customeCode
+          cutoffDateText
+          cutoffDateNumber
+          paymentMonthText
+          paymentMonthNumber
+          paymentDateText
+          paymentDateNumber
+          invoiceUnit
+          invoiceMethod
+          createdAt
+          updatedAt
+          contacts {
+            nextToken
+          }
+        }
+      }
+      user {
+        id
+        name
+        firstName
+        lastName
+        email
+        showTutorial
+        invited
+        verified
+        fontSize
+        language
+        receiveEmailNotification
+        theme
+        useMfa
+        customId
+        configuration {
+          projectFilter {
+            name
+            duration
+            sort
+            showProcesses
+            showUnits
+            showPhases
+          }
+        }
+        tenantId
+        isAdmin
+        createdAt
+        updatedAt
+        tenant {
+          id
+          name
+          logoUrl
+          address
+          phone
+          syncSFObject
+          sfLoginUrl
+          sfUsername
+          sfPassword
+          sfSecretToken
+          projectFilters {
+            name
+            duration
+            sort
+            showProcesses
+            showUnits
+            showPhases
+          }
+          createdAt
+          updatedAt
+          accounts {
+            nextToken
+          }
+          contacts {
+            nextToken
+          }
+          users {
+            nextToken
+          }
+          groups {
+            nextToken
+          }
+          sfObjects {
+            nextToken
+          }
+        }
+        accessLogs {
+          items {
+            id
+            device
+            ipAddress
+            description
+            userId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userId
+            groupId
+            role
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      group {
+        id
+        name
+        phone
+        fax
+        email
+        logoUrl
+        groupAddress {
+          address
+          street
+          city
+          state
+          postalCode
+          country
+        }
+        quoteInfo {
+          greeting
+          paymentMethod
+          destination
+          dueDate
+          expiryDate
+          description
+        }
+        bank {
+          name
+          branchName
+          branchNumber
+          type
+          accountNumber
+          swiftCode
+        }
+        packPhases {
+          id
+          name
+          requiresPhoto
+          showInKanBan
+          numImgs
+        }
+        taxRate
+        maxInventoryM3
+        heatTreatmentRequestCode
+        packingMaterialProducerRegistrationNumber
+        tenantId
+        createdAt
+        updatedAt
+        tenant {
+          id
+          name
+          logoUrl
+          address
+          phone
+          syncSFObject
+          sfLoginUrl
+          sfUsername
+          sfPassword
+          sfSecretToken
+          projectFilters {
+            name
+            duration
+            sort
+            showProcesses
+            showUnits
+            showPhases
+          }
+          createdAt
+          updatedAt
+          accounts {
+            nextToken
+          }
+          contacts {
+            nextToken
+          }
+          users {
+            nextToken
+          }
+          groups {
+            nextToken
+          }
+          sfObjects {
+            nextToken
+          }
+        }
+        users {
+          items {
+            id
+            userId
+            groupId
+            role
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }
+      schedules {
+        items {
+          id
+          projectId
+          name
+          m3
+          case
+          shipType
+          stockingDate
+          packagingDate
+          shippingDate
+          cutDate
+          createdAt
+          updatedAt
+          products {
+            nextToken
+          }
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const onCreateMetaTable = /* GraphQL */ `
   subscription OnCreateMetaTable {
     onCreateMetaTable {

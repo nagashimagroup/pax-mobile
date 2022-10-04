@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useMemo,
 } from "react";
 import { useRouter } from "next/router";
 import type { Case, PackPhase, Product } from "API";
@@ -106,26 +107,27 @@ export const ProductProvider = ({
     let newPhases = data.cases[idx].packPhases;
     const pidx = newPhases.findIndex((p: PackPhase) => p.id === phaseId);
     newCs[idx].packPhases[pidx] = { ...newPhases[pidx], ...input };
-    update({
+    await update({
       id: data.id,
       cases: newCs,
     });
   };
 
+  const values = useMemo(
+    () => ({
+      product: data,
+      update,
+      updateCase,
+      updatePhase,
+      loading,
+      currentCase,
+      setCurrentCase,
+    }),
+    [data, update, updateCase, updateCase, loading, currentCase, setCurrentCase]
+  );
+
   return (
-    <ProductContext.Provider
-      value={{
-        product: data,
-        update,
-        updateCase,
-        updatePhase,
-        loading,
-        currentCase,
-        setCurrentCase,
-      }}
-    >
-      {children}
-    </ProductContext.Provider>
+    <ProductContext.Provider value={values}>{children}</ProductContext.Provider>
   );
 };
 

@@ -7,7 +7,7 @@ export default function Stock() {
   if (!project) return null;
 
   return (
-    <div className="block h-full">
+    <div className="w-screen h-full px-1">
       <Gallery
         label="入荷写真"
         path={`${project?.id}/stocking`}

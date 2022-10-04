@@ -5,6 +5,16 @@ import ScaleIcon from "@mui/icons-material/Scale";
 
 import type { Case } from "API";
 
+export const getPhaseName = (c: Case) => {
+  if (!c || !c.packPhases) return null;
+
+  if (c.phaseId === "final") return "重量入力";
+  if (c.phaseId === "complete") return "梱包完了";
+  const p = c.packPhases.filter((p) => p?.id === c.phaseId)[0];
+  if (!p) return "-";
+  return p.name;
+};
+
 export function invalidPhases(cs: Case) {
   return !cs.packPhases || cs.packPhases.length === 0;
 }

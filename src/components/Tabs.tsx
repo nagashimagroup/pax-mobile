@@ -4,7 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { ReactNode, SyntheticEvent, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -14,26 +14,13 @@ interface TabPanelProps {
 }
 
 function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box>{children}</Box>}
+    <div className="relative" role="tabpanel" hidden={value !== index}>
+      {value === index && children}
     </div>
   );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
 }
 
 interface TabsProps {
@@ -74,8 +61,6 @@ function TabsComponent({ tabs, index, onTabClick }: TabsProps) {
       sx={{
         bgcolor: "background.paper",
         width: "100%",
-        display: "flex",
-        flexFlow: "column",
         height: "100%",
       }}
     >
@@ -88,16 +73,12 @@ function TabsComponent({ tabs, index, onTabClick }: TabsProps) {
           variant="fullWidth"
         >
           {tabs.map((tab, idx: number) => (
-            <Tab
-              key={`tabs__title__${tab.title}__${idx}`}
-              label={tab.title}
-              {...a11yProps(idx)}
-            />
+            <Tab key={`tabs__title__${tab.title}__${idx}`} label={tab.title} />
           ))}
         </Tabs>
       </AppBar>
       <SwipeableViews
-        style={{ height: "100%" }}
+        style={{ height: "100%", position: "relative" }}
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
