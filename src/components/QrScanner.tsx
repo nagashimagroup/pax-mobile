@@ -47,7 +47,7 @@ export default function QrReader({ open, setOpen }: QrReaderProps) {
           const data = JSON.parse(result.data);
           if (data.case && data.product) {
             return router.push(
-              `/product=${data.product}?cs=${data.case}&camera=true`
+              `/products/${data.product}?cs=${data.case}&camera=true`
             );
           } else if (data.project && data.product) {
             router.push(`/projects/${data.project}?product=${data.product}`);
