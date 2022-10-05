@@ -16,7 +16,7 @@ const Container = ({ children }: { children: ReactNode }) => (
 const SelectButton = ({ img }: { img: S3Image }) => {
   const { isSelected } = useSelectedImages();
   return (
-    <div className="absolute flex items-center justify-center top-0 left-0 w-5 h-5 sm:w-8 sm:h-8 md:w-6 md:h-6">
+    <div className="absolute flex items-center justify-center top-2 left-2 w-5 h-5 sm:w-8 sm:h-8 md:w-6 md:h-6">
       {isSelected(img) && (
         <CheckCircleIcon
           sx={{ margin: 0 }}
@@ -78,7 +78,7 @@ function Images() {
         <div
           key={img.key}
           className={`${
-            isSelected(img) ? "p-3 bg-slate-400" : "p-0"
+            isSelected(img) ? "p-3 bg-slate-400" : "p-0 bg-black"
           } relative w-full aspect-square flex justify-center items-center`}
         >
           <div
@@ -88,7 +88,7 @@ function Images() {
           />
           <SelectButton img={img} />
           <div
-            className={`w-full aspect-square overflow-hidden object-cover flex justify-center items-center ${
+            className={`w-full aspect-square overflow-hidden object-center flex justify-center items-center ${
               isSelected(img) ? "rounded-xl" : ""
             }`}
           >
