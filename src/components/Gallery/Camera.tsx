@@ -77,6 +77,7 @@ export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
   };
 
   const removeImage = (name: string) => {
+    window.navigator.vibrate([20]);
     const newFiles = imageFiles.filter((f) => f.file.name !== name);
     setImageFiles(newFiles);
   };
@@ -87,6 +88,7 @@ export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
   };
 
   const capture = useCallback(() => {
+    window.navigator.vibrate([20]);
     const image = webcamRef?.current?.getScreenshot();
     if (image) {
       const buffer = decodeBase64(image);

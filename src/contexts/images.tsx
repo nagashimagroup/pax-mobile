@@ -124,6 +124,11 @@ export const ImagesProvider = ({
     setOpenCamera(true);
   }, [startCamera]);
 
+  useEffect(() => {
+    if (!openCamera) return;
+    window.navigator.vibrate([100]);
+  }, [openCamera]);
+
   const loadImages = async (setLoadingType: any, numTries?: number) => {
     const fetchImages = async () => {
       const res = await Storage.list(path);
