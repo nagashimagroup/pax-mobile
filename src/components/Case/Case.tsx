@@ -119,7 +119,9 @@ function Case() {
             ),
           })),
           {
-            title: `重量入力${gw ? ` (${gw}kg)` : ""}`,
+            title: `重量入力${
+              currentCase?.grossWeight ? ` (${currentCase?.grossWeight}kg)` : ""
+            }`,
             disabled: !gw || gw <= 0,
             content: (
               <div>

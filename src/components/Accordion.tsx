@@ -22,7 +22,7 @@ export default function AccordionComponent({ items }: AccordionProps) {
   return (
     <>
       {items.map((item) => (
-        <Accordion key={item.key} defaultExpanded={item.open}>
+        <Accordion key={item.key} defaultExpanded={item.open || false}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"

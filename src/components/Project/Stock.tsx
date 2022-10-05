@@ -9,6 +9,7 @@ const galleries = (project: Project, update: any) => [
   {
     key: `${project?.id}_stocking`,
     title: `入荷写真${project.stockNumImgs ? ` x${project.stockNumImgs}` : ""}`,
+    open: true,
     content: (
       <ImagesProvider
         label="入荷写真"
