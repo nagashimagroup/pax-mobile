@@ -135,13 +135,15 @@ export const ImagesProvider = ({
   }, [startCamera]);
 
   const bind = useLongPress(
-    (_, context: any) => {
+    (e, context: any) => {
       if (context.imgKey) setSelectedImages([context.imgKey]);
       if (mode === "select") return;
       setMode("select");
+      e.preventDefault();
+      e.stopPropagation();
     },
     {
-      threshold: 400,
+      threshold: 100,
     }
   );
 

@@ -13,6 +13,7 @@ const galleries = (project: Project) => [
         path={`${project?.id}/stocking`}
         fileType="image/*"
         size="sm"
+        previewSize="lg"
         showTitle={false}
         showHeaderButton
         showFileUploadButton

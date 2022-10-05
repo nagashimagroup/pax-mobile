@@ -3,6 +3,9 @@ import { SelectFooter, GalleryHeader } from "./Headers";
 import { ImagesProvider } from "contexts/images";
 import { S3Image, ImageSize } from "utils/image";
 
+export * from "./Headers";
+export * from "./Images";
+
 interface GalleryProps {
   label?: string;
   path: string;
@@ -17,6 +20,10 @@ interface GalleryProps {
   expectedNumImgs?: number;
 }
 
+// make image context support multiple paths
+// 2 separate contexts
+// use mode, select, delete, download in image-select context
+// use label, path, fileType, size, previewSize, updateCallback, etc for image context
 export default function Gallery({
   label,
   path,
@@ -47,7 +54,7 @@ export default function Gallery({
           showFileUploadButton={showFileUploadButton}
           showTitle={showTitle}
         />
-        <Images />
+        <Images path={path} size={size} />
         <SelectFooter />
       </ImagesProvider>
     </div>

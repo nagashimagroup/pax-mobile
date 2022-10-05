@@ -103,6 +103,7 @@ function Case() {
                 showHeaderButton={true}
                 showFileUploadButton={true}
                 size="sm"
+                previewSize="lg"
                 startCamera={phase?.id === phaseId && !!camera}
                 expectedNumImgs={phase?.numImgs || undefined}
                 updateCallback={(fileList) => {

@@ -46,7 +46,7 @@ const TakePhotoBlock = () => {
   );
 };
 
-export default function Image() {
+function Images() {
   const {
     loading,
     images,
@@ -82,13 +82,16 @@ export default function Image() {
             isSelected(img) ? "p-3 bg-slate-400" : "p-0"
           } relative w-full aspect-square flex justify-center items-center`}
         >
-          <SelectButton img={img} />
           <div
             onClick={() => handleImgClick(img, idx)}
+            {...bind({ imgKey: img.key })}
+            className="absolute inset-0 bg-transparent"
+          />
+          <SelectButton img={img} />
+          <div
             className={`w-full aspect-square overflow-hidden object-cover ${
               isSelected(img) ? "rounded-xl" : ""
             }`}
-            {...bind({ imgKey: img.key })}
           >
             <AmplifyS3Image
               style={{ width: "100%" }}
@@ -102,3 +105,4 @@ export default function Image() {
     </Container>
   );
 }
+export default Images;
