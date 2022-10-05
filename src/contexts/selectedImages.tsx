@@ -1,5 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import { useLongPress } from "use-long-press";
 import {
   S3Image,
@@ -11,6 +17,8 @@ import {
 import { downloadFile } from "utils/files";
 import { Storage } from "aws-amplify";
 import { shortHaptic } from "utils/haptic";
+import JSZip from "jszip";
+import moment from "moment";
 
 type Mode = "gallery" | "select";
 
@@ -56,6 +64,11 @@ export const SelectedImagesProvider = ({
   const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
   const [deletedImages, setDeletedImages] = useState<string[]>([]);
 
+  useEffect(() => {
+    if (mode === "select") return;
+    setSelectedImages([]);
+  }, [mode]);
+
   const bind = useLongPress(
     (e, context: any) => {
       if (context.imgKey)
@@ -83,6 +96,19 @@ export const SelectedImagesProvider = ({
         }
       )) as any;
       await downloadFile(getImageNameFromKey(imgs[0].key) as string, file.Body);
+    } else {
+      const zip = new JSZip();
+      const promisedfiles = imgs.map((img) => {
+        return Storage.get(getImageKeyBySize(img.key, img.downloadSize), {
+          download: true,
+        });
+      });
+      const files = await Promise.all(promisedfiles);
+      imgs.forEach((img, idx) => {
+        zip.file(getImageNameFromKey(img.key) || "?", files[idx].Body as Blob);
+      });
+      const blob = await zip.generateAsync({ type: "blob" });
+      await downloadFile(`pax_${moment().format("YYYYMMDDHHmmss")}`, blob);
     }
   };
 

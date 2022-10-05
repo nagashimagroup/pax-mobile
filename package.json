@@ -26,6 +26,7 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.2",
     "aws-amplify": "^4.3.33",
+    "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "next": "12.2.5",
