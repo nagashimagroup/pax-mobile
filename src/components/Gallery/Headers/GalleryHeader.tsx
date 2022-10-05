@@ -2,8 +2,37 @@ import { useImages } from "contexts/images";
 import { useSelectedImages } from "contexts/selectedImages";
 import { ChangeEvent, useRef } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CircleIcon from "@mui/icons-material/Circle";
 import CameraIcon from "@mui/icons-material/CameraAlt";
 import AddPhotoIcon from "@mui/icons-material/AddPhotoAlternate";
+
+const SelectButton = () => {
+  const { images, previewSize } = useImages();
+  const { selectedImages, setSelectedImages } = useSelectedImages();
+  return (
+    <div className="text-white">
+      {images.length === selectedImages.length ? (
+        <CheckCircleIcon
+          sx={{ margin: 0 }}
+          color="primary"
+          onClick={() => setSelectedImages([])}
+        />
+      ) : (
+        <CircleIcon
+          sx={{ margin: 0 }}
+          color="inherit"
+          className="border-2 border-gray-600 rounded-full"
+          onClick={() =>
+            setSelectedImages(
+              images.map((i) => ({ key: i.key, downloadSize: previewSize }))
+            )
+          }
+        />
+      )}
+    </div>
+  );
+};
 
 interface GalleryHeaderProps {
   showTitle?: boolean;
@@ -24,6 +53,7 @@ export function GalleryHeader({
     return (
       <div className="py-4 w-full sticky top-0 flex items-center text-sm">
         <div className="text-slate-700 mr-4">{label}選択</div>
+        <SelectButton />
       </div>
     );
 
