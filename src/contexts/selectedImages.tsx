@@ -57,7 +57,12 @@ export const SelectedImagesProvider = ({
   const [deletedImages, setDeletedImages] = useState<string[]>([]);
 
   const bind = useLongPress(
-    (e) => {
+    (e, context: any) => {
+      if (context.imgKey)
+        setSelectedImages([
+          ...selectedImages,
+          { key: context.imgKey, downloadSize: context.downloadSize },
+        ]);
       if (mode === "select") return;
       shortHaptic();
       setMode("select");

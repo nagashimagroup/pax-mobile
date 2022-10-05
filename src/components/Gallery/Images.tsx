@@ -83,7 +83,7 @@ export function Images() {
         >
           <div
             onClick={() => handleImgClick(img, idx)}
-            {...bind({ imgKey: img.key })}
+            {...bind({ imgKey: img.key, downloadSize: previewSize })}
             className="absolute inset-0 bg-transparent"
           />
           <SelectButton img={img} />
