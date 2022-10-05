@@ -1,4 +1,5 @@
 import { useImages } from "contexts/images";
+import { useSelectedImages } from "contexts/selectedImages";
 import { ChangeEvent, useRef } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import CameraIcon from "@mui/icons-material/CameraAlt";
@@ -15,8 +16,8 @@ export function GalleryHeader({
   showFileUploadButton,
   showTitle,
 }: GalleryHeaderProps) {
-  const { mode, uploading, label, setOpenCamera, fileType, saveImages } =
-    useImages();
+  const { uploading, label, setOpenCamera, fileType, saveImages } = useImages();
+  const { mode } = useSelectedImages();
   const inputRef = useRef<HTMLInputElement>(null);
 
   if (mode === "select")

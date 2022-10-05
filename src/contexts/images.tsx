@@ -6,7 +6,6 @@ import {
   useState,
   useEffect,
 } from "react";
-import { useLongPress } from "use-long-press";
 import {
   S3Image,
   deleteImages,
@@ -17,29 +16,19 @@ import { Storage } from "aws-amplify";
 import Preview from "components/Gallery/ImagePreview";
 import Camera from "components/Gallery/Camera";
 
-type Mode = "gallery" | "select";
-
 interface ImagesContextValue {
   loading: boolean;
   images: S3Image[];
   uploading: boolean;
   fileType: string;
-  isSelected: (img: S3Image) => boolean;
   getImageName: (img: S3Image) => string | null;
   showImage: (idx: number) => void;
-  bind: any;
-  mode: Mode;
   previewSize?: ImageSize;
-  setMode: (mode: Mode) => void;
   label: string | null | undefined;
   setOpenCamera: (open: boolean) => void;
-  selectedImages: string[];
-  setSelectedImages: (imgs: string[]) => void;
   currentIndex: number;
   setCurrentIndex: (idx: number) => void;
   saveImages: (files: File[] | FileList) => void;
-  deleteSelectedImages: () => void;
-  downloadSelectedImages: () => void;
   deleteImages: (imgKeys: string[]) => void;
   downloadImages: (imgKeys: string[]) => void;
 }
@@ -49,24 +38,16 @@ const ImagesContext = createContext<ImagesContextValue>({
   loading: false,
   uploading: false,
   fileType: "images/*",
-  isSelected: () => false,
   getImageName: () => null,
   showImage: () => null,
-  bind: null,
-  mode: "gallery",
-  setMode: () => null,
   label: "",
   previewSize: undefined,
   setOpenCamera: () => null,
-  selectedImages: [],
-  setSelectedImages: () => null,
   currentIndex: 0,
   setCurrentIndex: () => null,
   saveImages: () => null,
-  deleteSelectedImages: () => null,
   deleteImages: () => null,
   downloadImages: () => null,
-  downloadSelectedImages: () => null,
 });
 
 interface ImagesProviderProps {
@@ -121,12 +102,10 @@ export const ImagesProvider = ({
   const [uploading, setUploading] = useState<boolean>(false);
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [mode, setMode] = useState<Mode>("gallery");
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [openCamera, setOpenCamera] = useState<boolean>(startCamera || false);
 
   useEffect(() => {
-    loadImages(setLoading);
+    loadImages(setLoading, 100);
   }, []);
 
   useEffect(() => {
@@ -134,20 +113,7 @@ export const ImagesProvider = ({
     setOpenCamera(true);
   }, [startCamera]);
 
-  const bind = useLongPress(
-    (e) => {
-      if (mode === "select") return;
-      window.navigator.vibrate([20]);
-      setMode("select");
-      e.preventDefault();
-      e.stopPropagation();
-    },
-    {
-      threshold: 200,
-    }
-  );
-
-  const loadImages = async (setLoadingType: any) => {
+  const loadImages = async (setLoadingType: any, numTries?: number) => {
     const fetchImages = async () => {
       const res = await Storage.list(path);
       let targetImages = res;
@@ -160,11 +126,15 @@ export const ImagesProvider = ({
     let targetImages = await fetchImages();
     setImages(targetImages as S3Image[]);
     setLoadingType(false);
+    if (numTries !== undefined) {
+      if (numTries === 0) return;
+      numTries--;
+    }
     if (
       expectedNumImgs !== undefined &&
       targetImages.length !== expectedNumImgs
     ) {
-      loadImages(setUploading);
+      loadImages(setUploading, numTries);
     }
   };
 
@@ -188,21 +158,6 @@ export const ImagesProvider = ({
     setShowPreview(false);
   };
 
-  const deleteSelectedImages = async () => {
-    setMode("gallery");
-    setLoading(true);
-    const newImages = images.filter(
-      (f: { key: string }) => !selectedImages.includes(f.key)
-    );
-    setImages(newImages);
-
-    deleteImages(selectedImages);
-    setSelectedImages([]);
-
-    if (updateCallback) updateCallback(newImages);
-    setLoading(false);
-  };
-
   const downloadImages = async (imgKeys: string[]) => {
     if (imgKeys.length === 1) {
       const file = (await Storage.get(
@@ -219,17 +174,10 @@ export const ImagesProvider = ({
     const newImages = images.filter(
       (f: { key: string }) => !imgKeys.includes(f.key)
     );
+    console.log({ newImages });
     setImages(newImages);
-    deleteImages(selectedImages);
+    deleteImages(imgKeys);
     if (updateCallback) updateCallback(newImages);
-  };
-
-  const downloadSelectedImages = async () => {
-    downloadImages(selectedImages);
-  };
-
-  const isSelected = (img: S3Image) => {
-    return mode === "select" && selectedImages.includes(img.key);
   };
 
   return (
@@ -239,23 +187,15 @@ export const ImagesProvider = ({
         loading,
         uploading,
         fileType,
-        isSelected,
         getImageName,
         showImage,
-        bind,
-        mode,
-        setMode,
         label,
         setOpenCamera,
-        selectedImages,
-        setSelectedImages,
         currentIndex,
         setCurrentIndex,
         saveImages,
-        deleteSelectedImages,
         deleteImages: handleDeleteImages,
         downloadImages,
-        downloadSelectedImages,
         previewSize,
       }}
     >

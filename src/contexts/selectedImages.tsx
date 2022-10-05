@@ -3,7 +3,6 @@ import { ReactNode, createContext, useContext, useState } from "react";
 import { useLongPress } from "use-long-press";
 import {
   S3Image,
-  deleteImages,
   getImageKeyBySize,
   ImageSize,
   getImageNameFromKey,
@@ -25,7 +24,6 @@ interface SelectedImagesContextValue {
   setMode: (mode: Mode) => void;
   selectedImages: SelectedImage[];
   setSelectedImages: (imgs: SelectedImage[]) => void;
-  deleteSelectedImages: () => void;
   downloadSelectedImages: () => void;
   downloadImages: (imgs: SelectedImage[]) => void;
 }
@@ -37,43 +35,32 @@ const SelectedImagesContext = createContext<SelectedImagesContextValue>({
   setMode: () => null,
   selectedImages: [],
   setSelectedImages: () => null,
-  deleteSelectedImages: () => null,
   downloadImages: () => null,
   downloadSelectedImages: () => null,
 });
 
-interface ImagesProviderProps {
+interface SelectedImagesProviderProps {
   children: ReactNode;
-  deleteCallback?: (images: S3Image[]) => void;
 }
 
-export const ImagesProvider = ({
+export const SelectedImagesProvider = ({
   children,
-  deleteCallback,
-}: ImagesProviderProps) => {
+}: SelectedImagesProviderProps) => {
   const [mode, setMode] = useState<Mode>("gallery");
   const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
 
   const bind = useLongPress(
-    (e, context: any) => {
-      if (context.imgKey) setSelectedImages([context.imgKey]);
+    (e) => {
       if (mode === "select") return;
+      window.navigator.vibrate([20]);
       setMode("select");
       e.preventDefault();
       e.stopPropagation();
     },
     {
-      threshold: 100,
+      threshold: 200,
     }
   );
-
-  const deleteSelectedImages = async () => {
-    setMode("gallery");
-    const imgKeys = selectedImages.map((i) => i.key);
-    deleteImages(imgKeys);
-    setSelectedImages([]);
-    if (deleteCallback) deleteCallback(selectedImages as S3Image[]);
-  };
 
   const downloadImages = async (imgs: SelectedImage[]) => {
     if (imgs.length === 1) {
@@ -105,7 +92,6 @@ export const ImagesProvider = ({
         setMode,
         selectedImages,
         setSelectedImages,
-        deleteSelectedImages,
         downloadImages,
         downloadSelectedImages,
       }}

@@ -1,6 +1,7 @@
 import Images from "./Images";
 import { SelectFooter, GalleryHeader } from "./Headers";
 import { ImagesProvider } from "contexts/images";
+import { SelectedImagesProvider } from "contexts/selectedImages";
 import { S3Image, ImageSize } from "utils/image";
 
 export * from "./Headers";
@@ -39,24 +40,26 @@ export default function Gallery({
 }: GalleryProps) {
   return (
     <div className="w-full">
-      <ImagesProvider
-        path={path}
-        fileType={fileType}
-        size={size}
-        previewSize={previewSize}
-        label={label}
-        startCamera={startCamera}
-        updateCallback={updateCallback}
-        expectedNumImgs={expectedNumImgs}
-      >
-        <GalleryHeader
-          showHeaderButton={showHeaderButton}
-          showFileUploadButton={showFileUploadButton}
-          showTitle={showTitle}
-        />
-        <Images path={path} size={size} />
-        <SelectFooter />
-      </ImagesProvider>
+      <SelectedImagesProvider>
+        <ImagesProvider
+          path={path}
+          fileType={fileType}
+          size={size}
+          previewSize={previewSize}
+          label={label}
+          startCamera={startCamera}
+          updateCallback={updateCallback}
+          expectedNumImgs={expectedNumImgs}
+        >
+          <GalleryHeader
+            showHeaderButton={showHeaderButton}
+            showFileUploadButton={showFileUploadButton}
+            showTitle={showTitle}
+          />
+          <Images />
+          <SelectFooter />
+        </ImagesProvider>
+      </SelectedImagesProvider>
     </div>
   );
 }

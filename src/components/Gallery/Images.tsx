@@ -1,5 +1,6 @@
 import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
 import { useImages } from "contexts/images";
+import { useSelectedImages } from "contexts/selectedImages";
 import CircularProgress from "@mui/material/CircularProgress";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CameraIcon from "@mui/icons-material/CameraAlt";
@@ -13,7 +14,7 @@ const Container = ({ children }: { children: ReactNode }) => (
 );
 
 const SelectButton = ({ img }: { img: S3Image }) => {
-  const { isSelected } = useImages();
+  const { isSelected } = useSelectedImages();
   return (
     <div className="absolute flex items-center justify-center top-0 left-0 w-5 h-5 sm:w-8 sm:h-8 md:w-6 md:h-6">
       {isSelected(img) && (
@@ -47,17 +48,9 @@ const TakePhotoBlock = () => {
 };
 
 function Images() {
-  const {
-    loading,
-    images,
-    bind,
-    mode,
-    selectedImages,
-    setSelectedImages,
-    showImage,
-    isSelected,
-    getImageName,
-  } = useImages();
+  const { loading, images, showImage, getImageName, previewSize } = useImages();
+  const { bind, mode, selectedImages, setSelectedImages, isSelected } =
+    useSelectedImages();
 
   if (loading)
     return (
@@ -69,11 +62,14 @@ function Images() {
   const handleImgClick = (img: S3Image, idx: number) => {
     if (mode === "gallery") {
       showImage(idx);
-      setSelectedImages([img.key]);
+      setSelectedImages([{ key: img.key, downloadSize: previewSize }]);
     }
     if (!isSelected(img))
-      return setSelectedImages([...selectedImages, img.key]);
-    setSelectedImages(selectedImages.filter((k) => k !== img.key));
+      return setSelectedImages([
+        ...selectedImages,
+        { key: img.key, downloadSize: previewSize },
+      ]);
+    setSelectedImages(selectedImages.filter((i) => i.key !== img.key));
   };
 
   return (
