@@ -44,7 +44,6 @@ export default function QrReader({ open, setOpen }: QrReaderProps) {
       videoRef,
       (result: any) => {
         try {
-          console.log({ result });
           const data = JSON.parse(result.data);
           qrScanner.stop();
           setOpen(false);

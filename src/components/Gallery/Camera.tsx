@@ -74,6 +74,11 @@ export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
   }, [open]);
 
   const handleClose = () => {
+    router.push(
+      router.asPath.replace("&camera=true", "&camera=false"),
+      undefined,
+      { shallow: true }
+    );
     setOpen(false);
   };
 

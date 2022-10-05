@@ -96,7 +96,7 @@ function Case() {
             disabled: phase?.requiresPhoto && !phase?.numImgs,
             content: (
               <Gallery
-                label={phase?.name || "?"}
+                label={`${currentCase.name} ${phase?.name}`}
                 path={`${product.projectId}/${product.id}/${currentCase.order}/${phase?.id}`}
                 fileType="image/*"
                 showTitle={false}
@@ -104,7 +104,7 @@ function Case() {
                 showFileUploadButton={true}
                 size="sm"
                 previewSize="lg"
-                startCamera={phase?.id === phaseId && !!camera}
+                startCamera={phase?.id === phaseId && camera === "true"}
                 expectedNumImgs={phase?.numImgs || undefined}
                 updateCallback={(fileList) => {
                   updatePhase(
