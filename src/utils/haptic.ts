@@ -1,16 +1,15 @@
-function canVibrate() {
-  if (window && window.navigator.vibrate) {
-    return true;
-  }
-  return false;
-}
-
 export function longHaptic() {
-  if (!canVibrate()) return;
-  window.navigator.vibrate([100]);
+  try {
+    window.navigator.vibrate([100]);
+  } catch (e) {
+    return;
+  }
 }
 
 export function shortHaptic() {
-  if (!canVibrate()) return;
-  window.navigator.vibrate([50]);
+  try {
+    window.navigator.vibrate([50]);
+  } catch (e) {
+    return;
+  }
 }
