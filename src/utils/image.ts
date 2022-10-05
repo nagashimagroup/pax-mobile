@@ -32,6 +32,21 @@ export const isImage = (file: S3Image) => {
   return false;
 };
 
+export const getImageName = (img: S3Image) => {
+  return getImageNameFromKey(img.key);
+};
+
+export const getImageNameFromKey = (key: string | null) => {
+  if (!key) return null;
+  const fileName = key.split("/").at(-1);
+  if (!fileName) return key;
+  return fileName
+    .replace("lg_", "")
+    .replace("md_", "")
+    .replace("sm_", "")
+    .replace("xs_", "");
+};
+
 export const getImageKeyBySize = (key: string, size?: ImageSize) => {
   if (!size) return key;
   let newKey = key

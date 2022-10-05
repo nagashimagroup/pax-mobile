@@ -67,7 +67,10 @@ function Images() {
     );
 
   const handleImgClick = (img: S3Image, idx: number) => {
-    if (mode === "gallery") return showImage(idx);
+    if (mode === "gallery") {
+      showImage(idx);
+      setSelectedImages([img.key]);
+    }
     if (!isSelected(img))
       return setSelectedImages([...selectedImages, img.key]);
     setSelectedImages(selectedImages.filter((k) => k !== img.key));
@@ -89,7 +92,7 @@ function Images() {
           />
           <SelectButton img={img} />
           <div
-            className={`w-full aspect-square overflow-hidden object-cover ${
+            className={`w-full aspect-square overflow-hidden object-cover flex justify-center items-center ${
               isSelected(img) ? "rounded-xl" : ""
             }`}
           >

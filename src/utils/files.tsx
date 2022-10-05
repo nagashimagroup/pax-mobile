@@ -7,3 +7,15 @@ export function decodeBase64(fileSrc: string) {
   }
   return buffer;
 }
+
+export const downloadFile = async (
+  fileName: string,
+  blob: Blob | MediaSource
+) => {
+  const link = document.createElement("a");
+  link.href = window.URL.createObjectURL(blob);
+  link.download = fileName;
+  document.body.append(link);
+  link.click();
+  link.remove();
+};
