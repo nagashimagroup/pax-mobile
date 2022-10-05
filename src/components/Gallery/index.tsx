@@ -21,10 +21,9 @@ interface GalleryProps {
   expectedNumImgs?: number;
 }
 
-// make image context support multiple paths
-// 2 separate contexts
-// use mode, select, delete, download in image-select context
-// use label, path, fileType, size, previewSize, updateCallback, etc for image context
+// bugs when deletes last photo
+// QR code scan not leading to correct page
+// iPhone
 export default function Gallery({
   label,
   path,

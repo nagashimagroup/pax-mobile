@@ -16,6 +16,7 @@ import { useSelectedImages } from "./selectedImages";
 import { Storage } from "aws-amplify";
 import Preview from "components/Gallery/ImagePreview";
 import Camera from "components/Gallery/Camera";
+import { longHaptic } from "utils/haptic";
 
 interface ImagesContextValue {
   loading: boolean;
@@ -126,7 +127,7 @@ export const ImagesProvider = ({
 
   useEffect(() => {
     if (!openCamera) return;
-    window.navigator.vibrate([100]);
+    longHaptic();
   }, [openCamera]);
 
   const loadImages = async (setLoadingType: any, numTries?: number) => {

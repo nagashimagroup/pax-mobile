@@ -22,6 +22,7 @@ import UploadIcon from "@mui/icons-material/CloudUpload";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { decodeBase64 } from "utils/files";
+import { shortHaptic } from "utils/haptic";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -77,7 +78,7 @@ export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
   };
 
   const removeImage = (name: string) => {
-    window.navigator.vibrate([20]);
+    shortHaptic();
     const newFiles = imageFiles.filter((f) => f.file.name !== name);
     setImageFiles(newFiles);
   };
@@ -88,7 +89,7 @@ export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
   };
 
   const capture = useCallback(() => {
-    window.navigator.vibrate([20]);
+    shortHaptic();
     const image = webcamRef?.current?.getScreenshot();
     if (image) {
       const buffer = decodeBase64(image);

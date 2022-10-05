@@ -10,6 +10,7 @@ import {
 } from "utils/image";
 import { downloadFile } from "utils/files";
 import { Storage } from "aws-amplify";
+import { shortHaptic } from "utils/haptic";
 
 type Mode = "gallery" | "select";
 
@@ -58,7 +59,7 @@ export const SelectedImagesProvider = ({
   const bind = useLongPress(
     (e) => {
       if (mode === "select") return;
-      window.navigator.vibrate([20]);
+      shortHaptic();
       setMode("select");
       e.preventDefault();
       e.stopPropagation();

@@ -88,12 +88,13 @@ export function Images() {
           />
           <SelectButton img={img} />
           <div
+            style={{ width: "100%", aspectRatio: "1/1" }}
             className={`w-full aspect-square overflow-hidden object-center flex justify-center items-center ${
               isSelected(img) ? "rounded-xl" : ""
             }`}
           >
             <AmplifyS3Image
-              style={{ width: "100%" }}
+              style={{ width: "100%", aspectRatio: "1/1" }}
               imgKey={img.key}
               alt={getImageName(img) || "img"}
             />
