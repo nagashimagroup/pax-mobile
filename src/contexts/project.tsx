@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, createContext, useContext, useEffect } from "react";
 import type { Project } from "API";
-import useData from "hooks/data";
+import useData, { GraphQLInput } from "hooks/data";
 
 interface ProjectContextValue {
   loading: boolean;
   project: Project | undefined;
+  update: (input: GraphQLInput) => void;
 }
 
 interface ProjectContextProps {
@@ -16,10 +17,11 @@ interface ProjectContextProps {
 const ProjectContext = createContext<ProjectContextValue>({
   project: undefined,
   loading: false,
+  update: () => null,
 });
 
 export const ProjectProvider = ({ id, children }: ProjectContextProps) => {
-  const { data, loading, refetch } = useData({
+  const { data, loading, refetch, update } = useData({
     object: "project",
     variables: { id },
   });
@@ -31,7 +33,7 @@ export const ProjectProvider = ({ id, children }: ProjectContextProps) => {
   }, [id]);
 
   return (
-    <ProjectContext.Provider value={{ project: data, loading }}>
+    <ProjectContext.Provider value={{ project: data, loading, update }}>
       {children}
     </ProjectContext.Provider>
   );

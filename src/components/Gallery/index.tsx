@@ -1,5 +1,5 @@
-import Images from "./Images";
-import { SelectFooter, GalleryHeader } from "./Headers";
+import Images from "components/Gallery/Images";
+import { SelectFooter, GalleryHeader } from "components/Gallery/Headers";
 import { ImagesProvider } from "contexts/images";
 import { SelectedImagesProvider } from "contexts/selectedImages";
 import { S3Image, ImageSize } from "utils/image";
@@ -57,8 +57,8 @@ export default function Gallery({
             showTitle={showTitle}
           />
           <Images />
-          <SelectFooter />
         </ImagesProvider>
+        <SelectFooter />
       </SelectedImagesProvider>
     </div>
   );

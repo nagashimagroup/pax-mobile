@@ -27,7 +27,7 @@ export default function AccordionComponent({ items }: AccordionProps) {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
           >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+            <Typography sx={{ width: "50%", flexShrink: 0 }}>
               {item.title}
             </Typography>
             {item.subtitle && (

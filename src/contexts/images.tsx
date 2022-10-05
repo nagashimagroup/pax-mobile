@@ -12,6 +12,7 @@ import {
   getImageKeyBySize,
   ImageSize,
 } from "utils/image";
+import { useSelectedImages } from "./selectedImages";
 import { Storage } from "aws-amplify";
 import Preview from "components/Gallery/ImagePreview";
 import Camera from "components/Gallery/Camera";
@@ -97,6 +98,7 @@ export const ImagesProvider = ({
   startCamera,
   expectedNumImgs,
 }: ImagesProviderProps) => {
+  const { deletedImages } = useSelectedImages();
   const [images, setImages] = useState<S3Image[] | []>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
@@ -107,6 +109,15 @@ export const ImagesProvider = ({
   useEffect(() => {
     loadImages(setLoading, 100);
   }, []);
+
+  useEffect(() => {
+    if (deletedImages.length === 0) return;
+    const newImages = images.filter(
+      (f: { key: string }) => !deletedImages.includes(f.key)
+    );
+    setImages(newImages);
+    if (updateCallback) updateCallback(newImages);
+  }, [deletedImages]);
 
   useEffect(() => {
     if (!startCamera) return;
@@ -145,6 +156,7 @@ export const ImagesProvider = ({
       Storage.put(`${path}/${file.name}`, file)
     );
     let newFiles = (await Promise.all(promises)) as S3Image[];
+    setImages([...images, ...newFiles]);
     setUploading(false);
     if (updateCallback) updateCallback([...images, ...newFiles]);
   };

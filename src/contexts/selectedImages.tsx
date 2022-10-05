@@ -6,6 +6,7 @@ import {
   getImageKeyBySize,
   ImageSize,
   getImageNameFromKey,
+  deleteImages,
 } from "utils/image";
 import { downloadFile } from "utils/files";
 import { Storage } from "aws-amplify";
@@ -24,8 +25,10 @@ interface SelectedImagesContextValue {
   setMode: (mode: Mode) => void;
   selectedImages: SelectedImage[];
   setSelectedImages: (imgs: SelectedImage[]) => void;
+  deletedImages: string[];
   downloadSelectedImages: () => void;
   downloadImages: (imgs: SelectedImage[]) => void;
+  deleteSelectedImages: () => void;
 }
 
 const SelectedImagesContext = createContext<SelectedImagesContextValue>({
@@ -35,8 +38,10 @@ const SelectedImagesContext = createContext<SelectedImagesContextValue>({
   setMode: () => null,
   selectedImages: [],
   setSelectedImages: () => null,
+  deletedImages: [],
   downloadImages: () => null,
   downloadSelectedImages: () => null,
+  deleteSelectedImages: () => null,
 });
 
 interface SelectedImagesProviderProps {
@@ -48,6 +53,7 @@ export const SelectedImagesProvider = ({
 }: SelectedImagesProviderProps) => {
   const [mode, setMode] = useState<Mode>("gallery");
   const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
+  const [deletedImages, setDeletedImages] = useState<string[]>([]);
 
   const bind = useLongPress(
     (e) => {
@@ -76,11 +82,20 @@ export const SelectedImagesProvider = ({
 
   const downloadSelectedImages = async () => {
     downloadImages(selectedImages);
+    setMode("gallery");
   };
 
   const isSelected = (img: S3Image) => {
     const imgKeys = selectedImages.map((i) => i.key);
     return mode === "select" && imgKeys.includes(img.key);
+  };
+
+  const deleteSelectedImages = () => {
+    const imgKeys = selectedImages.map((s) => s.key);
+    deleteImages(imgKeys);
+    setDeletedImages([...deletedImages, ...imgKeys]);
+    setSelectedImages([]);
+    setMode("gallery");
   };
 
   return (
@@ -94,6 +109,8 @@ export const SelectedImagesProvider = ({
         setSelectedImages,
         downloadImages,
         downloadSelectedImages,
+        deletedImages,
+        deleteSelectedImages,
       }}
     >
       {children}

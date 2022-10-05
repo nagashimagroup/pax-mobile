@@ -5,17 +5,15 @@ import CloseIcon from "@mui/icons-material/Close";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { useSelectedImages } from "contexts/selectedImages";
-import { useImages } from "contexts/images";
 
 export function SelectFooter() {
   const {
     mode,
     setMode,
     setSelectedImages,
-    selectedImages,
     downloadSelectedImages,
+    deleteSelectedImages,
   } = useSelectedImages();
-  const { deleteImages } = useImages();
   return (
     <Slide direction="up" appear={false} in={mode === "select"}>
       <BottomNavigation
@@ -29,7 +27,7 @@ export function SelectFooter() {
           className="text-white"
         />
         <BottomNavigationAction
-          onClick={() => deleteImages(selectedImages.map((s) => s.key))}
+          onClick={deleteSelectedImages}
           label="削除"
           icon={<DeleteIcon />}
           className="text-white"

@@ -47,7 +47,7 @@ const TakePhotoBlock = () => {
   );
 };
 
-function Images() {
+export function Images() {
   const { loading, images, showImage, getImageName, previewSize } = useImages();
   const { bind, mode, selectedImages, setSelectedImages, isSelected } =
     useSelectedImages();
