@@ -93,11 +93,12 @@ export function Images() {
               isSelected(img) ? "rounded-xl" : ""
             }`}
           >
-            <AmplifyS3Image
-              style={{ width: "100%", aspectRatio: "1/1" }}
-              imgKey={img.key}
-              alt={getImageName(img) || "img"}
-            />
+            <div className="w-full object-cover">
+              <AmplifyS3Image
+                imgKey={img.key}
+                alt={getImageName(img) || "img"}
+              />
+            </div>
           </div>
         </div>
       ))}

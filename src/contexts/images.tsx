@@ -17,6 +17,7 @@ import { Storage } from "aws-amplify";
 import Preview from "components/Gallery/ImagePreview";
 import Camera from "components/Gallery/Camera";
 import { longHaptic } from "utils/haptic";
+import moment from "moment";
 
 interface ImagesContextValue {
   loading: boolean;
@@ -88,6 +89,10 @@ const getImageNameFromKey = (key: string | null) => {
     .replace("xs_", "");
 };
 
+function sortByModifyDate(a: S3Image, b: S3Image) {
+  return moment(a.lastModified).isBefore(b.lastModified) ? -1 : 1;
+}
+
 export const ImagesProvider = ({
   children,
   path,
@@ -141,7 +146,7 @@ export const ImagesProvider = ({
     };
     setLoadingType(true);
     let targetImages = await fetchImages();
-    setImages(targetImages as S3Image[]);
+    setImages((targetImages as S3Image[]).sort(sortByModifyDate));
     setLoadingType(false);
     if (numTries !== undefined) {
       if (numTries === 0) return;
@@ -192,7 +197,6 @@ export const ImagesProvider = ({
     const newImages = images.filter(
       (f: { key: string }) => !imgKeys.includes(f.key)
     );
-    console.log({ newImages });
     setImages(newImages);
     deleteImages(imgKeys);
     if (updateCallback) updateCallback(newImages);
@@ -217,11 +221,7 @@ export const ImagesProvider = ({
         previewSize,
       }}
     >
-      <Preview
-        open={showPreview}
-        hideImage={hideImage}
-        currentImage={images[currentIndex]}
-      />
+      <Preview open={showPreview} hideImage={hideImage} />
       <Camera open={openCamera} setOpen={setOpenCamera} />
       {children}
     </ImagesContext.Provider>

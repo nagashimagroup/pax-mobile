@@ -20,7 +20,6 @@ function Case() {
 
   useEffect(() => {
     router.beforePopState(({ as }) => {
-      console.log({ as }, router.asPath);
       if (as !== router.asPath) {
         router.push(
           `/projects/${product?.projectId}?status=PACK&&product=${product?.id}`

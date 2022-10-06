@@ -14,8 +14,6 @@ const AccountsContent = () => {
 
   if (loading || !accounts) return <div>loading</div>;
 
-  console.log({ accounts });
-
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
