@@ -160,22 +160,22 @@ export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
                 </div>
               ))}
           </div>
-          <div className="w-full h-auto grid grid-cols-3 items-center my-4">
+          <div className="w-full grid grid-cols-3 items-center my-4">
             <IconButton
               onClick={handleClose}
               className="flex flex-col justify-center items-center"
             >
-              <ArrowBackIcon className="text-white text-[28px]" />
+              <ArrowBackIcon className="text-white text-[10vw] sm:text-[6vw] md:text-[28px]" />
               <span className="text-white text-[8px]">キャンセル</span>
             </IconButton>
             <IconButton onClick={capture}>
-              <CaptureIcon className="text-white text-[64px]" />
+              <CaptureIcon className="text-white text-[20vw] sm:text-[14vw] md:text-[64px]" />
             </IconButton>
             <IconButton
               onClick={uploadImages}
               className="flex flex-col justify-center items-center"
             >
-              <UploadIcon className="text-white text-[28px]" />
+              <UploadIcon className="text-white text-[10vw] sm:text-[6vw] md:text-[28px]" />
               <span className="text-white text-[8px]">アップロード</span>
             </IconButton>
           </div>
