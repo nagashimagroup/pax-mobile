@@ -8,7 +8,8 @@ import Avatar from "@mui/material/Avatar";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, MouseEvent } from "react";
+import Menu from "components/Menu";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -25,6 +26,12 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
+interface Action {
+  icon?: any;
+  label: string;
+  onClick: () => void;
+}
+
 interface CardProps {
   title: string;
   subtitle?: string;
@@ -32,6 +39,7 @@ interface CardProps {
   statusColor?: string;
   content: ReactNode | ReactNode[] | string | string[];
   extra: ReactNode | ReactNode[] | string | string[];
+  actions: Action[] | undefined | null | false;
 }
 
 export default function BasicCard({
@@ -41,8 +49,21 @@ export default function BasicCard({
   statusColor,
   content,
   extra,
+  actions,
 }: CardProps) {
   const [expanded, setExpanded] = useState(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
+
+  const handleClick = (e: MouseEvent<HTMLElement>) => {
+    setOpenMenu(true);
+    setAnchor(e.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setOpenMenu(false);
+    setAnchor(null);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -50,6 +71,14 @@ export default function BasicCard({
 
   return (
     <Card sx={{ width: "100%" }}>
+      {actions && (
+        <Menu
+          open={openMenu}
+          anchor={anchor}
+          menus={actions}
+          onClose={handleCloseMenu}
+        />
+      )}
       <CardHeader
         avatar={
           status && (
@@ -59,9 +88,11 @@ export default function BasicCard({
           )
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          actions && (
+            <IconButton aria-label="settings" onClick={handleClick}>
+              <MoreVertIcon />
+            </IconButton>
+          )
         }
         title={title}
         subheader={subtitle}

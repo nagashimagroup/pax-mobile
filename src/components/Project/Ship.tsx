@@ -142,14 +142,25 @@ export default function Ship() {
             <Card
               status={schedule.isShipped ? "済" : "未"}
               statusColor={schedule.isShipped ? "#2196f3" : "gray"}
-              title={`${schedule.name}${
-                schedule.numImgs ? ` x${schedule.numImgs}` : ""
-              }`}
+              title={schedule?.name || "-"}
               subtitle={`${moment(schedule.packagingDate).format(
                 "MM/DD"
               )}${moment(schedule.shippingDate).format(" - MM/DD")}`}
               content={<ShipStats schedule={schedule} />}
               extra={<Accordion items={items(schedule, update)} />}
+              actions={
+                schedule.isShipped && [
+                  {
+                    label: "出荷を取り消す",
+                    onClick: () => {
+                      update("updateSchedule", {
+                        id: schedule.id,
+                        isShipped: false,
+                      });
+                    },
+                  },
+                ]
+              }
             />
           </ProductsProvider>
         ))}
