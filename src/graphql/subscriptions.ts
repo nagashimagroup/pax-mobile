@@ -324,6 +324,7 @@ export const onUpdateProjectById = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -7249,6 +7250,7 @@ export const onCreateSchedule = /* GraphQL */ `
       shippingDate
       cutDate
       numImgs
+      isShipped
       createdAt
       updatedAt
       products {
@@ -7315,6 +7317,7 @@ export const onCreateSchedule = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -7344,6 +7347,7 @@ export const onUpdateSchedule = /* GraphQL */ `
       shippingDate
       cutDate
       numImgs
+      isShipped
       createdAt
       updatedAt
       products {
@@ -7410,6 +7414,7 @@ export const onUpdateSchedule = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -7439,6 +7444,7 @@ export const onDeleteSchedule = /* GraphQL */ `
       shippingDate
       cutDate
       numImgs
+      isShipped
       createdAt
       updatedAt
       products {
@@ -7505,6 +7511,7 @@ export const onDeleteSchedule = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -7842,6 +7849,7 @@ export const onCreateProject = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -8175,6 +8183,7 @@ export const onUpdateProject = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -8508,6 +8517,7 @@ export const onDeleteProject = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -8972,6 +8982,7 @@ export const onCreateProduct = /* GraphQL */ `
         shippingDate
         cutDate
         numImgs
+        isShipped
         createdAt
         updatedAt
         products {
@@ -9117,6 +9128,7 @@ export const onUpdateProduct = /* GraphQL */ `
         shippingDate
         cutDate
         numImgs
+        isShipped
         createdAt
         updatedAt
         products {
@@ -9262,6 +9274,7 @@ export const onDeleteProduct = /* GraphQL */ `
         shippingDate
         cutDate
         numImgs
+        isShipped
         createdAt
         updatedAt
         products {

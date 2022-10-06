@@ -3,9 +3,15 @@ import { useReducer, Reducer, useEffect } from "react";
 import _ from "lodash";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "graphql/queries";
-//import * as mutations from "graphql/mutations";
+import * as mutations from "graphql/mutations";
+import { useAlerts } from "contexts/alerts";
 
 interface GraphQLVariables {
+  [key: string]: any;
+}
+
+export interface GraphQLInput {
+  id: string;
   [key: string]: any;
 }
 
@@ -21,6 +27,7 @@ interface QueryState {
   error: string | boolean;
   refetch: () => null;
   loadNext: () => null;
+  update: (query: string, input: GraphQLInput) => void;
 }
 
 interface QueryAction {
@@ -45,6 +52,7 @@ const initialState = {
   nextToken: null,
   refetch: () => null,
   loadNext: () => null,
+  update: () => null,
 };
 
 const reducer: Reducer<QueryState, QueryAction> = (
@@ -85,6 +93,26 @@ const reducer: Reducer<QueryState, QueryAction> = (
         error: false,
         data: [...state.data, action.payload.data],
       };
+    case "UPDATE_DATA":
+      return {
+        ...state,
+        updating: true,
+        error: false,
+      };
+    case "DATA_UPDATED":
+      const newData = state.data;
+      newData[
+        state.data.findIndex(
+          (d: GraphQLInput) => d.id === action.payload.data.id
+        )
+      ] = action.payload.data;
+
+      return {
+        ...state,
+        updating: false,
+        error: false,
+        data: newData,
+      };
     case "DELETE_DATA":
       return {
         ...state,
@@ -103,12 +131,9 @@ const reducer: Reducer<QueryState, QueryAction> = (
   }
 };
 
-function cap(str: string) {
-  return `${str[0].toUpperCase()}${str.substring(1).toLowerCase()}`;
-}
-
 export default function useDatalist({ query, variables }: QueryProps) {
   const [result, dispatch] = useReducer(reducer, initialState);
+  const { addAlert } = useAlerts();
 
   // triggers data fetch when initialized
   useEffect(() => {
@@ -161,6 +186,34 @@ export default function useDatalist({ query, variables }: QueryProps) {
     }
   };
 
+  const update = async (mutation: string, input: GraphQLInput | undefined) => {
+    try {
+      dispatch({ type: "UPDATE_DATA" });
+      const res = (await API.graphql(
+        graphqlOperation(_.get(mutations, mutation), {
+          input,
+        })
+      )) as GraphQLResult;
+
+      if (res.errors) {
+        console.log(res.errors);
+        addAlert({ message: res.errors[0].message, severity: "error" });
+        return dispatch({ type: "SET_ERROR", payload: res.errors });
+      }
+
+      dispatch({ type: "DATA_UPDATED", payload: { data: res.data[mutation] } });
+    } catch (err) {
+      console.log(err);
+      if (typeof err === "string") {
+        addAlert({ message: err, severity: "error" });
+        return dispatch({ type: "SET_ERROR", payload: err });
+      } else if (err instanceof Error) {
+        addAlert({ message: err.message, severity: "error" });
+        return dispatch({ type: "SET_ERROR", payload: err.message });
+      }
+    }
+  };
+
   // refetch the same dataset
   // can refetch with new variables
   const refetch = async (
@@ -169,5 +222,5 @@ export default function useDatalist({ query, variables }: QueryProps) {
     await loadData(customVariables || variables);
   };
 
-  return { ...result, refetch, loadNext };
+  return { ...result, refetch, loadNext, update };
 }

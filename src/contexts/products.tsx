@@ -10,7 +10,8 @@ interface ProductsContextValue {
 
 interface ProductsContextProps {
   children: ReactNode;
-  projectId: string;
+  variables: { [key: string]: any };
+  by?: "ProjectId" | "ScheduleId" | "PackageTypeId";
 }
 
 const ProductsContext = createContext<ProductsContextValue>({
@@ -19,21 +20,18 @@ const ProductsContext = createContext<ProductsContextValue>({
 });
 
 export const ProductsProvider = ({
-  projectId,
+  variables,
   children,
+  by,
 }: ProductsContextProps) => {
   const { data, loading, refetch } = useDatalist({
-    query: "productsByProjectId",
-    variables: {
-      projectId,
-    },
+    query: `productsBy${by || "ProjectId"}`,
+    variables: variables,
   });
 
   useEffect(() => {
-    refetch({
-      id: projectId,
-    });
-  }, [projectId]);
+    refetch(variables);
+  }, [variables]);
 
   return (
     <ProductsContext.Provider value={{ products: data, loading }}>

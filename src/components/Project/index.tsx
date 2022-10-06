@@ -4,6 +4,7 @@ import Tabs from "components/Tabs";
 import ProjectDetail from "./Detail";
 import StockPage from "./Stock";
 import PackPage from "./Pack";
+import ShipPage from "./Ship";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useEffect, useState } from "react";
 import { getStatusFromTabIndex, getTabIndex } from "utils/status";
@@ -45,7 +46,7 @@ function Project() {
         { title: "詳細", content: <ProjectDetail /> },
         { title: "入荷", content: <StockPage /> },
         { title: "梱包", content: <PackPage /> },
-        { title: "出荷", content: "出荷" },
+        { title: "出荷", content: <ShipPage /> },
       ]}
     />
   );

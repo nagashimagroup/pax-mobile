@@ -68,9 +68,11 @@ export default function Stock() {
 
   if (!project) return null;
   return (
-    <SelectedImagesProvider>
-      <Accordion items={galleries(project, update)} />
-      <SelectFooter />
-    </SelectedImagesProvider>
+    <div className="m-2">
+      <SelectedImagesProvider>
+        <Accordion items={galleries(project, update)} />
+        <SelectFooter />
+      </SelectedImagesProvider>
+    </div>
   );
 }

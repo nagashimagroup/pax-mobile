@@ -3,15 +3,18 @@ import { ReactNode, createContext, useContext, useEffect } from "react";
 import type { Schedule } from "API";
 import useDatalist from "hooks/datalist";
 import moment from "moment";
+import { GraphQLInput } from "hooks/datalist";
 
 interface SchedulesContextValue {
   loading: boolean;
   schedules: Schedule[];
+  update: (query: string, input: GraphQLInput) => void;
 }
 
 interface SchedulesContextProps {
   children: ReactNode;
-  projectId: string;
+  variables: { [key: string]: any };
+  by?: "ProjectId" | "ScheduleId" | "PackageTypeId";
 }
 
 function sortByDate(a: Schedule, b: Schedule) {
@@ -21,28 +24,26 @@ function sortByDate(a: Schedule, b: Schedule) {
 const SchedulesContext = createContext<SchedulesContextValue>({
   schedules: [],
   loading: false,
+  update: () => null,
 });
 
 export const SchedulesProvider = ({
-  projectId,
+  variables,
   children,
+  by,
 }: SchedulesContextProps) => {
-  const { data, loading, refetch } = useDatalist({
-    query: "schedulesByProject",
-    variables: {
-      projectId,
-    },
+  const { data, loading, refetch, update } = useDatalist({
+    query: `schedulesBy${by || "ProjectId"}`,
+    variables,
   });
 
   useEffect(() => {
-    refetch({
-      id: projectId,
-    });
-  }, [projectId]);
+    refetch(variables);
+  }, [variables]);
 
   return (
     <SchedulesContext.Provider
-      value={{ schedules: data ? data.sort(sortByDate) : [], loading }}
+      value={{ schedules: data ? data.sort(sortByDate) : [], loading, update }}
     >
       {children}
     </SchedulesContext.Provider>

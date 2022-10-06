@@ -1810,6 +1810,7 @@ export type CreateScheduleInput = {
   shippingDate?: string | null,
   cutDate?: string | null,
   numImgs?: number | null,
+  isShipped?: boolean | null,
 };
 
 export type ModelScheduleConditionInput = {
@@ -1823,6 +1824,7 @@ export type ModelScheduleConditionInput = {
   shippingDate?: ModelStringInput | null,
   cutDate?: ModelStringInput | null,
   numImgs?: ModelFloatInput | null,
+  isShipped?: ModelBooleanInput | null,
   and?: Array< ModelScheduleConditionInput | null > | null,
   or?: Array< ModelScheduleConditionInput | null > | null,
   not?: ModelScheduleConditionInput | null,
@@ -1841,6 +1843,7 @@ export type Schedule = {
   shippingDate?: string | null,
   cutDate?: string | null,
   numImgs?: number | null,
+  isShipped?: boolean | null,
   createdAt: string,
   updatedAt: string,
   products?: ModelProductConnection | null,
@@ -1967,6 +1970,7 @@ export type UpdateScheduleInput = {
   shippingDate?: string | null,
   cutDate?: string | null,
   numImgs?: number | null,
+  isShipped?: boolean | null,
 };
 
 export type DeleteScheduleInput = {
@@ -3460,6 +3464,7 @@ export type ModelScheduleFilterInput = {
   shippingDate?: ModelStringInput | null,
   cutDate?: ModelStringInput | null,
   numImgs?: ModelFloatInput | null,
+  isShipped?: ModelBooleanInput | null,
   and?: Array< ModelScheduleFilterInput | null > | null,
   or?: Array< ModelScheduleFilterInput | null > | null,
   not?: ModelScheduleFilterInput | null,
@@ -12432,6 +12437,7 @@ export type CreateScheduleMutation = {
     shippingDate?: string | null,
     cutDate?: string | null,
     numImgs?: number | null,
+    isShipped?: boolean | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -12504,6 +12510,7 @@ export type CreateScheduleMutation = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -12540,6 +12547,7 @@ export type UpdateScheduleMutation = {
     shippingDate?: string | null,
     cutDate?: string | null,
     numImgs?: number | null,
+    isShipped?: boolean | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -12612,6 +12620,7 @@ export type UpdateScheduleMutation = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -12648,6 +12657,7 @@ export type DeleteScheduleMutation = {
     shippingDate?: string | null,
     cutDate?: string | null,
     numImgs?: number | null,
+    isShipped?: boolean | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -12720,6 +12730,7 @@ export type DeleteScheduleMutation = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -13101,6 +13112,7 @@ export type CreateProjectMutation = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -13477,6 +13489,7 @@ export type UpdateProjectMutation = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -13853,6 +13866,7 @@ export type DeleteProjectMutation = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -14367,6 +14381,7 @@ export type CreateProductMutation = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -14530,6 +14545,7 @@ export type UpdateProductMutation = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -14693,6 +14709,7 @@ export type DeleteProductMutation = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -21567,6 +21584,7 @@ export type GetScheduleQuery = {
     shippingDate?: string | null,
     cutDate?: string | null,
     numImgs?: number | null,
+    isShipped?: boolean | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -21639,6 +21657,7 @@ export type GetScheduleQuery = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -21678,6 +21697,7 @@ export type ListSchedulesQuery = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -21714,7 +21734,7 @@ export type ListSchedulesQuery = {
   } | null,
 };
 
-export type SchedulesByProjectQueryVariables = {
+export type SchedulesByProjectIdQueryVariables = {
   projectId?: string | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelScheduleFilterInput | null,
@@ -21722,8 +21742,8 @@ export type SchedulesByProjectQueryVariables = {
   nextToken?: string | null,
 };
 
-export type SchedulesByProjectQuery = {
-  schedulesByProject?:  {
+export type SchedulesByProjectIdQuery = {
+  schedulesByProjectId?:  {
     __typename: "ModelScheduleConnection",
     items:  Array< {
       __typename: "Schedule",
@@ -21738,6 +21758,7 @@ export type SchedulesByProjectQuery = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -22137,6 +22158,7 @@ export type GetProjectQuery = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -22395,6 +22417,7 @@ export type ListProjectsQuery = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -22653,6 +22676,7 @@ export type ProjectsByUserIdQuery = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -22911,6 +22935,7 @@ export type ProjectsByAccountIdQuery = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -23169,6 +23194,7 @@ export type ProjectsByContactIdQuery = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -23427,6 +23453,7 @@ export type ProjectsByGroupIdQuery = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null >,
@@ -23960,6 +23987,7 @@ export type GetProductQuery = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -24126,6 +24154,7 @@ export type ListProductsQuery = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -24169,7 +24198,7 @@ export type ListProductsQuery = {
   } | null,
 };
 
-export type ProductsbyScheduleIdQueryVariables = {
+export type ProductsByScheduleIdQueryVariables = {
   scheduleId?: string | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelProductFilterInput | null,
@@ -24177,8 +24206,8 @@ export type ProductsbyScheduleIdQueryVariables = {
   nextToken?: string | null,
 };
 
-export type ProductsbyScheduleIdQuery = {
-  productsbyScheduleId?:  {
+export type ProductsByScheduleIdQuery = {
+  productsByScheduleId?:  {
     __typename: "ModelProductConnection",
     items:  Array< {
       __typename: "Product",
@@ -24256,6 +24285,7 @@ export type ProductsbyScheduleIdQuery = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -24386,6 +24416,7 @@ export type ProductsByPackageTypeIdQuery = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -24516,6 +24547,7 @@ export type ProductsByProjectIdQuery = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -25931,6 +25963,7 @@ export type OnUpdateProjectByIdSubscription = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -33466,6 +33499,7 @@ export type OnCreateScheduleSubscription = {
     shippingDate?: string | null,
     cutDate?: string | null,
     numImgs?: number | null,
+    isShipped?: boolean | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -33538,6 +33572,7 @@ export type OnCreateScheduleSubscription = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -33569,6 +33604,7 @@ export type OnUpdateScheduleSubscription = {
     shippingDate?: string | null,
     cutDate?: string | null,
     numImgs?: number | null,
+    isShipped?: boolean | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -33641,6 +33677,7 @@ export type OnUpdateScheduleSubscription = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -33672,6 +33709,7 @@ export type OnDeleteScheduleSubscription = {
     shippingDate?: string | null,
     cutDate?: string | null,
     numImgs?: number | null,
+    isShipped?: boolean | null,
     createdAt: string,
     updatedAt: string,
     products?:  {
@@ -33744,6 +33782,7 @@ export type OnDeleteScheduleSubscription = {
           shippingDate?: string | null,
           cutDate?: string | null,
           numImgs?: number | null,
+          isShipped?: boolean | null,
           createdAt: string,
           updatedAt: string,
         } | null,
@@ -34120,6 +34159,7 @@ export type OnCreateProjectSubscription = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -34491,6 +34531,7 @@ export type OnUpdateProjectSubscription = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -34862,6 +34903,7 @@ export type OnDeleteProjectSubscription = {
         shippingDate?: string | null,
         cutDate?: string | null,
         numImgs?: number | null,
+        isShipped?: boolean | null,
         createdAt: string,
         updatedAt: string,
         products?:  {
@@ -35341,6 +35383,7 @@ export type OnCreateProductSubscription = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -35499,6 +35542,7 @@ export type OnUpdateProductSubscription = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {
@@ -35657,6 +35701,7 @@ export type OnDeleteProductSubscription = {
       shippingDate?: string | null,
       cutDate?: string | null,
       numImgs?: number | null,
+      isShipped?: boolean | null,
       createdAt: string,
       updatedAt: string,
       products?:  {

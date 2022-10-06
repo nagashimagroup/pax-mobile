@@ -17,7 +17,7 @@ function Item({ label, data }: ItemProps) {
   return (
     <>
       <div className="my-4">
-        <div className="text-sm text-slate-700">{label}</div>
+        <div className="text-sm text-slate-700 mb-1">{label}</div>
         <div className="text-xl">{data}</div>
       </div>
       <Divider />
@@ -53,7 +53,7 @@ export default function ProjectDetail() {
   const { project } = useProject();
 
   return (
-    <div className="p-4">
+    <div className="m-2 p-4 bg-white">
       <Item label="案件名" data={project?.name} />
       <Item label="お得意様" data={project?.accountName} />
       <Item label="注意事項" data={project?.alert} />
@@ -67,6 +67,7 @@ export default function ProjectDetail() {
                 key: `${schedule?.name}_${idx}`,
                 title: `${schedule?.name}`,
                 content: <Schedule data={schedule} />,
+                className: "bg-gray-100",
               }))}
             />
           }

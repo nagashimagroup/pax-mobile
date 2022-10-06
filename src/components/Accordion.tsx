@@ -15,6 +15,7 @@ interface Data {
   subtitle?: string | null | undefined;
   content: ReactNode | ReactNode[] | string | undefined;
   open?: boolean;
+  className?: string;
 }
 
 export default function AccordionComponent({ items }: AccordionProps) {
@@ -22,12 +23,16 @@ export default function AccordionComponent({ items }: AccordionProps) {
   return (
     <>
       {items.map((item) => (
-        <Accordion key={item.key} defaultExpanded={item.open || false}>
+        <Accordion
+          className={item.className || ""}
+          key={item.key}
+          defaultExpanded={item.open || false}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
           >
-            <Typography sx={{ width: "50%", flexShrink: 0 }}>
+            <Typography sx={{ flexShrink: 0, marginRight: 4 }}>
               {item.title}
             </Typography>
             {item.subtitle && (

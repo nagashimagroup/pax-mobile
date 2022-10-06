@@ -5376,6 +5376,7 @@ export const getSchedule = /* GraphQL */ `
       shippingDate
       cutDate
       numImgs
+      isShipped
       createdAt
       updatedAt
       products {
@@ -5442,6 +5443,7 @@ export const getSchedule = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -5476,6 +5478,7 @@ export const listSchedules = /* GraphQL */ `
         shippingDate
         cutDate
         numImgs
+        isShipped
         createdAt
         updatedAt
         products {
@@ -5510,15 +5513,15 @@ export const listSchedules = /* GraphQL */ `
     }
   }
 `;
-export const schedulesByProject = /* GraphQL */ `
-  query SchedulesByProject(
+export const schedulesByProjectId = /* GraphQL */ `
+  query SchedulesByProjectId(
     $projectId: ID
     $sortDirection: ModelSortDirection
     $filter: ModelScheduleFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    schedulesByProject(
+    schedulesByProjectId(
       projectId: $projectId
       sortDirection: $sortDirection
       filter: $filter
@@ -5537,6 +5540,7 @@ export const schedulesByProject = /* GraphQL */ `
         shippingDate
         cutDate
         numImgs
+        isShipped
         createdAt
         updatedAt
         products {
@@ -5893,6 +5897,7 @@ export const getProject = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -6129,6 +6134,7 @@ export const listProjects = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -6372,6 +6378,7 @@ export const projectsByUserId = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -6615,6 +6622,7 @@ export const projectsByAccountId = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -6858,6 +6866,7 @@ export const projectsByContactId = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -7101,6 +7110,7 @@ export const projectsByGroupId = /* GraphQL */ `
             shippingDate
             cutDate
             numImgs
+            isShipped
             createdAt
             updatedAt
           }
@@ -7608,6 +7618,7 @@ export const getProduct = /* GraphQL */ `
         shippingDate
         cutDate
         numImgs
+        isShipped
         createdAt
         updatedAt
         products {
@@ -7758,6 +7769,7 @@ export const listProducts = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -7796,15 +7808,15 @@ export const listProducts = /* GraphQL */ `
     }
   }
 `;
-export const productsbyScheduleId = /* GraphQL */ `
-  query ProductsbyScheduleId(
+export const productsByScheduleId = /* GraphQL */ `
+  query ProductsByScheduleId(
     $scheduleId: ID
     $sortDirection: ModelSortDirection
     $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    productsbyScheduleId(
+    productsByScheduleId(
       scheduleId: $scheduleId
       sortDirection: $sortDirection
       filter: $filter
@@ -7881,6 +7893,7 @@ export const productsbyScheduleId = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -8004,6 +8017,7 @@ export const productsByPackageTypeId = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {
@@ -8127,6 +8141,7 @@ export const productsByProjectId = /* GraphQL */ `
           shippingDate
           cutDate
           numImgs
+          isShipped
           createdAt
           updatedAt
           products {

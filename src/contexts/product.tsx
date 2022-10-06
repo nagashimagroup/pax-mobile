@@ -33,7 +33,7 @@ interface ProductContextValue {
 
 interface ProductContextProps {
   id: string | string[] | undefined;
-  caseOrder: string | null | undefined;
+  caseOrder?: string | null | undefined;
   children: ReactNode;
 }
 
@@ -85,6 +85,7 @@ export const ProductProvider = ({
   }, [caseOrder, data]);
 
   const updateCase = async (input: CaseInput) => {
+    if (!caseOrder || !data) return;
     const idx = data.cases.findIndex((c: Case) => c.order === input.order);
     let newCs = data.cases;
     newCs[idx] = {
@@ -102,6 +103,7 @@ export const ProductProvider = ({
     phaseId: string,
     input: PhaseInput
   ) => {
+    if (!caseOrder || !data) return;
     let newCs = data.cases;
     const idx = newCs.findIndex((c: Case) => c.order === caseOrder);
     let newPhases = data.cases[idx].packPhases;

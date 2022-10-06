@@ -58,10 +58,9 @@ function TabsComponent({ tabs, index, onTabClick }: TabsProps) {
   return (
     <Box
       sx={{
-        bgcolor: "background.paper",
         width: "100%",
       }}
-      className="h-full"
+      className="h-full bg-slate-100"
     >
       <AppBar position="static" sx={{ bgcolor: "white" }}>
         <Tabs
