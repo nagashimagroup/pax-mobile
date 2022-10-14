@@ -2,12 +2,15 @@ import { ProductsProvider, useProducts } from "contexts/products";
 import { useProject } from "contexts/project";
 import Accordion from "components/Accordion";
 import LinearProgress from "@mui/material/LinearProgress";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorIcon from "@mui/icons-material/Error";
 import CaseList from "components/Case/CaseList";
 import moment from "moment";
 import { Product } from "API";
 import { List, ListSubheader } from "@mui/material";
 import { useSchedules } from "contexts/schedules";
 import { useRouter } from "next/router";
+import { Typography } from "@mui/material";
 
 function sortByPackEnd(a: Product, b: Product) {
   return moment(a.packagingEnd).isBefore(b.packagingEnd) ? -1 : 1;
@@ -26,7 +29,24 @@ function ProductList() {
   const { loading, products } = useProducts();
 
   if (loading) return <LinearProgress color="secondary" />;
-  if (!products) return <div>No Products</div>;
+  if (!products)
+    return (
+      <div className="w-full p-4 flex justify-start items-center gap-3 bg-white">
+        <ErrorIcon color="error" />
+        <Typography variant="body1" color="text.secondary">
+          製品が存在しません
+        </Typography>
+      </div>
+    );
+  if (products.filter((p) => !packed(p)).length === 0)
+    return (
+      <div className="w-full p-4 flex justify-start items-center gap-3 bg-white">
+        <CheckCircleIcon color="success" />
+        <Typography variant="body1" color="text.secondary">
+          梱包完了
+        </Typography>
+      </div>
+    );
 
   return (
     <Accordion
