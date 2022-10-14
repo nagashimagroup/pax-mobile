@@ -33,6 +33,7 @@ export default function BasicMenu({ open, anchor, menus, onClose }: MenuProps) {
           key={menu.label}
           onClick={() => {
             menu.onClick();
+            onClose();
           }}
         >
           {menu.icon && <ListItemIcon>{menu.icon}</ListItemIcon>}
