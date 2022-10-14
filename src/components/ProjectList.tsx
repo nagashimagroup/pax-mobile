@@ -52,7 +52,7 @@ function Item({ project }: { project: Project }) {
 
 function FilterList({ projects }: { projects: Project[] }) {
   return (
-    <List>
+    <List sx={{ backgroundColor: "white" }}>
       {projects.map((project) => (
         <Link key={project.id} href={`projects/${project.id}`} passHref>
           <a>
