@@ -5,9 +5,12 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { ChangeEvent, useEffect, useState } from "react";
 import Stepper from "components/Stepper";
 import Gallery from "components/Gallery";
+import { Typography, Button } from "@mui/material";
 import { getPhaseIdFromStepIndex, getStepIndex } from "utils/packPhase";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import Accordion from "components/Accordion";
+import CaseGallery from "components/Case/CaseGallery";
 
 function Case() {
   const [stepIndex, setStepIndex] = useState(0);
@@ -75,79 +78,127 @@ function Case() {
     });
   };
 
+  const updateGw = () => {
+    updateCase({
+      order: currentCase.order as number,
+      phaseId: "complete",
+      grossWeight: gw,
+    });
+  };
+
   const handleGwChange = (e: ChangeEvent<HTMLInputElement>) => {
     setGw(e.target.value);
   };
 
   return (
     <div className="w-full p-3">
-      <Stepper
-        index={stepIndex}
-        onNext={handleNext}
-        onBack={handleBack}
-        onFinish={handleFinish}
-        completedText="梱包作業が完了しました"
-        steps={[
-          ...currentCase.packPhases.map((phase) => ({
-            title: `${phase?.name || "?"} ${
-              !phase?.requiresPhoto ? "(任意)" : ""
-            }${phase?.numImgs ? ` x${phase.numImgs}` : ""}`,
-            disabled: phase?.requiresPhoto && !phase?.numImgs,
-            content: (
-              <Gallery
-                label={`${currentCase.name} ${phase?.name}`}
-                path={`${product.projectId}/${product.id}/${currentCase.order}/${phase?.id}`}
-                fileType="image/*"
-                showTitle={false}
-                showHeaderButton={true}
-                showFileUploadButton={true}
-                size="sm"
-                previewSize="lg"
-                startCamera={phase?.id === phaseId && camera === "true"}
-                expectedNumImgs={phase?.numImgs || undefined}
-                updateCallback={(fileList) => {
-                  updatePhase(
-                    currentCase.order as number,
-                    phase?.id as string,
-                    {
-                      numImgs: fileList.length,
-                    }
-                  );
-                }}
-              />
-            ),
-          })),
-          {
-            title: `重量入力${
-              currentCase?.grossWeight ? ` (${currentCase?.grossWeight}kg)` : ""
-            }`,
-            disabled: !gw || gw <= 0,
-            content: (
-              <div>
-                <TextField
-                  value={gw}
-                  onChange={handleGwChange}
-                  type="number"
-                  label="Gross Weight"
-                  variant="outlined"
-                  size="small"
-                  onFocus={(event) => {
-                    event.target.select();
-                  }}
-                  onBlur={(e) => {
-                    setGw(Number(e.target.value));
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">kg</InputAdornment>
-                    ),
+      {currentCase.isPacked ? (
+        <>
+          <div className="w-full flex flex-col justify-center items-center">
+            <Typography variant="h5" color="text.secondary">
+              梱包完了
+            </Typography>
+            <Button onClick={handleBack}>未完了に戻る</Button>
+          </div>
+          <div className="w-full py-10 flex justify-center items-center">
+            <TextField
+              value={gw}
+              onChange={handleGwChange}
+              type="number"
+              label="Gross Weight"
+              variant="outlined"
+              size="small"
+              onFocus={(event) => {
+                event.target.select();
+              }}
+              onBlur={(e) => {
+                setGw(Number(e.target.value));
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">kg</InputAdornment>
+                ),
+              }}
+            />
+            {gw !== currentCase.grossWeight && (
+              <Button onClick={updateGw}>保存</Button>
+            )}
+          </div>
+          <CaseGallery />
+          <div />
+        </>
+      ) : (
+        <Stepper
+          index={stepIndex}
+          onNext={handleNext}
+          onBack={handleBack}
+          onFinish={handleFinish}
+          completedText=""
+          steps={[
+            ...currentCase.packPhases.map((phase) => ({
+              title: `${phase?.name || "?"} ${
+                !phase?.requiresPhoto ? "(任意)" : ""
+              }`,
+              subtitle: phase?.numImgs ? ` x${phase.numImgs}` : "",
+              disabled: phase?.requiresPhoto && !phase?.numImgs,
+              content: (
+                <Gallery
+                  label={`${currentCase.name} ${phase?.name}`}
+                  path={`${product.projectId}/${product.id}/${currentCase.order}/${phase?.id}`}
+                  fileType="image/*"
+                  showTitle={false}
+                  showHeaderButton={true}
+                  showFileUploadButton={true}
+                  size="sm"
+                  previewSize="lg"
+                  startCamera={phase?.id === phaseId && camera === "true"}
+                  expectedNumImgs={phase?.numImgs || undefined}
+                  updateCallback={(fileList) => {
+                    updatePhase(
+                      currentCase.order as number,
+                      phase?.id as string,
+                      {
+                        numImgs: fileList.length,
+                      }
+                    );
                   }}
                 />
-              </div>
-            ),
-          },
-        ]}
-      />
+              ),
+            })),
+            {
+              title: `重量入力${
+                currentCase?.grossWeight
+                  ? ` (${currentCase?.grossWeight}kg)`
+                  : ""
+              }`,
+              disabled: !gw || gw <= 0,
+              content: (
+                <div>
+                  <TextField
+                    value={gw}
+                    onChange={handleGwChange}
+                    type="number"
+                    label="Gross Weight"
+                    variant="outlined"
+                    size="small"
+                    onFocus={(event) => {
+                      event.target.select();
+                    }}
+                    onBlur={(e) => {
+                      setGw(Number(e.target.value));
+                    }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">kg</InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+              ),
+            },
+          ]}
+        />
+      )}
     </div>
   );
 }
