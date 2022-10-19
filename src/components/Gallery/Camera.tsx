@@ -165,17 +165,26 @@ export default function Camera({ open, setOpen, ...webCamProps }: CameraProps) {
               onClick={handleClose}
               className="flex flex-col justify-center items-center"
             >
-              <ArrowBackIcon className="text-white text-[10vw] sm:text-[6vw] md:text-[28px]" />
+              <ArrowBackIcon
+                sx={{ fontSize: "10vw" }}
+                className="text-white text-[10vw] sm:text-[6vw] md:text-[28px]"
+              />
               <span className="text-white text-[8px]">キャンセル</span>
             </IconButton>
             <IconButton onClick={capture}>
-              <CaptureIcon className="text-white text-[20vw] sm:text-[14vw] md:text-[64px]" />
+              <CaptureIcon
+                sx={{ fontSize: "20vw" }}
+                className="text-white text-[20vw] sm:text-[14vw] md:text-[64px]"
+              />
             </IconButton>
             <IconButton
               onClick={uploadImages}
               className="flex flex-col justify-center items-center"
             >
-              <UploadIcon className="text-white text-[10vw] sm:text-[6vw] md:text-[28px]" />
+              <UploadIcon
+                sx={{ fontSize: "10vw" }}
+                className="text-white text-[10vw] sm:text-[6vw] md:text-[28px]"
+              />
               <span className="text-white text-[8px]">アップロード</span>
             </IconButton>
           </div>
