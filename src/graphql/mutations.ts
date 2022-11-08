@@ -7894,6 +7894,7 @@ export const createSchedule = /* GraphQL */ `
             outerLength
             outerWidth
             outerHeight
+            thumbnail
           }
           elements {
             type
@@ -7994,6 +7995,7 @@ export const updateSchedule = /* GraphQL */ `
             outerLength
             outerWidth
             outerHeight
+            thumbnail
           }
           elements {
             type
@@ -8094,6 +8096,7 @@ export const deleteSchedule = /* GraphQL */ `
             outerLength
             outerWidth
             outerHeight
+            thumbnail
           }
           elements {
             type
@@ -9595,6 +9598,7 @@ export const createProduct = /* GraphQL */ `
         outerLength
         outerWidth
         outerHeight
+        thumbnail
       }
       elements {
         type
@@ -9744,6 +9748,7 @@ export const updateProduct = /* GraphQL */ `
         outerLength
         outerWidth
         outerHeight
+        thumbnail
       }
       elements {
         type
@@ -9893,6 +9898,7 @@ export const deleteProduct = /* GraphQL */ `
         outerLength
         outerWidth
         outerHeight
+        thumbnail
       }
       elements {
         type

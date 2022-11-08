@@ -1899,6 +1899,7 @@ export type Case = {
   outerLength?: number | null,
   outerWidth?: number | null,
   outerHeight?: number | null,
+  thumbnail?: string | null,
 };
 
 export type ModelAreaConnection = {
@@ -2424,6 +2425,7 @@ export type CaseInput = {
   outerLength?: number | null,
   outerWidth?: number | null,
   outerHeight?: number | null,
+  thumbnail?: string | null,
 };
 
 export type ModelProductConditionInput = {
@@ -12483,6 +12485,7 @@ export type CreateScheduleMutation = {
           outerLength?: number | null,
           outerWidth?: number | null,
           outerHeight?: number | null,
+          thumbnail?: string | null,
         } | null > | null,
         elements?:  Array< {
           __typename: "Element",
@@ -12593,6 +12596,7 @@ export type UpdateScheduleMutation = {
           outerLength?: number | null,
           outerWidth?: number | null,
           outerHeight?: number | null,
+          thumbnail?: string | null,
         } | null > | null,
         elements?:  Array< {
           __typename: "Element",
@@ -12703,6 +12707,7 @@ export type DeleteScheduleMutation = {
           outerLength?: number | null,
           outerWidth?: number | null,
           outerHeight?: number | null,
+          thumbnail?: string | null,
         } | null > | null,
         elements?:  Array< {
           __typename: "Element",
@@ -14354,6 +14359,7 @@ export type CreateProductMutation = {
       outerLength?: number | null,
       outerWidth?: number | null,
       outerHeight?: number | null,
+      thumbnail?: string | null,
     } | null > | null,
     elements?:  Array< {
       __typename: "Element",
@@ -14518,6 +14524,7 @@ export type UpdateProductMutation = {
       outerLength?: number | null,
       outerWidth?: number | null,
       outerHeight?: number | null,
+      thumbnail?: string | null,
     } | null > | null,
     elements?:  Array< {
       __typename: "Element",
@@ -14682,6 +14689,7 @@ export type DeleteProductMutation = {
       outerLength?: number | null,
       outerWidth?: number | null,
       outerHeight?: number | null,
+      thumbnail?: string | null,
     } | null > | null,
     elements?:  Array< {
       __typename: "Element",
@@ -21630,6 +21638,7 @@ export type GetScheduleQuery = {
           outerLength?: number | null,
           outerWidth?: number | null,
           outerHeight?: number | null,
+          thumbnail?: string | null,
         } | null > | null,
         elements?:  Array< {
           __typename: "Element",
@@ -23960,6 +23969,7 @@ export type GetProductQuery = {
       outerLength?: number | null,
       outerWidth?: number | null,
       outerHeight?: number | null,
+      thumbnail?: string | null,
     } | null > | null,
     elements?:  Array< {
       __typename: "Element",
@@ -24127,6 +24137,7 @@ export type ListProductsQuery = {
         outerLength?: number | null,
         outerWidth?: number | null,
         outerHeight?: number | null,
+        thumbnail?: string | null,
       } | null > | null,
       elements?:  Array< {
         __typename: "Element",
@@ -24258,6 +24269,7 @@ export type ProductsByScheduleIdQuery = {
         outerLength?: number | null,
         outerWidth?: number | null,
         outerHeight?: number | null,
+        thumbnail?: string | null,
       } | null > | null,
       elements?:  Array< {
         __typename: "Element",
@@ -24389,6 +24401,7 @@ export type ProductsByPackageTypeIdQuery = {
         outerLength?: number | null,
         outerWidth?: number | null,
         outerHeight?: number | null,
+        thumbnail?: string | null,
       } | null > | null,
       elements?:  Array< {
         __typename: "Element",
@@ -24520,6 +24533,7 @@ export type ProductsByProjectIdQuery = {
         outerLength?: number | null,
         outerWidth?: number | null,
         outerHeight?: number | null,
+        thumbnail?: string | null,
       } | null > | null,
       elements?:  Array< {
         __typename: "Element",
@@ -33545,6 +33559,7 @@ export type OnCreateScheduleSubscription = {
           outerLength?: number | null,
           outerWidth?: number | null,
           outerHeight?: number | null,
+          thumbnail?: string | null,
         } | null > | null,
         elements?:  Array< {
           __typename: "Element",
@@ -33650,6 +33665,7 @@ export type OnUpdateScheduleSubscription = {
           outerLength?: number | null,
           outerWidth?: number | null,
           outerHeight?: number | null,
+          thumbnail?: string | null,
         } | null > | null,
         elements?:  Array< {
           __typename: "Element",
@@ -33755,6 +33771,7 @@ export type OnDeleteScheduleSubscription = {
           outerLength?: number | null,
           outerWidth?: number | null,
           outerHeight?: number | null,
+          thumbnail?: string | null,
         } | null > | null,
         elements?:  Array< {
           __typename: "Element",
@@ -35356,6 +35373,7 @@ export type OnCreateProductSubscription = {
       outerLength?: number | null,
       outerWidth?: number | null,
       outerHeight?: number | null,
+      thumbnail?: string | null,
     } | null > | null,
     elements?:  Array< {
       __typename: "Element",
@@ -35515,6 +35533,7 @@ export type OnUpdateProductSubscription = {
       outerLength?: number | null,
       outerWidth?: number | null,
       outerHeight?: number | null,
+      thumbnail?: string | null,
     } | null > | null,
     elements?:  Array< {
       __typename: "Element",
@@ -35674,6 +35693,7 @@ export type OnDeleteProductSubscription = {
       outerLength?: number | null,
       outerWidth?: number | null,
       outerHeight?: number | null,
+      thumbnail?: string | null,
     } | null > | null,
     elements?:  Array< {
       __typename: "Element",

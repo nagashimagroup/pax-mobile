@@ -5418,6 +5418,7 @@ export const getSchedule = /* GraphQL */ `
             outerLength
             outerWidth
             outerHeight
+            thumbnail
           }
           elements {
             type
@@ -7593,6 +7594,7 @@ export const getProduct = /* GraphQL */ `
         outerLength
         outerWidth
         outerHeight
+        thumbnail
       }
       elements {
         type
@@ -7744,6 +7746,7 @@ export const listProducts = /* GraphQL */ `
           outerLength
           outerWidth
           outerHeight
+          thumbnail
         }
         elements {
           type
@@ -7868,6 +7871,7 @@ export const productsByScheduleId = /* GraphQL */ `
           outerLength
           outerWidth
           outerHeight
+          thumbnail
         }
         elements {
           type
@@ -7992,6 +7996,7 @@ export const productsByPackageTypeId = /* GraphQL */ `
           outerLength
           outerWidth
           outerHeight
+          thumbnail
         }
         elements {
           type
@@ -8116,6 +8121,7 @@ export const productsByProjectId = /* GraphQL */ `
           outerLength
           outerWidth
           outerHeight
+          thumbnail
         }
         elements {
           type

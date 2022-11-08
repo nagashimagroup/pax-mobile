@@ -13,7 +13,7 @@ const galleries = (project: Project, update: any) => [
     content: (
       <ImagesProvider
         label="入荷写真"
-        path={`${project?.id}/stocking`}
+        path={`${project?.id}/photo/stocking`}
         fileType="image/*"
         size="sm"
         previewSize="lg"
@@ -42,7 +42,7 @@ const galleries = (project: Project, update: any) => [
     content: (
       <ImagesProvider
         label="ケースマーク"
-        path={`${project?.id}/casemarks`}
+        path={`${project?.id}/files/casemarks`}
         fileType="*"
         updateCallback={(images) => {
           update({

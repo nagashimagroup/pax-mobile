@@ -52,6 +52,9 @@
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
           "s3Key": "amplify-builds/resizeImage-6f346b5650702b684865-build.zip"
         }
+      },
+      "storage": {
+        "paxstorage": {}
       }
     }
   }

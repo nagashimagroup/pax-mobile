@@ -16,11 +16,12 @@ const galleries = (currentCase: Case, product: Product, update: any) =>
     content: (
       <ImagesProvider
         label={phase?.name || "?"}
-        path={`${product.projectId}/${product.id}/${currentCase.order}/${phase?.id}`}
+        path={`${product.projectId}/photo/products/${product.id}/${currentCase.order}/${phase?.id}`}
         fileType="image/*"
         size="sm"
         previewSize="lg"
         updateCallback={(fileList) => {
+          console.log({ fileList });
           update(currentCase.order as number, phase?.id as string, {
             numImgs: fileList.length,
           });

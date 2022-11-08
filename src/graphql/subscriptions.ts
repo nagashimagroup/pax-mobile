@@ -7292,6 +7292,7 @@ export const onCreateSchedule = /* GraphQL */ `
             outerLength
             outerWidth
             outerHeight
+            thumbnail
           }
           elements {
             type
@@ -7389,6 +7390,7 @@ export const onUpdateSchedule = /* GraphQL */ `
             outerLength
             outerWidth
             outerHeight
+            thumbnail
           }
           elements {
             type
@@ -7486,6 +7488,7 @@ export const onDeleteSchedule = /* GraphQL */ `
             outerLength
             outerWidth
             outerHeight
+            thumbnail
           }
           elements {
             type
@@ -8957,6 +8960,7 @@ export const onCreateProduct = /* GraphQL */ `
         outerLength
         outerWidth
         outerHeight
+        thumbnail
       }
       elements {
         type
@@ -9103,6 +9107,7 @@ export const onUpdateProduct = /* GraphQL */ `
         outerLength
         outerWidth
         outerHeight
+        thumbnail
       }
       elements {
         type
@@ -9249,6 +9254,7 @@ export const onDeleteProduct = /* GraphQL */ `
         outerLength
         outerWidth
         outerHeight
+        thumbnail
       }
       elements {
         type

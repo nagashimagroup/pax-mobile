@@ -10,7 +10,7 @@
     "fix": "prettier --write src/ && next lint --fix",
     "typecheck": "tsc -p . --noEmit",
     "prepare": "husky install",
-    "aws-sync": "amplify pull && amplify codegen"
+    "sync": "amplify pull && amplify codegen"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

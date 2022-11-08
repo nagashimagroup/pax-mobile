@@ -13,7 +13,7 @@ import useData, { GraphQLInput } from "hooks/data";
 
 interface CaseInput {
   order: number;
-  phaseId: string;
+  phaseId?: string;
   [key: string]: any;
 }
 

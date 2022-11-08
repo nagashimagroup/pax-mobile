@@ -9,8 +9,8 @@ import { Typography, Button } from "@mui/material";
 import { getPhaseIdFromStepIndex, getStepIndex } from "utils/packPhase";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import Accordion from "components/Accordion";
 import CaseGallery from "components/Case/CaseGallery";
+import { getImageKeyBySize } from "utils/image";
 
 function Case() {
   const [stepIndex, setStepIndex] = useState(0);
@@ -154,6 +154,20 @@ function Case() {
                   startCamera={phase?.id === phaseId && camera === "true"}
                   expectedNumImgs={phase?.numImgs || undefined}
                   updateCallback={(fileList) => {
+                    if (fileList.length > 0) {
+                      updateCase({
+                        order: currentCase.order as number,
+                        thumbnail: getImageKeyBySize(
+                          fileList.at(-1)?.key as string,
+                          "xs"
+                        ),
+                      });
+                    } else {
+                      updateCase({
+                        order: currentCase.order as number,
+                        thumbnail: null,
+                      });
+                    }
                     updatePhase(
                       currentCase.order as number,
                       phase?.id as string,

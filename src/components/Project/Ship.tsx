@@ -5,7 +5,7 @@ import { Images, GalleryHeader, SelectFooter } from "components/Gallery";
 import Accordion from "components/Accordion";
 import ProductList from "components/ProductList";
 import Card from "components/Card";
-import { Schedule } from "API";
+import { Project, Schedule } from "API";
 import moment from "moment";
 import {
   getProductsCompletionRate,
@@ -15,8 +15,9 @@ import {
 import { ProductsProvider, useProducts } from "contexts/products";
 import { Typography, Button } from "@mui/material";
 import { ReactNode } from "react";
+import { useProject } from "contexts/project";
 
-const items = (schedule: Schedule, update: any) => [
+const items = (schedule: Schedule, project: Project, update: any) => [
   {
     key: `${schedule.id}_gallery`,
     title: `${schedule.name} 出荷写真`,
@@ -26,7 +27,7 @@ const items = (schedule: Schedule, update: any) => [
     content: (
       <ImagesProvider
         label={`${schedule.name}出荷写真`}
-        path={`${schedule.id}/stocking`}
+        path={`${project.id}/photo/shipping/${schedule.id}`}
         fileType="image/*"
         size="sm"
         previewSize="lg"
@@ -124,6 +125,7 @@ function ShipStats({ schedule }: ShipStatsProps) {
 
 export default function Ship() {
   const { schedules, update } = useSchedules();
+  const { project } = useProject();
 
   if (!schedules) return null;
   return (
@@ -147,7 +149,7 @@ export default function Ship() {
                 "MM/DD"
               )}${moment(schedule.shippingDate).format(" - MM/DD")}`}
               content={<ShipStats schedule={schedule} />}
-              extra={<Accordion items={items(schedule, update)} />}
+              extra={<Accordion items={items(schedule, project, update)} />}
               actions={
                 schedule.isShipped && [
                   {
