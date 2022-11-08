@@ -5,8 +5,14 @@ import { SelectedImagesProvider } from "contexts/selectedImages";
 import { Images, GalleryHeader, SelectFooter } from "components/Gallery";
 import Accordion from "components/Accordion";
 import { Case, PackPhase, Product } from "API";
+import { getImageKeyBySize } from "utils/image";
 
-const galleries = (currentCase: Case, product: Product, update: any) =>
+const galleries = (
+  currentCase: Case,
+  product: Product,
+  updateCase: any,
+  updatePhase: any
+) =>
   currentCase?.packPhases &&
   currentCase?.packPhases.map((phase: PackPhase | null) => ({
     key: `${phase?.id}_gallery`,
@@ -21,8 +27,21 @@ const galleries = (currentCase: Case, product: Product, update: any) =>
         size="sm"
         previewSize="lg"
         updateCallback={(fileList) => {
-          console.log({ fileList });
-          update(currentCase.order as number, phase?.id as string, {
+          if (fileList.length > 0) {
+            updateCase({
+              order: currentCase.order as number,
+              thumbnail: getImageKeyBySize(
+                fileList.at(-1)?.key as string,
+                "sm"
+              ),
+            });
+          } else {
+            updateCase({
+              order: currentCase.order as number,
+              thumbnail: null,
+            });
+          }
+          updatePhase(currentCase.order as number, phase?.id as string, {
             numImgs: fileList.length,
           });
         }}
@@ -39,7 +58,7 @@ const galleries = (currentCase: Case, product: Product, update: any) =>
   }));
 
 export default function CaseGallery() {
-  const { currentCase, updatePhase, product } = useProduct();
+  const { currentCase, updatePhase, updateCase, product } = useProduct();
 
   if (!currentCase || !currentCase?.packPhases) return null;
 
@@ -50,6 +69,7 @@ export default function CaseGallery() {
           items={galleries(
             currentCase as Case,
             product as Product,
+            updateCase,
             updatePhase
           )}
         />

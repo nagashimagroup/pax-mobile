@@ -159,7 +159,7 @@ function Case() {
                         order: currentCase.order as number,
                         thumbnail: getImageKeyBySize(
                           fileList.at(-1)?.key as string,
-                          "xs"
+                          "sm"
                         ),
                       });
                     } else {
