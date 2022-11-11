@@ -149,7 +149,11 @@ export default function Ship() {
                 "MM/DD"
               )}${moment(schedule.shippingDate).format(" - MM/DD")}`}
               content={<ShipStats schedule={schedule} />}
-              extra={<Accordion items={items(schedule, project, update)} />}
+              extra={
+                <Accordion
+                  items={items(schedule, project as Project, update)}
+                />
+              }
               actions={
                 schedule.isShipped && [
                   {
