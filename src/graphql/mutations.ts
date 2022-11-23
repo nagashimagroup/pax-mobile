@@ -7877,6 +7877,7 @@ export const createSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          readyToPack
           packPhases {
             id
             name
@@ -7978,6 +7979,7 @@ export const updateSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          readyToPack
           packPhases {
             id
             name
@@ -8079,6 +8081,7 @@ export const deleteSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          readyToPack
           packPhases {
             id
             name
@@ -9574,6 +9577,7 @@ export const createProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      readyToPack
       packPhases {
         id
         name
@@ -9649,6 +9653,7 @@ export const createProduct = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }
@@ -9724,6 +9729,7 @@ export const updateProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      readyToPack
       packPhases {
         id
         name
@@ -9799,6 +9805,7 @@ export const updateProduct = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }
@@ -9874,6 +9881,7 @@ export const deleteProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      readyToPack
       packPhases {
         id
         name
@@ -9949,6 +9957,7 @@ export const deleteProduct = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }

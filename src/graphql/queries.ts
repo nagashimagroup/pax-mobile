@@ -5401,6 +5401,7 @@ export const getSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          readyToPack
           packPhases {
             id
             name
@@ -5504,6 +5505,7 @@ export const listSchedules = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }
@@ -5566,6 +5568,7 @@ export const schedulesByProjectId = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }
@@ -7570,6 +7573,7 @@ export const getProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      readyToPack
       packPhases {
         id
         name
@@ -7645,6 +7649,7 @@ export const getProduct = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }
@@ -7722,6 +7727,7 @@ export const listProducts = /* GraphQL */ `
         packagingEnd
         packageMethod
         description
+        readyToPack
         packPhases {
           id
           name
@@ -7847,6 +7853,7 @@ export const productsByScheduleId = /* GraphQL */ `
         packagingEnd
         packageMethod
         description
+        readyToPack
         packPhases {
           id
           name
@@ -7972,6 +7979,7 @@ export const productsByPackageTypeId = /* GraphQL */ `
         packagingEnd
         packageMethod
         description
+        readyToPack
         packPhases {
           id
           name
@@ -8097,6 +8105,7 @@ export const productsByProjectId = /* GraphQL */ `
         packagingEnd
         packageMethod
         description
+        readyToPack
         packPhases {
           id
           name

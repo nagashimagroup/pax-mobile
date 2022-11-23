@@ -11,8 +11,8 @@ interface AccordionProps {
 
 interface Data {
   key: number | string;
-  title: string | null | undefined;
-  subtitle?: string | null | undefined;
+  title: ReactNode | ReactNode[] | string | undefined;
+  subtitle?: ReactNode | ReactNode[] | string | undefined;
   content: ReactNode | ReactNode[] | string | undefined;
   open?: boolean;
   className?: string;
@@ -27,6 +27,7 @@ export default function AccordionComponent({ items }: AccordionProps) {
           className={item.className || ""}
           key={item.key}
           defaultExpanded={item.open || false}
+          disabled={!item.content}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

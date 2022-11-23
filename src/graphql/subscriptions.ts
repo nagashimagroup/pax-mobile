@@ -7275,6 +7275,7 @@ export const onCreateSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          readyToPack
           packPhases {
             id
             name
@@ -7373,6 +7374,7 @@ export const onUpdateSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          readyToPack
           packPhases {
             id
             name
@@ -7471,6 +7473,7 @@ export const onDeleteSchedule = /* GraphQL */ `
           packagingEnd
           packageMethod
           description
+          readyToPack
           packPhases {
             id
             name
@@ -8936,6 +8939,7 @@ export const onCreateProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      readyToPack
       packPhases {
         id
         name
@@ -9011,6 +9015,7 @@ export const onCreateProduct = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }
@@ -9083,6 +9088,7 @@ export const onUpdateProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      readyToPack
       packPhases {
         id
         name
@@ -9158,6 +9164,7 @@ export const onUpdateProduct = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }
@@ -9230,6 +9237,7 @@ export const onDeleteProduct = /* GraphQL */ `
       packagingEnd
       packageMethod
       description
+      readyToPack
       packPhases {
         id
         name
@@ -9305,6 +9313,7 @@ export const onDeleteProduct = /* GraphQL */ `
             packagingEnd
             packageMethod
             description
+            readyToPack
             createdAt
             updatedAt
           }

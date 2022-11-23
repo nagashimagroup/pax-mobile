@@ -11,6 +11,7 @@ import { List, ListSubheader } from "@mui/material";
 import { useSchedules } from "contexts/schedules";
 import { useRouter } from "next/router";
 import { Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 function sortByPackEnd(a: Product, b: Product) {
   return moment(a.packagingEnd).isBefore(b.packagingEnd) ? -1 : 1;
@@ -55,11 +56,27 @@ function ProductList() {
         .sort(sortByPackEnd)
         .map((product, idx: number) => ({
           key: `${product?.name}_${idx}`,
-          title: product?.name,
+          title: (
+            <div className="flex gap-4">
+              {!product.readyToPack && (
+                <Avatar
+                  sx={{
+                    width: 20,
+                    height: 20,
+                    fontSize: 10,
+                    bgcolor: "gray",
+                  }}
+                >
+                  仮
+                </Avatar>
+              )}
+              {product?.name}
+            </div>
+          ),
           subtitle: `${product?.packageTypeName}・${moment(
-            product.packagingEnd
+            product.schedule?.shippingDate
           ).format("MM/DD迄")}`,
-          content: <CaseList product={product} />,
+          content: product.readyToPack && <CaseList product={product} />,
           open: pId ? product?.id === pId : false,
         }))}
     />

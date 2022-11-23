@@ -22,23 +22,23 @@
         },
         "cascadeDeleteTenant": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/cascadeDeleteTenant-6c627734743132584d6f-build.zip"
+          "s3Key": "amplify-builds/cascadeDeleteTenant-766666343457666d3664-build.zip"
         },
         "paxwebGraphQL": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/paxwebGraphQL-LambdaLayerVersion1864553c-build.zip"
+          "s3Key": "amplify-builds/paxwebGraphQL-LambdaLayerVersionc880ef05-build.zip"
         },
         "salesforce": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/salesforce-5949416c626769615133-build.zip"
+          "s3Key": "amplify-builds/salesforce-6c6d70456a64672b4931-build.zip"
         },
         "syncAll": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/syncAll-52502f48314a46334848-build.zip"
+          "s3Key": "amplify-builds/syncAll-44706f73474b434f4761-build.zip"
         },
         "syncOne": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/syncOne-6571355473346a37762f-build.zip"
+          "s3Key": "amplify-builds/syncOne-357379612f75507a3144-build.zip"
         },
         "cascadeDeleteUser": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
@@ -50,7 +50,7 @@
         },
         "resizeImage": {
           "deploymentBucketName": "amplify-paxweb-test-04425-deployment",
-          "s3Key": "amplify-builds/resizeImage-6f346b5650702b684865-build.zip"
+          "s3Key": "amplify-builds/resizeImage-41476832612f316e5842-build.zip"
         }
       },
       "storage": {
