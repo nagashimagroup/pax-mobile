@@ -144,7 +144,7 @@ function Case() {
               content: (
                 <Gallery
                   label={`${currentCase.name} ${phase?.name}`}
-                  path={`${product.projectId}/${product.id}/${currentCase.order}/${phase?.id}`}
+                  path={`${product.projectId}/photo/products/${product.id}/${currentCase.order}/${phase?.id}`}
                   fileType="image/*"
                   showTitle={false}
                   showHeaderButton={true}
